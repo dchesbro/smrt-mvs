@@ -1,0 +1,30 @@
+body {
+	/* background-image: url( "bg.png" ); */
+	/* color: #fff; */
+	padding: 40px 0;	
+}
+
+form {	
+	.form-control, .input-group-addon {
+		border-radius: 0;
+		border-width: 2px;
+	}
+	
+	.form-control {
+		&:focus {
+			box-shadow: none;
+			
+			&[name=move_1] {
+				border-color: purple;
+			}
+			
+			&[name=move_2] {
+				border-color: orangered;
+			}
+			
+			&[name=move_3] {
+				border-color: royalblue;
+			}
+		}
+	}
+}

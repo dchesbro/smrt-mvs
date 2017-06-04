@@ -141,35 +141,8 @@
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-		<style>
-			body {
-				/* background-image: url( "bg.png" ); */
-				/* color: #fff; */
-				padding: 40px 0;	
-			}
-			
-			.form-control, .input-group-addon {
-				border-radius: 0;
-				border-width: 2px;
-			}
-			
-			.form-control[name]:focus {
-				box-shadow: none;
-			}
-			
-			.form-control[name=move_1]:focus {
-				border-color: purple;
-			}
-			
-			.form-control[name=move_2]:focus {
-				border-color: orangered;
-			}
-			
-			.form-control[name=move_3]:focus {
-				border-color: royalblue;
-			}
-		</style>
+		<!-- Custom styles -->
+		<link rel="stylesheet" href="css/styles.css">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -196,19 +169,19 @@
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">1.</div>
-								<input value="<?php if( isset( $_POST['move_1'] ) ) { echo $_POST['move_1']; } ?>" type="text" placeholder="" name="move_1" maxlength="20" class="form-control input-lg">
+								<input value="<?php if( isset( $_POST['move_1'] ) ) { echo $_POST['move_1']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[0]]; ?>" name="move_1" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">2.</div>
-								<input value="<?php if( isset( $_POST['move_2'] ) ) { echo $_POST['move_2']; } ?>" type="text" placeholder="" name="move_2" maxlength="20" class="form-control input-lg">
+								<input value="<?php if( isset( $_POST['move_2'] ) ) { echo $_POST['move_2']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[1]]; ?>" name="move_2" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">3.</div>
-								<input value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" type="text" placeholder="" name="move_3" maxlength="20" class="form-control input-lg">
+								<input value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[2]]; ?>" name="move_3" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
 						<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-default" />
