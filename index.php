@@ -92,6 +92,7 @@
 		'3. ' . $default_moves[$random_moves[2]]
 	);
 	
+	// Check for user moves
 	if( isset( $_POST['submit'] ) ) {
 
 		/*
@@ -112,7 +113,7 @@
 	
 		*/
 
-		// Check for missing fields
+		// Error for empty input fields
 		if( strlen( $_POST['move_1'] ) == 0 || strlen( $_POST['move_2'] ) == 0 || strlen( $_POST['move_3'] ) == 0) {
 			$error = 'Champions always enter three moves!';
 		}
@@ -130,83 +131,100 @@
 	$filename = create_image( $smart_moves );
 ?>
 
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SMRT MVS</title>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>SMRT MVS</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 		<style>
 			body {
-				/* background-image: url( "bg.png" );
-				color: #fff; */
+				/* background-image: url( "bg.png" ); */
+				/* color: #fff; */
+				padding: 40px 0;	
+			}
+			
+			.form-control, .input-group-addon {
+				border-radius: 0;
+				border-width: 2px;
+			}
+			
+			.form-control[name]:focus {
+				box-shadow: none;
+			}
+			
+			.form-control[name=move_1]:focus {
+				border-color: purple;
+			}
+			
+			.form-control[name=move_2]:focus {
+				border-color: orangered;
+			}
+			
+			.form-control[name=move_3]:focus {
+				border-color: royalblue;
 			}
 		</style>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-	  
-	  <div class="container" style="margin: auto; max-width: 480px;">
-		  <div class="row">
-			  <div class="col-md-12">
-	    
-			    <img src="<?=$filename;?>?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
-			    
-			    <hr />
-					
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		 
+		<div class="container" style="margin: auto; max-width: 480px;">
+			<div class="row">
+				<div class="col-md-12">
+			 
+					<img src="<?=$filename;?>?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
+					 					
 					<!-- <p>You can edit the image above by typing your details in below. It'll then generate a new image which you can right click on and save to your computer.</p> -->
-					
-					<p><?php echo $filename; ?></p>
 										
 					<?php if( isset( $error ) ) {
 						echo '<p>' . $error . '</p>';
 					} ?>
 					
-					<form method="post">
-					  <div class="form-group">
-						  <label for="Move #1">1.</label>
-							<input value="<?php if( isset( $_POST['move_1'] ) ) { echo $_POST['move_1']; } ?>" type="text" placeholder="" name="move_1" maxlength="20" class="form-control">
-					  </div>
-					  <div class="form-group">
-						  <label for="Move #2">2.</label>
-							<input value="<?php if( isset( $_POST['move_2'] ) ) { echo $_POST['move_2']; } ?>" type="text" placeholder="" name="move_2" maxlength="20" class="form-control">
-					  </div>
-					  <div class="form-group">
-						  <label for="Move #3">3.</label>
-							<input value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" type="text" placeholder="" name="move_3" maxlength="20" class="form-control">
-					  </div>
-					  <input value="Take it to Mo!" type="submit" name="submit" class="btn btn-default" />
+					<form method="post" style="text-align: center;">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">1.</div>
+								<input value="<?php if( isset( $_POST['move_1'] ) ) { echo $_POST['move_1']; } ?>" type="text" placeholder="" name="move_1" maxlength="20" class="form-control input-lg">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">2.</div>
+								<input value="<?php if( isset( $_POST['move_2'] ) ) { echo $_POST['move_2']; } ?>" type="text" placeholder="" name="move_2" maxlength="20" class="form-control input-lg">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon">3.</div>
+								<input value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" type="text" placeholder="" name="move_3" maxlength="20" class="form-control input-lg">
+							</div>
+						</div>
+						<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-default" />
 					</form>
 					
-			  </div>
-		  </div>
-	  </div>
+				</div>
+			</div>
+		</div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  
-  </body>
+	
+	</body>
 </html>
-
 
 <!--
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
