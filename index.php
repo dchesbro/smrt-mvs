@@ -1,12 +1,12 @@
 <?php
 	function create_image( $smart_moves ) {
 	
-		$file = 'img/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
+		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 	
 		// If the file already exists display original and dont create duplicate
 		if ( !file_exists( $file ) ) {
 			// Set background image
-			$image = imagecreatefrompng( 'sm_green_1.png' );
+			$image = imagecreatefrompng( 'img/sm_green.png' );
 			
 			// Set font file and size
 			$font_file = 'font/LTe50244.ttf';
