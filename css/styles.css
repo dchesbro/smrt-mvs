@@ -3,6 +3,9 @@ body {
   /* color: #fff; */
   padding: 40px 0; }
 
+.container {
+  max-width: 480px; }
+
 form .form-control, form .input-group-addon {
   border-radius: 0;
   border-width: 2px; }

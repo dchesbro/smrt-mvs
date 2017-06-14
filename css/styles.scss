@@ -4,6 +4,10 @@ body {
 	padding: 40px 0;	
 }
 
+.container {
+	max-width: 480px;
+}
+
 form {	
 	.form-control, .input-group-addon {
 		border-radius: 0;
