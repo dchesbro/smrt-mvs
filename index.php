@@ -33,15 +33,15 @@
 			
 			
 			// Set background image
-			$image = imagecreatefrompng( 'img/sm_grey.png' );
+			// $image = imagecreatefrompng( 'img/sm_grey.png' );
 			
 			// Set font file and size
 			$font_file = 'font/tt0144m_.ttf';
 			$size = '28';
 			
 			// Set text colors
-			$black = imagecolorallocate( $image, 0, 0, 0 );
-			$white = imagecolorallocate( $image, 240, 240, 235 );
+			$black = imagecolorallocate( $image_a, 0, 0, 0 );
+			$white = imagecolorallocate( $image_a, 240, 240, 235 );
 			
 			// Set text position
 			$x_pos = 150;
@@ -51,19 +51,52 @@
 			$l = 0;
 			$l_height = 50;
 			
+			
+			
+			
+			
+			
+			
+			$src_image = 'img/sm_green.png';
+			
+			$dst_image = 'img/sm_grey.png';
+			
+			// Set a maximum height and width for src_image
+			$img_width = 240;
+			$img_height = 223;
+			
+
+			
+			// Get new dimensions
+			list( $width_orig, $height_orig ) = getimagesize( $src_image );
+			
+			$ratio_orig = $width_orig / $height_orig;
+			
+			if ( $img_width / $img_height < $ratio_orig ) {
+			   $img_width = $img_height * $ratio_orig;
+			} else {
+			   $img_height = $img_width / $ratio_orig;
+			}
+			
+			// Resample
+			$image_a = imagecreatefrompng( $dst_image );
+			$image_b = imagecreatefrompng( $src_image );
+			
+			imagecopyresampled($image_a, $image_b, 324, 23, 0, 0, $img_width, $img_height, $width_orig, $height_orig);
+			
 			foreach( $smart_moves as $move ) {
 				// Draw drop shadow
 				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
-					imagettftext( $image, $size, 0, $x_pos + $s_depth, $y_pos + $s_depth + $l, $black, $font_file, strtoupper( $move ) );
+					imagettftext( $image_a, $size, 0, $x_pos + $s_depth, $y_pos + $s_depth + $l, $black, $font_file, strtoupper( $move ) );
 				}
 				
 				// Draw text
-				imagettftext( $image, $size, 0, $x_pos, $y_pos + $l, $white, $font_file, strtoupper( $move ) );
+				imagettftext( $image_a, $size, 0, $x_pos, $y_pos + $l, $white, $font_file, strtoupper( $move ) );
 				
 				// Add 65px to line height for next line of text
 				$l = $l + $l_height;
 			}
-			imagejpeg( $image, $file, 25 );
+			imagepng( $image_a, $file);
 		}
 		return $file;
 	}
@@ -71,39 +104,36 @@
 	function create_image_2( $smart_moves ) {
 
 		// The file
-		$filename = 'img/sm_green.png';
+		$src_image = 'img/sm_green.png';
 		
-		$filename2 = 'img/sm_grey.png';
+		$dst_image = 'img/sm_grey.png';
 		
-		// Set a maximum height and width
-		$width = 240;
-		$height = 223;
+		// Set a maximum height and width for src_image
+		$img_width = 240;
+		$img_height = 223;
 		
 		// Content type
 		header('Content-Type: image/png');
 		
 		// Get new dimensions
-		list($width_orig, $height_orig) = getimagesize($filename);
+		list( $width_orig, $height_orig ) = getimagesize( $src_image );
 		
-		$ratio_orig = $width_orig/$height_orig;
+		$ratio_orig = $width_orig / $height_orig;
 		
-		
-		
-		if ($width/$height < $ratio_orig) {
-		   $width = $height*$ratio_orig;
+		if ( $img_width / $img_height < $ratio_orig ) {
+		   $img_width = $img_height * $ratio_orig;
 		} else {
-		   $height = $width/$ratio_orig;
+		   $img_height = $img_width / $ratio_orig;
 		}
 		
-		
-		
 		// Resample
-		$image_p = imagecreatefrompng($filename2);
-		$image = imagecreatefrompng($filename);
-		imagecopyresampled($image_p, $image, 324, 23, 0, 0, $width, $height, $width_orig, $height_orig);
+		$image_a = imagecreatefrompng( $dst_image );
+		$image_b = imagecreatefrompng( $src_image );
+		
+		imagecopyresampled($image_a, $image_b, 324, 23, 0, 0, $img_width, $img_height, $width_orig, $height_orig);
 		
 		// Output
-		imagepng($image_p, $file);
+		imagepng($image_a, $file);
 		
 		return $file;
 		
@@ -256,7 +286,7 @@
 	}
 	
 	// Run script and create image
-	$filename = create_image_2( $smart_moves );
+	$filename = create_image( $smart_moves );
 ?>
 
 <!DOCTYPE html>
