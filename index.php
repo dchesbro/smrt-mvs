@@ -5,39 +5,166 @@
 	
 		// If the file already exists display original and dont create duplicate
 		if ( !file_exists( $file ) ) {
+			/*
+				// Set background image
+				$image = imagecreatefrompng( 'img/sm_green.png' );
+				
+				// Set font file and size
+				$font_file = 'font/LTe50244.ttf';
+				$size = '26';
+				
+				// Set text colors
+				$black = imagecolorallocate( $image, 0, 0, 0 );
+				$white = imagecolorallocate( $image, 230, 230, 225 );
+				
+				// Set text position
+				$x_pos = 60;
+				$y_pos = 245;
+				
+				// Initialize line height
+				$l = 0;
+				$l_height = 65;
+			*/
+			
+			
+			
+
+			
+			
+			
 			// Set background image
-			$image = imagecreatefrompng( 'img/sm_green.png' );
+			$image = imagecreatefrompng( 'img/sm_grey.png' );
 			
 			// Set font file and size
-			$font_file = 'font/LTe50244.ttf';
-			$size = '26';
+			$font_file = 'font/tt0144m_.ttf';
+			$size = '28';
 			
 			// Set text colors
 			$black = imagecolorallocate( $image, 0, 0, 0 );
-			$white = imagecolorallocate( $image, 230, 230, 225 );
+			$white = imagecolorallocate( $image, 240, 240, 235 );
 			
 			// Set text position
-			$x_pos = 60;
-			$y_pos = 245;
+			$x_pos = 150;
+			$y_pos = 310;
 			
 			// Initialize line height
-			$l_height = 0;
+			$l = 0;
+			$l_height = 50;
 			
 			foreach( $smart_moves as $move ) {
 				// Draw drop shadow
 				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
-					imagettftext( $image, $size, 0, $x_pos + $s_depth, $y_pos + $s_depth + $l_height, $black, $font_file, strtoupper( $move ) );
+					imagettftext( $image, $size, 0, $x_pos + $s_depth, $y_pos + $s_depth + $l, $black, $font_file, strtoupper( $move ) );
 				}
 				
 				// Draw text
-				imagettftext( $image, $size, 0, $x_pos, $y_pos + $l_height, $white, $font_file, strtoupper( $move ) );
+				imagettftext( $image, $size, 0, $x_pos, $y_pos + $l, $white, $font_file, strtoupper( $move ) );
 				
 				// Add 65px to line height for next line of text
-				$l_height = $l_height + 65;
+				$l = $l + $l_height;
 			}
 			imagejpeg( $image, $file, 25 );
 		}
 		return $file;
+	}
+	
+	function create_image_2( $smart_moves ) {
+
+		// The file
+		$filename = 'img/sm_green.png';
+		
+		$filename2 = 'img/sm_grey.png';
+		
+		// Set a maximum height and width
+		$width = 240;
+		$height = 223;
+		
+		// Content type
+		header('Content-Type: image/png');
+		
+		// Get new dimensions
+		list($width_orig, $height_orig) = getimagesize($filename);
+		
+		$ratio_orig = $width_orig/$height_orig;
+		
+		
+		
+		if ($width/$height < $ratio_orig) {
+		   $width = $height*$ratio_orig;
+		} else {
+		   $height = $width/$ratio_orig;
+		}
+		
+		
+		
+		// Resample
+		$image_p = imagecreatefrompng($filename2);
+		$image = imagecreatefrompng($filename);
+		imagecopyresampled($image_p, $image, 324, 23, 0, 0, $width, $height, $width_orig, $height_orig);
+		
+		// Output
+		imagepng($image_p, $file);
+		
+		return $file;
+		
+	}
+	
+	function upload_image() {
+		
+		global $upload_error;
+		
+		global $target_file;
+		
+		$target_dir = "img/usr/";
+		
+		$target_file = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
+		
+		$uploadOk = 1;
+		
+		$imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
+				
+		// Check if image file is a actual image or fake image
+		if( isset( $_POST["submit"] ) ) {
+			
+			$check = getimagesize( $_FILES["fileToUpload"]["tmp_name"] );
+			
+			if( $check !== false ) {
+				$upload_error = "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			} else {
+				$upload_error = "File is not an image.";
+				$uploadOk = 0;
+			}
+		}
+		
+		// Check if file already exists
+		if (file_exists($target_file)) {
+		    $upload_error = "Sorry, file already exists.";
+		    $uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["fileToUpload"]["size"] > 500000) {
+		    $upload_error = "Sorry, your file is too large.";
+		    $uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+		    $upload_error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		    $uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+		    $upload_error = "Sorry, your file was not uploaded.";
+		// if everything is ok, try to upload file
+		} else {
+		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		        $upload_error = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+		    } else {
+		        $upload_error = "Sorry, there was an error uploading your file.";
+		    }
+		}
+		
 	}
 	
 	// Default moves
@@ -127,8 +254,9 @@
 			);
 		}
 	}
+	
 	// Run script and create image
-	$filename = create_image( $smart_moves );
+	$filename = create_image_2( $smart_moves );
 ?>
 
 <!DOCTYPE html>
@@ -153,19 +281,24 @@
 	</head>
 	<body>
 		 
-		<div class="container" style="margin: auto; max-width: 480px;">
+		<div class="container" style="margin: auto;">
 			<div class="row">
 				<div class="col-md-12">
 			 
 					<img src="<?=$filename;?>?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
-					 					
+					
+					<hr />
+										 					
 					<!-- <p>You can edit the image above by typing your details in below. It'll then generate a new image which you can right click on and save to your computer.</p> -->
-										
+					
 					<?php if( isset( $error ) ) {
 						echo '<p>' . $error . '</p>';
 					} ?>
 					
-					<form method="post" style="text-align: center;">
+					<form enctype="multipart/form-data" method="post" style="text-align: center;">
+						<div class="form-group">
+							<input type="file" name="fileToUpload" id="fileToUpload">
+						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">1.</div>
