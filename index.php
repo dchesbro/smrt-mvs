@@ -7,9 +7,9 @@
 		$upload_log = array();
 		
 		// Set function variables
-		$usr_directory   = 'img/usr/';
-		$usr_image       = $usr_directory . basename( $_FILES['fileToUpload']['name'] );
-		$usr_extension   = pathinfo( $usr_image, PATHINFO_EXTENSION );
+		$usr_directory = 'img/usr/';
+		$usr_image     = $usr_directory . basename( $_FILES['fileToUpload']['name'] );
+		$usr_extension = pathinfo( $usr_image, PATHINFO_EXTENSION );
 		
 		if( !empty( $_FILES['fileToUpload']['tmp_name'] ) ) {
 			$upload_ok = 1;
