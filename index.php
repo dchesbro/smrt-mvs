@@ -260,7 +260,11 @@
 		}
 	
 		*/
-		$my_image = upload_image();
+		// $my_image = upload_image();
+		
+		if( empty( $_FILES['fileToUpload']['tmp_name'] ) ) {
+			$upload_log = array( 'Choose and image, dummy!' );
+		}
 
 		// Error for empty input fields
 		if( strlen( $_POST['move_1'] ) == 0 || strlen( $_POST['move_2'] ) == 0 || strlen( $_POST['move_3'] ) == 0 ) {
