@@ -65,7 +65,7 @@
 		
 	}
 	
-	function create_image( $smart_moves, $usr_image ) {
+	function create_image( $smart_moves ) {
 		
 		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
@@ -95,7 +95,7 @@
 			define( 'PIP_WIDTH', 240 );
 			define( 'PIP_HEIGHT', 223 );
 						
-			$usr_image = $usr_image;
+			$usr_image = $_FILES['fileToUpload']['tmp_name'];
 			
 			$dst_image = 'img/sm_grey.png';
 			
@@ -278,7 +278,7 @@
 	}
 	
 	// Run script and create image
-	$filename = create_image( $smart_moves, $my_image );
+	$filename = create_image( $smart_moves );
 ?>
 
 <!DOCTYPE html>
