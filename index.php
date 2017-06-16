@@ -1,143 +1,4 @@
 <?php
-	function create_image( $smart_moves ) {
-	
-		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
-	
-		// If the file already exists display original and dont create duplicate
-		if ( !file_exists( $file ) ) {
-			/*
-				// Set background image
-				$image = imagecreatefrompng( 'img/sm_green.png' );
-				
-				// Set font file and size
-				$font_file = 'font/LTe50244.ttf';
-				$size = '26';
-				
-				// Set text colors
-				$black = imagecolorallocate( $image, 0, 0, 0 );
-				$white = imagecolorallocate( $image, 230, 230, 225 );
-				
-				// Set text position
-				$x_pos = 60;
-				$y_pos = 245;
-				
-				// Initialize line height
-				$l = 0;
-				$l_height = 65;
-			*/
-			
-			
-			
-
-			
-			
-			
-			// Set background image
-			// $image = imagecreatefrompng( 'img/sm_grey.png' );
-			
-			// Set font file and size
-			$font_file = 'font/tt0144m_.ttf';
-			$size = '28';
-			
-			// Set text colors
-			$black = imagecolorallocate( $image_a, 0, 0, 0 );
-			$white = imagecolorallocate( $image_a, 240, 240, 235 );
-			
-			// Set text position
-			$x_pos = 150;
-			$y_pos = 310;
-			
-			// Initialize line height
-			$l = 0;
-			$l_height = 50;
-			
-			
-			
-			
-			
-			
-			
-			$src_image = 'img/sm_green.png';
-			
-			$dst_image = 'img/sm_grey.png';
-			
-			// Set a maximum height and width for src_image
-			$img_width = 240;
-			$img_height = 223;
-			
-
-			
-			// Get new dimensions
-			list( $width_orig, $height_orig ) = getimagesize( $src_image );
-			
-			$ratio_orig = $width_orig / $height_orig;
-			
-			if ( $img_width / $img_height < $ratio_orig ) {
-			   $img_width = $img_height * $ratio_orig;
-			} else {
-			   $img_height = $img_width / $ratio_orig;
-			}
-			
-			// Resample
-			$image_a = imagecreatefrompng( $dst_image );
-			$image_b = imagecreatefrompng( $src_image );
-			
-			imagecopyresampled($image_a, $image_b, 324, 23, 0, 0, $img_width, $img_height, $width_orig, $height_orig);
-			
-			foreach( $smart_moves as $move ) {
-				// Draw drop shadow
-				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
-					imagettftext( $image_a, $size, 0, $x_pos + $s_depth, $y_pos + $s_depth + $l, $black, $font_file, strtoupper( $move ) );
-				}
-				
-				// Draw text
-				imagettftext( $image_a, $size, 0, $x_pos, $y_pos + $l, $white, $font_file, strtoupper( $move ) );
-				
-				// Add 65px to line height for next line of text
-				$l = $l + $l_height;
-			}
-			imagepng( $image_a, $file);
-		}
-		return $file;
-	}
-	
-	function create_image_2( $smart_moves ) {
-
-		// The file
-		$src_image = 'img/sm_green.png';
-		
-		$dst_image = 'img/sm_grey.png';
-		
-		// Set a maximum height and width for src_image
-		$img_width = 240;
-		$img_height = 223;
-		
-		// Content type
-		header('Content-Type: image/png');
-		
-		// Get new dimensions
-		list( $width_orig, $height_orig ) = getimagesize( $src_image );
-		
-		$ratio_orig = $width_orig / $height_orig;
-		
-		if ( $img_width / $img_height < $ratio_orig ) {
-		   $img_width = $img_height * $ratio_orig;
-		} else {
-		   $img_height = $img_width / $ratio_orig;
-		}
-		
-		// Resample
-		$image_a = imagecreatefrompng( $dst_image );
-		$image_b = imagecreatefrompng( $src_image );
-		
-		imagecopyresampled($image_a, $image_b, 324, 23, 0, 0, $img_width, $img_height, $width_orig, $height_orig);
-		
-		// Output
-		imagepng($image_a, $file);
-		
-		return $file;
-		
-	}
 	
 	function upload_image() {
 		
@@ -169,33 +30,156 @@
 		
 		// Check if file already exists
 		if (file_exists($target_file)) {
-		    $upload_error = "Sorry, file already exists.";
-		    $uploadOk = 0;
+			  $upload_error = "Sorry, file already exists.";
+			  $uploadOk = 0;
 		}
 		// Check file size
 		if ($_FILES["fileToUpload"]["size"] > 500000) {
-		    $upload_error = "Sorry, your file is too large.";
-		    $uploadOk = 0;
+			  $upload_error = "Sorry, your file is too large.";
+			  $uploadOk = 0;
 		}
 		// Allow certain file formats
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 		&& $imageFileType != "gif" ) {
-		    $upload_error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-		    $uploadOk = 0;
+			  $upload_error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			  $uploadOk = 0;
 		}
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
-		    $upload_error = "Sorry, your file was not uploaded.";
+			  $upload_error = "Sorry, your file was not uploaded.";
 		// if everything is ok, try to upload file
 		} else {
-		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		        $upload_error = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		    } else {
-		        $upload_error = "Sorry, there was an error uploading your file.";
-		    }
+			  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				  $upload_error = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			  } else {
+				  $upload_error = "Sorry, there was an error uploading your file.";
+			  }
 		}
 		
 	}
+	
+	function create_image_3( $smart_moves, $target_file ) {
+		
+		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
+		
+		if ( !file_exists( $file ) ) {
+			
+			/*
+				// Set background image
+				$image = imagecreatefrompng( 'img/sm_green.png' );
+				
+				// Set font file and size
+				$font_file = 'font/LTe50244.ttf';
+				$size = '26';
+				
+				// Set text colors
+				$black = imagecolorallocate( $image, 0, 0, 0 );
+				$white = imagecolorallocate( $image, 230, 230, 225 );
+				
+				// Set text position
+				$x_pos = 60;
+				$y_pos = 245;
+				
+				// Initialize line height
+				$l = 0;
+				$l_height = 65;
+			*/
+			
+			define( 'PIP_WIDTH', 240 );
+			define( 'PIP_HEIGHT', 224 );
+						
+			$usr_image = $target_file;
+			
+			$dst_image = 'img/sm_grey.png';
+			
+			// Get user image properties
+			list( $src_width, $src_height, $src_type ) = getimagesize( $usr_image );
+			
+			switch ( $src_type ) {
+				case IMAGETYPE_GIF:
+					$src_image = imagecreatefromgif( $usr_image );
+					break;
+				case IMAGETYPE_JPEG:
+					$src_image = imagecreatefromjpeg( $usr_image );
+					break;
+				case IMAGETYPE_PNG:
+					$src_image = imagecreatefrompng( $usr_image );
+					break;
+			}
+			
+			// Set aspect ratios
+			$dst_ar = PIP_WIDTH / PIP_HEIGHT;
+			$src_ar = $src_width / $src_height;
+			
+			if( $dst_ar < $src_ar ) {
+				// User image wider
+				$tmp_height = PIP_HEIGHT;
+				$tmp_width = ( int )( PIP_HEIGHT * $src_ar );
+			} else {
+				// User image taller or same size
+				$tmp_width = PIP_WIDTH;
+				$tmp_height = ( int )( PIP_WIDTH / $src_ar );
+			}
+			
+			// Create temp image
+			$pip_image = imagecreatetruecolor( $tmp_width, $tmp_height );
+			
+			imagecopyresampled( $pip_image, $src_image, 0, 0, 0, 0, $tmp_width, $tmp_height, $src_width, $src_height );
+			
+			// Create background image
+			$tmp_image = imagecreatefrompng( $dst_image );
+			
+			// Set PIP coordinates
+			$x_pip = ( $tmp_width - PIP_WIDTH ) / 2;
+			$y_pip = ( $tmp_height - PIP_HEIGHT ) / 2;
+			
+			imagecopy( $tmp_image, $pip_image, 324, 23, $x_pip, $y_pip, PIP_WIDTH, PIP_HEIGHT );
+			
+			// Set font file and size
+			$font_file = 'font/tt0144m_.ttf';
+			$size = '28';
+			
+			// Set text colors
+			$black = imagecolorallocate( $tmp_image, 0, 0, 0 );
+			$white = imagecolorallocate( $tmp_image, 240, 240, 235 );
+			
+			// Set text position
+			$x_txt = 150;
+			$y_txt = 310;
+			
+			// Initialize line height
+			$l = 0;
+			$l_height = 50;
+			
+			foreach( $smart_moves as $move ) {
+				// Draw drop shadow
+				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
+					imagettftext( $tmp_image, $size, 0, $x_txt + $s_depth, $y_txt + $s_depth + $l, $black, $font_file, strtoupper( $move ) );
+				}
+				
+				// Draw text
+				imagettftext( $tmp_image, $size, 0, $x_txt, $y_txt + $l, $white, $font_file, strtoupper( $move ) );
+				
+				// Add 65px to line height for next line of text
+				$l = $l + $l_height;
+			}
+			imagejpeg( $tmp_image, $file, 25 );
+		}
+		return $file;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// Default moves
 	$default_moves = array(
@@ -271,7 +255,7 @@
 		*/
 
 		// Error for empty input fields
-		if( strlen( $_POST['move_1'] ) == 0 || strlen( $_POST['move_2'] ) == 0 || strlen( $_POST['move_3'] ) == 0) {
+		if( strlen( $_POST['move_1'] ) == 0 || strlen( $_POST['move_2'] ) == 0 || strlen( $_POST['move_3'] ) == 0 ) {
 			$error = 'Champions always enter three moves!';
 		}
 	
@@ -285,8 +269,10 @@
 		}
 	}
 	
+	upload_image();
+	
 	// Run script and create image
-	$filename = create_image( $smart_moves );
+	$filename = create_image_3( $smart_moves, $target_file );
 ?>
 
 <!DOCTYPE html>
@@ -321,6 +307,10 @@
 										 					
 					<!-- <p>You can edit the image above by typing your details in below. It'll then generate a new image which you can right click on and save to your computer.</p> -->
 					
+					<?php if( isset( $upload_error ) ) {
+						echo $upload_error;
+					} ?>
+										
 					<?php if( isset( $error ) ) {
 						echo '<p>' . $error . '</p>';
 					} ?>
