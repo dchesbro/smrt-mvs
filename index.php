@@ -170,7 +170,7 @@
 				// Add 65px to line height for next line of text
 				$l = $l + $l_height;
 			}
-			imagejpeg( $tmp_image, $file, 25 );
+			imagejpeg( $tmp_image, $file, 35 );
 		// }
 		return $file;
 	}
