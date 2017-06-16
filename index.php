@@ -2,63 +2,70 @@
 	
 	function upload_image() {
 		
-		global $upload_error;
+		// Set log variables
+		global $upload_log;
+		$upload_log = array();
 		
-		global $target_file;
+		// Set function variables
+		$usr_directory   = 'img/usr/';
+		$usr_image       = $usr_directory . basename( $_FILES['fileToUpload']['name'] );
+		$usr_extension   = pathinfo( $usr_image, PATHINFO_EXTENSION );
 		
-		$target_dir = "img/usr/";
+		if( !empty( $_FILES['fileToUpload']['tmp_name'] ) ) {
+			$upload_ok = 1;
 		
-		$target_file = $target_dir . basename( $_FILES["fileToUpload"]["name"] );
-		
-		$uploadOk = 1;
-		
-		$imageFileType = pathinfo( $target_file, PATHINFO_EXTENSION );
-				
-		// Check if image file is a actual image or fake image
-		if( isset( $_POST["submit"] ) ) {
+			// Check if image
+			$img_check = getimagesize( $_FILES['fileToUpload']['tmp_name'] );
 			
-			$check = getimagesize( $_FILES["fileToUpload"]["tmp_name"] );
-			
-			if( $check !== false ) {
-				$upload_error = "File is an image - " . $check["mime"] . ".";
-				$uploadOk = 1;
+			if( $img_check == false ) {
+				array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
+				$upload_ok = 0;
 			} else {
-				$upload_error = "File is not an image.";
-				$uploadOk = 0;
+				array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $img_check['mime'] . '</code>).' );
 			}
-		}
-		
-		// Check if file already exists
-		if ( file_exists( $target_file ) ) {
-			  $upload_error = 'The image you are trying to upload already exists.';
-			  $uploadOk = 0;
-		}
-		// Check file size
-		if ($_FILES["fileToUpload"]["size"] > 500000) {
-			  $upload_error = "Sorry, your file is too large.";
-			  $uploadOk = 0;
-		}
-		// Allow certain file formats
-		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		&& $imageFileType != "gif" ) {
-			  $upload_error = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-			  $uploadOk = 0;
-		}
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
-			  // $upload_error = "Sorry, your file was not uploaded.";
-		// if everything is ok, try to upload file
+			
+			// Check if already exists
+			if( file_exists( $usr_image ) ) {
+				array_push( $upload_log, '<strong>ERROR:</strong> File already exists.' );
+				$upload_ok = 0;
+			} else {
+				array_push( $upload_log, '<strong>OK:</strong> File doesn\'t already exist.' );
+			}
+			
+			// Check file size
+			if( $_FILES['fileToUpload']['size'] > 500000 ) {
+				array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['fileToUpload']['size'] . ' bytes</code>).' );
+				$upload_ok = 0;
+			} else {
+				array_push( $upload_log, '<strong>OK:</strong> File size within limit.' );
+			}
+			
+			// Check if allowed format
+			if( $usr_extension !== 'jpeg' && $usr_extension !== 'jpg' && $usr_extension !== 'png' && $usr_extension !== 'gif' ) {
+				array_push( $upload_log, '<strong>ERROR:</strong> Sorry, only JPEG, JPG, PNG & GIF files are allowed.' );
+				$upload_ok = 0;
+			} else {
+				array_push( $upload_log, '<strong>OK:</strong> File is allowed format.' );
+			}
+			
+			// Check if errors, else upload
+			if ( $upload_ok == 0 ) {
+				array_push( $upload_log, '<strong>ERROR:</strong> File was not uploaded.' );
+			} else {
+				if ( move_uploaded_file( $_FILES['fileToUpload']['tmp_name'], $usr_image ) ) {
+					array_push( $upload_log, '<strong>OK:</strong> File <code>' . basename( $_FILES['fileToUpload']['name'] ) . '</code> has been uploaded.' );
+				} else {
+					array_push( $upload_log, '<strong>ERROR:</strong> There was an error uploading your file.' );
+				}
+			}
 		} else {
-			  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-				  $upload_error = "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-			  } else {
-				  $upload_error = "Sorry, there was an error uploading your file.";
-			  }
+			array_push( $upload_log, '<strong>ERROR:</strong> Champions always select an image to upload!' );
 		}
+		return $usr_image;
 		
 	}
 	
-	function create_image_3( $smart_moves, $target_file ) {
+	function create_image( $smart_moves, $usr_image ) {
 		
 		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
@@ -88,7 +95,7 @@
 			define( 'PIP_WIDTH', 240 );
 			define( 'PIP_HEIGHT', 223 );
 						
-			$usr_image = $target_file;
+			$usr_image = $usr_image;
 			
 			$dst_image = 'img/sm_grey.png';
 			
@@ -253,6 +260,7 @@
 		}
 	
 		*/
+		$my_image = upload_image();
 
 		// Error for empty input fields
 		if( strlen( $_POST['move_1'] ) == 0 || strlen( $_POST['move_2'] ) == 0 || strlen( $_POST['move_3'] ) == 0 ) {
@@ -267,12 +275,10 @@
 				'3. ' . $_POST['move_3']
 			);
 		}
-		
-		upload_image();
 	}
 	
 	// Run script and create image
-	$filename = create_image_3( $smart_moves, $target_file );
+	$filename = create_image( $smart_moves, $my_image );
 ?>
 
 <!DOCTYPE html>
@@ -307,9 +313,19 @@
 										 					
 					<!-- <p>You can edit the image above by typing your details in below. It'll then generate a new image which you can right click on and save to your computer.</p> -->
 					
-					<?php if( isset( $upload_error ) ) {
-						echo $upload_error;
-					} ?>
+					<?php					
+						echo '<ul>';
+						
+						foreach( $upload_log as $upload_error ) {
+							echo '<li>';
+							
+							echo $upload_error;
+							
+							echo '</li>';
+						}
+						
+						echo '</ul>';
+					?>
 										
 					<?php if( isset( $error ) ) {
 						echo '<p>' . $error . '</p>';
