@@ -67,7 +67,7 @@
 	
 	function create_image( $smart_moves ) {
 		
-		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
+		$file = 'img/mvs/' . md5( $usr_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
 		// if ( !file_exists( $file ) ) {
 			
