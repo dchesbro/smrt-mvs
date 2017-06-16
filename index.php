@@ -29,8 +29,8 @@
 		}
 		
 		// Check if file already exists
-		if (file_exists($target_file)) {
-			  $upload_error = "Sorry, file already exists.";
+		if ( file_exists( $target_file ) ) {
+			  $upload_error = 'The image you are trying to upload already exists.';
 			  $uploadOk = 0;
 		}
 		// Check file size
@@ -46,7 +46,7 @@
 		}
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
-			  $upload_error = "Sorry, your file was not uploaded.";
+			  // $upload_error = "Sorry, your file was not uploaded.";
 		// if everything is ok, try to upload file
 		} else {
 			  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -62,7 +62,7 @@
 		
 		$file = 'img/mvs/' . md5( $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
-		if ( !file_exists( $file ) ) {
+		// if ( !file_exists( $file ) ) {
 			
 			/*
 				// Set background image
@@ -86,7 +86,7 @@
 			*/
 			
 			define( 'PIP_WIDTH', 240 );
-			define( 'PIP_HEIGHT', 224 );
+			define( 'PIP_HEIGHT', 223 );
 						
 			$usr_image = $target_file;
 			
@@ -164,7 +164,7 @@
 				$l = $l + $l_height;
 			}
 			imagejpeg( $tmp_image, $file, 25 );
-		}
+		// }
 		return $file;
 	}
 	
@@ -267,9 +267,9 @@
 				'3. ' . $_POST['move_3']
 			);
 		}
+		
+		upload_image();
 	}
-	
-	upload_image();
 	
 	// Run script and create image
 	$filename = create_image_3( $smart_moves, $target_file );
