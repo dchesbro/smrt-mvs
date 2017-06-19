@@ -168,6 +168,51 @@
 		return $file;
 	}
 	
+	function validate_image( $usr_image ) {
+		
+		global $upload_log;
+		
+		$upload_log = array();
+		
+		$submit_ok = 1;
+			
+		// Check if image
+		$img_check = getimagesize( $usr_image['tmp_name'] );
+		
+		if( $img_check == false ) {
+			array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
+			$submit_ok = 0;
+		} else {
+			array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $img_check['mime'] . '</code>).' );
+		}
+		
+		// Check file size
+		if( $usr_image['size'] > 500000 ) {
+			array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
+			$submit_ok = 0;
+		} else {
+			array_push( $upload_log, '<strong>OK:</strong> File size within limit.' );
+		}
+		
+		// Check if allowed format
+		$usr_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
+				
+		if( $usr_extension !== 'jpeg' && $usr_extension !== 'jpg' && $usr_extension !== 'png' && $usr_extension !== 'gif' ) {
+			array_push( $upload_log, '<strong>ERROR:</strong> Sorry, only JPEG, JPG, PNG & GIF files are allowed.' );
+			$submit_ok = 0;
+		} else {
+			array_push( $upload_log, '<strong>OK:</strong> File is allowed format.' );
+		}
+		
+		// Check if any errors, else return
+		if ( $submit_ok == 0 ) {
+			array_push( $upload_log, '<strong>ERROR:</strong> File was not submitted.' );
+		} else {
+			return $usr_image['tmp_name'];
+		}
+		
+	}
+	
 	
 	
 	
@@ -258,14 +303,14 @@
 				
 		// Check for user image
 		if( empty( $_FILES['usr_image']['tmp_name'] ) ) {					
-			$error_log[] = 'Champions always choose an image!';
-		} else {			
-			$usr_image = $_FILES['usr_image']['tmp_name'];
+			$error_log[] = '<strong>ERROR:</strong> No file selected.';
+		} else {
+			$usr_image = validate_image( $_FILES['usr_image'] );
 		}
 
 		// Check for user moves
 		if( empty( $_POST['move_1'] ) || empty( $_POST['move_2'] ) || empty( $_POST['move_3'] ) ) {
-			$error_log[] = 'Champions always enter three moves!';
+			$error_log[] = '<strong>ERROR:</strong> Missing moves.';
 		} else {
 			$smart_moves = array(
 				'1. ' . $_POST['move_1'],
