@@ -12,14 +12,14 @@
 		$usr_extension = pathinfo( $usr_image, PATHINFO_EXTENSION );
 		
 		if( !empty( $_FILES['usr_image']['tmp_name'] ) ) {
-			$upload_ok = 1;
+			$submit_ok = 1;
 		
 			// Check if image
 			$img_check = getimagesize( $_FILES['usr_image']['tmp_name'] );
 			
 			if( $img_check == false ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
-				$upload_ok = 0;
+				$submit_ok = 0;
 			} else {
 				array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $img_check['mime'] . '</code>).' );
 			}
@@ -27,7 +27,7 @@
 			// Check if already exists
 			if( file_exists( $usr_image ) ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> File already exists.' );
-				$upload_ok = 0;
+				$submit_ok = 0;
 			} else {
 				array_push( $upload_log, '<strong>OK:</strong> File doesn\'t already exist.' );
 			}
@@ -35,7 +35,7 @@
 			// Check file size
 			if( $_FILES['usr_image']['size'] > 500000 ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
-				$upload_ok = 0;
+				$submit_ok = 0;
 			} else {
 				array_push( $upload_log, '<strong>OK:</strong> File size within limit.' );
 			}
@@ -43,13 +43,13 @@
 			// Check if allowed format
 			if( $usr_extension !== 'jpeg' && $usr_extension !== 'jpg' && $usr_extension !== 'png' && $usr_extension !== 'gif' ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> Sorry, only JPEG, JPG, PNG & GIF files are allowed.' );
-				$upload_ok = 0;
+				$submit_ok = 0;
 			} else {
 				array_push( $upload_log, '<strong>OK:</strong> File is allowed format.' );
 			}
 			
 			// Check if errors, else upload
-			if ( $upload_ok == 0 ) {
+			if ( $submit_ok == 0 ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> File was not uploaded.' );
 			} else {
 				if ( move_uploaded_file( $_FILES['usr_image']['tmp_name'], $usr_image ) ) {
@@ -261,6 +261,8 @@
 			$error_log[] = 'Champions always choose an image!';
 		} else {			
 			$usr_image = $_FILES['usr_image']['tmp_name'];
+			
+			validate_image( $usr_image );
 		}
 
 		// Check for user moves
