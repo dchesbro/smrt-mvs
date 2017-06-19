@@ -8,14 +8,14 @@
 		
 		// Set function variables
 		$usr_directory = 'img/usr/';
-		$usr_image     = $usr_directory . basename( $_FILES['fileToUpload']['name'] );
+		$usr_image     = $usr_directory . basename( $_FILES['usr_image']['name'] );
 		$usr_extension = pathinfo( $usr_image, PATHINFO_EXTENSION );
 		
-		if( !empty( $_FILES['fileToUpload']['tmp_name'] ) ) {
+		if( !empty( $_FILES['usr_image']['tmp_name'] ) ) {
 			$upload_ok = 1;
 		
 			// Check if image
-			$img_check = getimagesize( $_FILES['fileToUpload']['tmp_name'] );
+			$img_check = getimagesize( $_FILES['usr_image']['tmp_name'] );
 			
 			if( $img_check == false ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
@@ -33,8 +33,8 @@
 			}
 			
 			// Check file size
-			if( $_FILES['fileToUpload']['size'] > 500000 ) {
-				array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['fileToUpload']['size'] . ' bytes</code>).' );
+			if( $_FILES['usr_image']['size'] > 500000 ) {
+				array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
 				$upload_ok = 0;
 			} else {
 				array_push( $upload_log, '<strong>OK:</strong> File size within limit.' );
@@ -52,8 +52,8 @@
 			if ( $upload_ok == 0 ) {
 				array_push( $upload_log, '<strong>ERROR:</strong> File was not uploaded.' );
 			} else {
-				if ( move_uploaded_file( $_FILES['fileToUpload']['tmp_name'], $usr_image ) ) {
-					array_push( $upload_log, '<strong>OK:</strong> File <code>' . basename( $_FILES['fileToUpload']['name'] ) . '</code> has been uploaded.' );
+				if ( move_uploaded_file( $_FILES['usr_image']['tmp_name'], $usr_image ) ) {
+					array_push( $upload_log, '<strong>OK:</strong> File <code>' . basename( $_FILES['usr_image']['name'] ) . '</code> has been uploaded.' );
 				} else {
 					array_push( $upload_log, '<strong>ERROR:</strong> There was an error uploading your file.' );
 				}
@@ -65,7 +65,7 @@
 		
 	}
 	
-	function create_image( $smart_moves ) {
+	function create_image( $usr_image, $smart_moves ) {
 		
 		$file = 'img/mvs/' . md5( $usr_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
@@ -79,25 +79,22 @@
 				$font_file = 'font/LTe50244.ttf';
 				$size = '26';
 				
-				// Set text colors
-				$black = imagecolorallocate( $image, 0, 0, 0 );
-				$white = imagecolorallocate( $image, 230, 230, 225 );
-				
 				// Set text position
 				$x_pos = 60;
 				$y_pos = 245;
-				
-				// Initialize line height
-				$l = 0;
-				$l_height = 65;
+
 			*/
 			
-			define( 'PIP_WIDTH', 240 );
-			define( 'PIP_HEIGHT', 223 );
-						
-			$usr_image = $_FILES['fileToUpload']['tmp_name'];
-			
+			// Set background image			
 			$dst_image = 'img/sm_grey.png';
+			
+			// Set font file and size
+			$font_file = 'font/tt0144m_.ttf';
+			$size = '28';
+			
+			// Set text position
+			$x_txt = 150;
+			$y_txt = 310;
 			
 			// Get user image properties
 			list( $src_width, $src_height, $src_type ) = getimagesize( $usr_image );
@@ -113,6 +110,10 @@
 					$src_image = imagecreatefrompng( $usr_image );
 					break;
 			}
+			
+			// Set PIP dimensions
+			define( 'PIP_WIDTH', 240 );
+			define( 'PIP_HEIGHT', 223 );
 			
 			// Set aspect ratios
 			$dst_ar = PIP_WIDTH / PIP_HEIGHT;
@@ -136,23 +137,15 @@
 			// Create background image
 			$tmp_image = imagecreatefrompng( $dst_image );
 			
-			// Set PIP coordinates
+			// Set PIP cropping boundaries
 			$x_pip = ( $tmp_width - PIP_WIDTH ) / 2;
 			$y_pip = ( $tmp_height - PIP_HEIGHT ) / 2;
 			
 			imagecopy( $tmp_image, $pip_image, 324, 23, $x_pip, $y_pip, PIP_WIDTH, PIP_HEIGHT );
 			
-			// Set font file and size
-			$font_file = 'font/tt0144m_.ttf';
-			$size = '28';
-			
 			// Set text colors
 			$black = imagecolorallocate( $tmp_image, 0, 0, 0 );
-			$white = imagecolorallocate( $tmp_image, 240, 240, 235 );
-			
-			// Set text position
-			$x_txt = 150;
-			$y_txt = 310;
+			$white = imagecolorallocate( $tmp_image, 240, 240, 230 );
 			
 			// Initialize line height
 			$l = 0;
@@ -240,39 +233,40 @@
 		'3. ' . $default_moves[$random_moves[2]]
 	);
 	
-	// Check for user moves
+	// Check for user input
 	if( isset( $_POST['submit'] ) ) {
 
 		/*
 		
-		$error = array();
-	
-		if( strlen( $_POST['move_1'] ) == 0 ) {
-			$error[] = 'Where\'s your first move?!';
-		}
-	
-		if( strlen( $_POST['move_2'] ) == 0 ) {
-			$error[] = 'Champions always enter a second move!';
-		}
-	
-		if( strlen( $_POST['move_3'] ) == 0 ) {
-			$error[] = 'Not so fast, you need a third move!';
-		}
+			$error_log = array();
+		
+			if( strlen( $_POST['move_1'] ) == 0 ) {
+				$error_log[] = 'Where\'s your first move?!';
+			}
+		
+			if( strlen( $_POST['move_2'] ) == 0 ) {
+				$error_log[] = 'Champions always enter a second move!';
+			}
+		
+			if( strlen( $_POST['move_3'] ) == 0 ) {
+				$error_log[] = 'Not so fast, you need a third move!';
+			}
 	
 		*/
-		// $my_image = upload_image();
 		
-		if( empty( $_FILES['fileToUpload']['tmp_name'] ) ) {
-			$upload_log = array( 'Choose and image, dummy!' );
+		$error_log = array();
+				
+		// Check for user image
+		if( empty( $_FILES['usr_image']['tmp_name'] ) ) {					
+			$error_log[] = 'Champions always choose an image!';
+		} else {			
+			$usr_image = $_FILES['usr_image']['tmp_name'];
 		}
 
-		// Error for empty input fields
-		if( strlen( $_POST['move_1'] ) == 0 || strlen( $_POST['move_2'] ) == 0 || strlen( $_POST['move_3'] ) == 0 ) {
-			$error = 'Champions always enter three moves!';
-		}
-	
-		// Set user moves
-		if( count( $error ) == 0 ) {
+		// Check for user moves
+		if( empty( $_POST['move_1'] ) || empty( $_POST['move_2'] ) || empty( $_POST['move_3'] ) ) {
+			$error_log[] = 'Champions always enter three moves!';
+		} else {
 			$smart_moves = array(
 				'1. ' . $_POST['move_1'],
 				'2. ' . $_POST['move_2'],
@@ -281,8 +275,8 @@
 		}
 	}
 	
-	// Run script and create image
-	$filename = create_image( $smart_moves );
+	// Create image
+	$filename = create_image( $usr_image, $smart_moves );
 ?>
 
 <!DOCTYPE html>
@@ -330,14 +324,24 @@
 						
 						echo '</ul>';
 					?>
-										
-					<?php if( isset( $error ) ) {
-						echo '<p>' . $error . '</p>';
-					} ?>
+					
+					<?php					
+						echo '<ul>';
+						
+						foreach( $error_log as $error_message ) {
+							echo '<li>';
+							
+							echo $error_message;
+							
+							echo '</li>';
+						}
+						
+						echo '</ul>';
+					?>
 					
 					<form enctype="multipart/form-data" method="post" style="text-align: center;">
 						<div class="form-group">
-							<input type="file" name="fileToUpload" id="fileToUpload">
+							<input type="file" name="usr_image" id="usr_image">
 						</div>
 						<div class="form-group">
 							<div class="input-group">
@@ -357,6 +361,7 @@
 								<input value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[2]]; ?>" name="move_3" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
+						
 						<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-default" />
 					</form>
 					
@@ -371,69 +376,3 @@
 	
 	</body>
 </html>
-
-<!--
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>SMRT MOVES!</title>
-		<link href="../style.css" rel="stylesheet" type="text/css" />
-		
-		<style>
-		html {
-			/* background-image: url( "bg.png" ); */
-		}
-		input{
-			border:1px solid #ccc;
-			padding:8px;
-			font-size:14px;
-			width:300px;
-			}
-		
-		.submit{
-			width:110px;
-			background-color:#FF6;
-			padding:3px;
-			border:1px solid #FC0;
-			margin-top:20px;}
-		
-		</style>
-	</head>
-
-	<body>
-	
-	<?php include '../includes/header.php';
-					$link = '| <a href="http://papermashup.com/dynamically-add-form-inputs-and-submit-using-jquery/">Back To Tutorial</a>';
-	?>
-		
-	<img src="<?=$filename;?>?id=<?=rand(0,1292938);?>" width="640" height="400"/><br/><br/>
-	
-	<ul>
-		<?php if( isset( $error ) ) {
-		
-			foreach( $error as $errors ) {
-				echo '<li>' . $errors . '</li>';
-			}
-		
-		} ?>
-	</ul>
-	
-	<p>You can edit the image above by typing your details in below. It'll then generate a new image which you can right click on and save to your computer.</p>
-	
-	<div class="dynamic-form">
-		<form action="" method="post">
-			<label>1.</label>
-			<input type="text" value="<?php if( isset( $_POST['move_1'] ) ) { echo $_POST['move_1']; } ?>" name="move_1" maxlength="18" placeholder="Balance"><br/>
-			<label>2.</label>
-			<input type="text" value="<?php if( isset( $_POST['move_2'] ) ) { echo $_POST['move_2']; } ?>" name="move_2" maxlength="18" placeholder="Grip Strength"><br/>
-			<label>3.</label>
-			<input type="text" value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" name="move_3" maxlength="18" placeholder="Cornering"><br/>
-			<input name="submit" type="submit" class="btn btn-primary" value="Take it to Moe!" />
-		</form>
-	</div>
-		
-	<?php include '../includes/footer.php';?>
-	
-	</body>
-</html> -->
