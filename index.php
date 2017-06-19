@@ -261,8 +261,6 @@
 			$error_log[] = 'Champions always choose an image!';
 		} else {			
 			$usr_image = $_FILES['usr_image']['tmp_name'];
-			
-			validate_image( $usr_image );
 		}
 
 		// Check for user moves
