@@ -176,35 +176,37 @@
 		
 		$submit_ok = 1;
 			
-		// Check if image
-		$img_check = getimagesize( $usr_image['tmp_name'] );
+		// Check if user file is image
+		$is_image = getimagesize( $usr_image['tmp_name'] );
 		
-		if( $img_check == false ) {
+		if( $is_image == false ) {
 			array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
 			$submit_ok = 0;
 		} else {
-			array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $img_check['mime'] . '</code>).' );
+			array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $is_image['mime'] . '</code>).' );
 		}
 		
-		// Check file size
-		if( $usr_image['size'] > 500000 ) {
-			array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
-			$submit_ok = 0;
-		} else {
-			array_push( $upload_log, '<strong>OK:</strong> File size within limit.' );
-		}
-		
-		// Check if allowed format
-		$usr_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
+		// Check if image extension is allowed
+		$img_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
 				
-		if( $usr_extension !== 'jpeg' && $usr_extension !== 'jpg' && $usr_extension !== 'png' && $usr_extension !== 'gif' ) {
+		if( $img_extension !== 'jpeg' && $img_extension !== 'jpg' && $img_extension !== 'png' && $img_extension !== 'gif' ) {
 			array_push( $upload_log, '<strong>ERROR:</strong> Sorry, only JPEG, JPG, PNG & GIF files are allowed.' );
 			$submit_ok = 0;
 		} else {
-			array_push( $upload_log, '<strong>OK:</strong> File is allowed format.' );
+			array_push( $upload_log, '<strong>OK:</strong> File is allowed format (<code>' . $img_extension . '</code>).' );
 		}
 		
-		// Check if any errors, else return
+		// Check if image size is within limit
+		$size_limit = 500000;
+		
+		if( $usr_image['size'] > $size_limit ) {
+			array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).' );
+			$submit_ok = 0;
+		} else {
+			array_push( $upload_log, '<strong>OK:</strong> File size within limit (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
+		}
+		
+		// Check if any errors, else return file
 		if ( $submit_ok == 0 ) {
 			array_push( $upload_log, '<strong>ERROR:</strong> File was not submitted.' );
 		} else {
