@@ -12,7 +12,7 @@
     width: 0.1px;
     z-index: -1; }
   .mvs-form label[for=usr_image] {
-    background-color: orangered;
+    background-color: silver;
     color: white;
     cursor: pointer;
     height: 223px;
@@ -24,7 +24,7 @@
       display: block; }
   .mvs-form .mvs-container {
     position: absolute;
-    top: 272px;
+    top: 271px;
     left: 20%;
     width: 60%; }
     .mvs-form .mvs-container .mvs-group {

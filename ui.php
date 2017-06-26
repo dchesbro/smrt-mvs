@@ -282,24 +282,6 @@
 	
 	// Check for user input
 	if( isset( $_POST['submit'] ) ) {
-
-		/*
-		
-			$error_log = array();
-		
-			if( strlen( $_POST['move_1'] ) == 0 ) {
-				$error_log[] = 'Where\'s your first move?!';
-			}
-		
-			if( strlen( $_POST['move_2'] ) == 0 ) {
-				$error_log[] = 'Champions always enter a second move!';
-			}
-		
-			if( strlen( $_POST['move_3'] ) == 0 ) {
-				$error_log[] = 'Not so fast, you need a third move!';
-			}
-	
-		*/
 		
 		$error_log = array();
 				
@@ -378,7 +360,7 @@
 				</div>
 			</div>
 			
-			<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-default" />
+			<input value="Take it to Mo!" type="submit" name="submit" />
 			
 		</form>
 
