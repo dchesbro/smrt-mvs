@@ -393,19 +393,19 @@
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">1.</div>
-								<input value="<?php if( isset( $_POST['move_1'] ) ) { echo $_POST['move_1']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[0]]; ?>" name="move_1" maxlength="20" class="form-control input-lg">
+								<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_1'] ) ) { echo $default_moves[$random_moves[0]]; } ?>" name="move_1" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">2.</div>
-								<input value="<?php if( isset( $_POST['move_2'] ) ) { echo $_POST['move_2']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[1]]; ?>" name="move_2" maxlength="20" class="form-control input-lg">
+								<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_2'] ) ) { echo $default_moves[$random_moves[1]]; } ?>" name="move_2" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
 								<div class="input-group-addon">3.</div>
-								<input value="<?php if( isset( $_POST['move_3'] ) ) { echo $_POST['move_3']; } ?>" type="text" placeholder="<?php echo $default_moves[$random_moves[2]]; ?>" name="move_3" maxlength="20" class="form-control input-lg">
+								<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_3'] ) ) { echo $default_moves[$random_moves[2]]; } ?>" name="move_3" maxlength="20" class="form-control input-lg">
 							</div>
 						</div>
 						
