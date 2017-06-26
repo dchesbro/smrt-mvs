@@ -11,7 +11,7 @@
     position: absolute;
     width: 0.1px;
     z-index: -1; }
-  .mvs-form label {
+  .mvs-form label[for=usr_image] {
     background-color: orangered;
     color: white;
     cursor: pointer;
@@ -20,28 +20,37 @@
     top: 23px;
     right: 76px;
     width: 240px; }
-    .mvs-form label .fa {
+    .mvs-form label[for=usr_image] .fa {
       display: block; }
-  .mvs-form .mvs-group {
+  .mvs-form .mvs-container {
     position: absolute;
-    top: 280px;
+    top: 276px;
     left: 20%;
     width: 60%; }
-    .mvs-form .mvs-group input[type=text] {
-      border: 2px solid silver;
-      display: block;
-      font-size: 18px;
-      margin-bottom: 10px;
-      padding: 5px 10px;
-      width: 100%; }
-      .mvs-form .mvs-group input[type=text]:focus {
-        outline: none; }
-        .mvs-form .mvs-group input[type=text]:focus[name=move_1] {
-          border-color: purple; }
-        .mvs-form .mvs-group input[type=text]:focus[name=move_2] {
-          border-color: orangered; }
-        .mvs-form .mvs-group input[type=text]:focus[name=move_3] {
-          border-color: royalblue; }
+    .mvs-form .mvs-container .mvs-group {
+      display: table;
+      margin-bottom: 10px; }
+      .mvs-form .mvs-container .mvs-group label[for^=move] {
+        background-color: #eee;
+        border: 2px solid silver;
+        border-right: 0;
+        font-weight: 400;
+        display: table-cell;
+        padding: 8px 12px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        width: 1%; }
+      .mvs-form .mvs-container .mvs-group input[type=text] {
+        border: 2px solid silver;
+        display: table-cell;
+        float: left;
+        font-size: 18px;
+        padding: 6px 12px;
+        position: relative;
+        width: 100%; }
+        .mvs-form .mvs-container .mvs-group input[type=text]:focus {
+          outline: none; }
   .mvs-form .form-group .input-group .form-control, .mvs-form .form-group .input-group .input-group-addon {
     border-radius: 0;
     border-width: 2px; }
@@ -54,7 +63,6 @@
     .mvs-form .form-group .input-group .form-control:focus[name=move_3] {
       border-color: royalblue; }
   .mvs-form .v-center {
-    display: block;
     position: relative;
     top: 50%;
     transform: translateY(-50%); }
