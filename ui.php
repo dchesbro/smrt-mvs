@@ -305,7 +305,7 @@
 	}
 	
 	// Create image
-	$filename = create_image( $usr_image, $smart_moves );
+	// $filename = create_image( $usr_image, $smart_moves );
 ?>
 
 <!DOCTYPE html>
@@ -332,20 +332,19 @@
 	</head>
 	<body>
 		
-		<form enctype="multipart/form-data" method="post" class="mvs-form">
+		<form enctype="multipart/form-data" method="post" class="smrt-mvs-form">
 			
-			<img src="./img/sm_grey.png" class="mvs-bg" />
+			<img src="./img/sm_grey.png" />
 			
-			<label for="usr_image">
-				<div class="v-center">
+			<input type="file" name="usr-img" id="usr-img" />
+			<label for="usr-img">
+				<div class="img-outer">
 					<i class="fa fa-3x fa-picture-o" aria-hidden="true"></i>
-					Choose an image
+					<span>Choose an image...</span>
 				</div>
 			</label>
 			
-			<input type="file" name="usr_image" id="usr_image">
-			
-			<div class="mvs-container">
+			<div class="mvs-outer">
 				<div class="mvs-group">
 					<label for="move_1">1.</label>
 					<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_1'] ) ) { echo $default_moves[$random_moves[0]]; } ?>" name="move_1" maxlength="20" autocomplete="off" />
@@ -354,7 +353,7 @@
 					<label for="move_2">2.</label>
 					<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_2'] ) ) { echo $default_moves[$random_moves[1]]; } ?>" name="move_2" maxlength="20" autocomplete="off" />
 				</div>
-					<div class="mvs-group">
+				<div class="mvs-group">
 					<label for="move_3">3.</label>
 					<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_3'] ) ) { echo $default_moves[$random_moves[2]]; } ?>" name="move_3" maxlength="20" autocomplete="off" />
 				</div>
@@ -366,8 +365,13 @@
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
+		<script src="js/jquery.custom-file-input.js"></script>
+		
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+
 	
 	</body>
 </html>

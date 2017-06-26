@@ -6,7 +6,7 @@
 'use strict';
 
 ;( function( $, window, document, undefined ) {
-	$( '.inputfile' ).each( function() {
+	$( '#usr-img' ).each( function() {
 		var $input	 = $( this ),
 			$label	 = $input.next( 'label' ),
 			labelVal = $label.html();
