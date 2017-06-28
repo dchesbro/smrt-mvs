@@ -282,24 +282,6 @@
 	
 	// Check for user input
 	if( isset( $_POST['submit'] ) ) {
-
-		/*
-		
-			$error_log = array();
-		
-			if( strlen( $_POST['move_1'] ) == 0 ) {
-				$error_log[] = 'Where\'s your first move?!';
-			}
-		
-			if( strlen( $_POST['move_2'] ) == 0 ) {
-				$error_log[] = 'Champions always enter a second move!';
-			}
-		
-			if( strlen( $_POST['move_3'] ) == 0 ) {
-				$error_log[] = 'Not so fast, you need a third move!';
-			}
-	
-		*/
 		
 		$error_log = array();
 				
@@ -323,7 +305,7 @@
 	}
 	
 	// Create image
-	$filename = create_image( $usr_image, $smart_moves );
+	// $filename = create_image( $usr_image, $smart_moves );
 ?>
 
 <!DOCTYPE html>
@@ -336,8 +318,10 @@
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+		
 		<!-- Custom styles -->
-		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/styles_ui.css">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -347,79 +331,47 @@
 		<![endif]-->
 	</head>
 	<body>
-		 
-		<div class="container" style="margin: auto;">
-			<div class="row">
-				<div class="col-md-12">
-			 
-					<img src="<?=$filename;?>?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
-					
-					<hr />
-										 					
-					<!-- <p>You can edit the image above by typing your details in below. It'll then generate a new image which you can right click on and save to your computer.</p> -->
-					
-					<?php					
-						echo '<ul>';
-						
-						foreach( $upload_log as $upload_error ) {
-							echo '<li>';
-							
-							echo $upload_error;
-							
-							echo '</li>';
-						}
-						
-						echo '</ul>';
-					?>
-					
-					<?php					
-						echo '<ul>';
-						
-						foreach( $error_log as $error_message ) {
-							echo '<li>';
-							
-							echo $error_message;
-							
-							echo '</li>';
-						}
-						
-						echo '</ul>';
-					?>
-					
-					<form enctype="multipart/form-data" method="post" style="text-align: center;">
-						<div class="form-group">
-							<input type="file" name="usr_image" id="usr_image">
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">1.</div>
-								<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_1'] ) ) { echo $default_moves[$random_moves[0]]; } ?>" name="move_1" maxlength="20" class="form-control input-lg">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">2.</div>
-								<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_2'] ) ) { echo $default_moves[$random_moves[1]]; } ?>" name="move_2" maxlength="20" class="form-control input-lg">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<div class="input-group-addon">3.</div>
-								<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_3'] ) ) { echo $default_moves[$random_moves[2]]; } ?>" name="move_3" maxlength="20" class="form-control input-lg">
-							</div>
-						</div>
-						
-						<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-default" />
-					</form>
-					
+		
+		<form enctype="multipart/form-data" method="post" class="smrt-mvs-form">
+			
+			<img src="./img/sm_grey.png" />
+			
+			<input type="file" name="usr-img" id="usr-img" />
+			<label for="usr-img">
+				<div class="img-outer">
+					<i class="fa fa-3x fa-picture-o" aria-hidden="true"></i>
+					<span>Choose an image...</span>
+				</div>
+			</label>
+			
+			<div class="mvs-outer">
+				<div class="mvs-group">
+					<label for="move_1">1.</label>
+					<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_1'] ) ) { echo $default_moves[$random_moves[0]]; } ?>" name="move_1" maxlength="20" autocomplete="off" />
+				</div>
+				<div class="mvs-group">
+					<label for="move_2">2.</label>
+					<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_2'] ) ) { echo $default_moves[$random_moves[1]]; } ?>" name="move_2" maxlength="20" autocomplete="off" />
+				</div>
+				<div class="mvs-group">
+					<label for="move_3">3.</label>
+					<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_3'] ) ) { echo $default_moves[$random_moves[2]]; } ?>" name="move_3" maxlength="20" autocomplete="off" />
 				</div>
 			</div>
-		</div>
+			
+			<input value="Take it to Mo!" type="submit" name="submit" />
+			
+		</form>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
+		<script src="js/jquery.custom-file-input.js"></script>
+		
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+
 	
 	</body>
 </html>
