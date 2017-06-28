@@ -1,69 +1,4 @@
-<?php
-	
-	function upload_image() {
-		
-		// Set log variables
-		global $upload_log;
-		$upload_log = array();
-		
-		// Set function variables
-		$usr_directory = 'img/usr/';
-		$usr_image     = $usr_directory . basename( $_FILES['usr_image']['name'] );
-		$usr_extension = pathinfo( $usr_image, PATHINFO_EXTENSION );
-		
-		if( !empty( $_FILES['usr_image']['tmp_name'] ) ) {
-			$submit_ok = 1;
-		
-			// Check if image
-			$img_check = getimagesize( $_FILES['usr_image']['tmp_name'] );
-			
-			if( $img_check == false ) {
-				array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
-				$submit_ok = 0;
-			} else {
-				array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $img_check['mime'] . '</code>).' );
-			}
-			
-			// Check if already exists
-			if( file_exists( $usr_image ) ) {
-				array_push( $upload_log, '<strong>ERROR:</strong> File already exists.' );
-				$submit_ok = 0;
-			} else {
-				array_push( $upload_log, '<strong>OK:</strong> File doesn\'t already exist.' );
-			}
-			
-			// Check file size
-			if( $_FILES['usr_image']['size'] > 500000 ) {
-				array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
-				$submit_ok = 0;
-			} else {
-				array_push( $upload_log, '<strong>OK:</strong> File size within limit.' );
-			}
-			
-			// Check if allowed format
-			if( $usr_extension !== 'jpeg' && $usr_extension !== 'jpg' && $usr_extension !== 'png' && $usr_extension !== 'gif' ) {
-				array_push( $upload_log, '<strong>ERROR:</strong> Sorry, only JPEG, JPG, PNG & GIF files are allowed.' );
-				$submit_ok = 0;
-			} else {
-				array_push( $upload_log, '<strong>OK:</strong> File is allowed format.' );
-			}
-			
-			// Check if errors, else upload
-			if ( $submit_ok == 0 ) {
-				array_push( $upload_log, '<strong>ERROR:</strong> File was not uploaded.' );
-			} else {
-				if ( move_uploaded_file( $_FILES['usr_image']['tmp_name'], $usr_image ) ) {
-					array_push( $upload_log, '<strong>OK:</strong> File <code>' . basename( $_FILES['usr_image']['name'] ) . '</code> has been uploaded.' );
-				} else {
-					array_push( $upload_log, '<strong>ERROR:</strong> There was an error uploading your file.' );
-				}
-			}
-		} else {
-			array_push( $upload_log, '<strong>ERROR:</strong> Champions always select an image to upload!' );
-		}
-		return $usr_image;
-		
-	}
+<?php			
 	
 	function validate_image( $usr_image ) {
 		
@@ -77,36 +12,37 @@
 		$is_image = getimagesize( $usr_image['tmp_name'] );
 		
 		if( $is_image == false ) {
-			array_push( $upload_log, '<strong>ERROR:</strong> File is not an image.' );
+			$upload_log[] = '<strong>ERROR:</strong> File is not an image.';
 			$submit_ok = 0;
 		} else {
-			array_push( $upload_log, '<strong>OK:</strong> File is an image (<code>' . $is_image['mime'] . '</code>).' );
+			$upload_log[] = '<strong>OK:</strong> File is an image (<code>' . $is_image['mime'] . '</code>).';
 		}
 		
 		// Check if image extension is allowed
 		$img_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
 				
 		if( $img_extension !== 'jpeg' && $img_extension !== 'jpg' && $img_extension !== 'png' && $img_extension !== 'gif' ) {
-			array_push( $upload_log, '<strong>ERROR:</strong> Sorry, only JPEG, JPG, PNG & GIF files are allowed.' );
+			$upload_log[] = '<strong>ERROR:</strong> File must be a JPEG, JPG, PNG of GIF.';
 			$submit_ok = 0;
 		} else {
-			array_push( $upload_log, '<strong>OK:</strong> File is allowed format (<code>' . $img_extension . '</code>).' );
+			$upload_log[] = '<strong>OK:</strong> File is allowed format (<code>' . $img_extension . '</code>).';
 		}
 		
 		// Check if image size is within limit
-		$size_limit = 500000;
+		$size_limit = 5242880;
 		
 		if( $usr_image['size'] > $size_limit ) {
-			array_push( $upload_log, '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).' );
+			$upload_log[] = '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).';
 			$submit_ok = 0;
 		} else {
-			array_push( $upload_log, '<strong>OK:</strong> File size within limit (<code>' . $_FILES['usr_image']['size'] . ' bytes</code>).' );
+			$upload_log[] = '<strong>OK:</strong> File size within limit (<code>' . $usr_image['size'] . ' bytes</code>).';
 		}
 		
 		// Check if any errors, else return file
 		if ( $submit_ok == 0 ) {
-			array_push( $upload_log, '<strong>ERROR:</strong> File was not submitted.' );
+			$upload_log[] = '<strong>ERROR:</strong> File was not submitted.';
 		} else {
+			$upload_log[] = '<strong>OK:</strong> File submitted successfully.';
 			return $usr_image['tmp_name'];
 		}
 		
@@ -116,7 +52,7 @@
 		
 		// $file = 'img/mvs/' . md5( $usr_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
-		$file = 'img/mvs/tester.jpg';
+		$file = 'img/mvs/testing.jpg';
 		
 		// if ( !file_exists( $file ) ) {
 			
@@ -223,14 +159,17 @@
 		return $file;
 	}
 	
-	
-	
-	
-	
-	function get_default_moves() {
-		global $smart_moves;
+	function get_image_url ( $filename ) {
 		
-		// Set default moves
+		$http_protocol = ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) ? "https://" : "http://";
+					 
+		$img_url = $http_protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $filename;
+						
+		return $img_url;
+		
+	}
+	
+	// Set default moves
 	$default_moves = array(
 		'Accuracy',
 		'Aggressiveness',
@@ -281,16 +220,6 @@
 		$default_moves[$random_moves[1]],
 		$default_moves[$random_moves[2]]
 	);
-	}
-	
-	
-	
-	
-	
-	
-	
-	get_default_moves();
-	
 	
 	// Check for form submission
 	if( isset( $_POST['submit'] ) ) {
@@ -299,14 +228,14 @@
 				
 		// Check for user image
 		if( empty( $_FILES['usr_img']['tmp_name'] ) ) {					
-			$error_log[] = '<strong>ERROR:</strong> No file selected.';
+			$error_log[] = '<strong>ERROR:</strong> Champions always choose an image!';
 		} else {
 			$usr_image = validate_image( $_FILES['usr_img'] );
 		}
 
 		// Check for user moves
 		if( empty( $_POST['move_1'] ) || empty( $_POST['move_2'] ) || empty( $_POST['move_3'] ) ) {
-			$error_log[] = '<strong>ERROR:</strong> Missing moves.';
+			$error_log[] = '<strong>ERROR:</strong> Champions always enter 3 moves!';
 		} else {
 			$smart_moves = array(
 				$_POST['move_1'],
@@ -315,11 +244,10 @@
 			);
 		}
 		
-		if( !isset( $error_log[0] ) ) {
-			// Create image
+		if( empty( $error_log ) ) {
 			$filename = create_image( $usr_image, $smart_moves );
 		} else {
-			$tester = 'It\'s bad!';
+			$error_log[] = '<strong>ERROR:</strong> Image could not be created.';
 		}
 	}
 
@@ -351,13 +279,59 @@
 		
 		<div class="container">
 			
+			<?php if( isset( $_POST['submit'] ) && empty( $error_log ) ) { ?>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Form Submission</h1>
+					<hr />
+				</div>
+			</div>
+			<div id="smrt-mvs-results" class="row">
+				<div class="col-md-12">
+					<img src="img/mvs/tester.jpg?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
+					<div class="input-group">
+						<input value="<?php echo get_image_url( $filename ); ?>" type="text" class="form-control input-lg" readonly>
+						<span class="input-group-btn">
+							<button class="btn btn-lg btn-default" type="button"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
+						</span>
+					</div>
+					<a class="btn btn-lg btn-default" href="./" role="button">Try Again!</a>
+				</div>
+			</div>
+			
+			<?php } else { ?>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Landing Page</h1>
+					<hr />
+				</div>
+			</div>
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
-			
 					<form enctype="multipart/form-data" method="post">
-						
-						<img src="./img/sm_grey.png" class="img-responsive" />
-						
+						<img src="img/sm_grey.png" class="img-responsive" alt="..." />
+						<?php if( !empty( $upload_log ) ) {
+							
+							echo '<ul class="well">';
+							
+							foreach( $upload_log as $upload_message ) {
+								echo '<li>' . $upload_message . '</li>';
+							}
+							
+							echo '</ul>';
+						} ?>
+						<?php if( !empty( $error_log ) ) {
+							
+							echo '<ul class="well">';
+							
+							foreach( $error_log as $error_message ) {
+								echo '<li>' . $error_message . '</li>';
+							}
+							
+							echo '</ul>';
+						} ?>
 						<input type="file" name="usr_img" id="usr-img" />
 						<label for="usr-img">
 							<div class="img-inner">
@@ -365,54 +339,43 @@
 								<span>Choose an image...</span>
 							</div>
 						</label>
-						
 						<div class="mvs-outer">
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">1.</div>
-									<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control input-lg">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control input-lg">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">2.</div>
-									<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control input-lg">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control input-lg">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">3.</div>
-									<input value="" type="text" placeholder="<?php if( !isset( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control input-lg">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control input-lg">
 								</div>
 							</div>
 						</div>
-						
 						<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-lg btn-default" />
-						
 					</form>
-					
-					<?php if( $tester == 'It\'s bad!' || empty( $tester ) ) {
-						echo 'Still bad.';
-					} else {
-						echo 'Maybe good';
-						
-						echo '<img src="' . $filename . '?id=' . rand( 0, 1292938 ) . '" class="img-responsive" alt="..." />';
-					} ?>
-				
 				</div>
 			</div>
-		
+			
+			<?php } ?>
+				
 		</div>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		
-		<script src="js/jquery.custom-file-input.js"></script>
-		
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		
-
+		<!-- ... -->
+		<script src="js/jquery.custom-file-input.js"></script>
 	
 	</body>
 </html>

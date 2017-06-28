@@ -2,7 +2,7 @@
 
 #smrt-mvs-form { position: relative; text-align: center; }
 
-#smrt-mvs-form img { margin-bottom: 15px; }
+#smrt-mvs-form img { margin-bottom: 20px; }
 
 #smrt-mvs-form input[type=file] { height: 1px; opacity: 0; overflow: hidden; position: absolute; width: 1px; z-index: -1; }
 
@@ -17,6 +17,8 @@
 #smrt-mvs-form .mvs-outer { position: absolute; top: 270px; left: 25%; right: 25%; }
 
 #smrt-mvs-form .mvs-outer .form-group { margin-bottom: 9px; }
+
+#smrt-mvs-form .well { text-align: left; }
 
 /*
 
