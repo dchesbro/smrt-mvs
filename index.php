@@ -161,11 +161,11 @@
 	
 	function get_image_url ( $filename ) {
 		
-		$http_protocol = ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) ? "https://" : "http://";
+		$http_protocol = ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) ? "https://" : "http://";
 					 
-		$img_url = $http_protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $filename;
+		$image_url = $http_protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $filename;
 						
-		return $img_url;
+		return $image_url;
 		
 	}
 	
@@ -311,7 +311,7 @@
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
 					<form enctype="multipart/form-data" method="post">
-						<img src="img/sm_grey.png" class="img-responsive" alt="..." />
+						<img title="Do you have it?" src="img/sm_grey.png" class="img-responsive" alt="Do you have it?" />
 						<?php if( !empty( $upload_log ) ) {
 							
 							echo '<ul class="well">';

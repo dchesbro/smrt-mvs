@@ -65,8 +65,19 @@
 }
 
 #smrt-mvs-results {
+	position: relative;
+	text-align: center;
+	
 	img, .input-group {
 		margin-bottom: 20px;
+	}
+}
+
+.btn, .form-control, .input-group-addon {
+	border-radius: 0;
+	
+	&:focus {
+		box-shadow: none;
 	}
 }
 

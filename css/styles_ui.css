@@ -20,7 +20,13 @@
 
 #smrt-mvs-form .well { text-align: left; }
 
+#smrt-mvs-results { position: relative; text-align: center; }
+
 #smrt-mvs-results img, #smrt-mvs-results .input-group { margin-bottom: 20px; }
+
+.btn, .form-control, .input-group-addon { border-radius: 0; }
+
+.btn:focus, .form-control:focus, .input-group-addon:focus { box-shadow: none; }
 
 /*
 
