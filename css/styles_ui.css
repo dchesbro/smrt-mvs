@@ -20,6 +20,8 @@
 
 #smrt-mvs-form .well { text-align: left; }
 
+#smrt-mvs-results img, #smrt-mvs-results .input-group { margin-bottom: 20px; }
+
 /*
 
 $horizontal_pos: percentage(76/640); 

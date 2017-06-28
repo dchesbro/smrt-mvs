@@ -289,7 +289,7 @@
 			</div>
 			<div id="smrt-mvs-results" class="row">
 				<div class="col-md-12">
-					<img src="img/mvs/tester.jpg?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
+					<img src="img/mvs/testing.jpg?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
 					<div class="input-group">
 						<input value="<?php echo get_image_url( $filename ); ?>" type="text" class="form-control input-lg" readonly>
 						<span class="input-group-btn">
