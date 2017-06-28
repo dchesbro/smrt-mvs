@@ -1,3 +1,69 @@
+.container {
+	margin: 40px auto;
+	max-width: 670px;
+}
+
+#smrt-mvs-form {
+	position: relative;
+	text-align: center;
+	
+	img {
+		margin-bottom: 15px;
+	}
+	
+	input[type=file] {
+		height: 1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		width: 1px;
+		z-index: -1;
+	}
+	
+	label[for=usr-img] {
+		height: 223px;
+		font-weight: 400;
+		padding: 10px;
+		position: absolute;
+			top: 23px;
+			left: 339px;
+		width: 240px;
+		
+		&:hover {
+			background-color: #ccc;
+			cursor: pointer;
+		}
+
+		.img-inner {
+			overflow: hidden;
+			position: relative;
+				top: 50%;
+			text-align: center;
+			text-overflow: ellipsis;
+			transform: translateY(-50%);
+			
+			i {
+				display: block;
+			}
+		}
+	}
+	
+	.mvs-outer {
+		position: absolute;
+			top: 270px;
+			left: 25%;
+			right: 25%;
+		
+		.form-group {
+			margin-bottom: 9px;
+		}
+	}
+}
+
+
+
+/*
+
 $horizontal_pos: percentage(76/640); 
 
 @media only screen and (min-width : 320px) {
@@ -252,3 +318,5 @@ $horizontal_pos: percentage(76/640);
 	    transform: translateY(-50%);
 	}
 }
+
+*/
