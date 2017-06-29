@@ -1,49 +1,151 @@
-<?php			
+<?php
+	
+	function get_default_moves() {
+		
+		// Set default moves
+		$default_moveset = array(
+			'Accuracy',
+			'Aggressiveness',
+			'Agility',
+			'Balance',
+			'Body Control',
+			'Control',
+			'Coordination',
+			'Cornering',
+			'Decision Making',
+			'Determination',
+			'Endurance',
+			'Fast Start',
+			'Fearlessness',
+			'Flat Out Speed',
+			'Focus',
+			'Getting There First',
+			'Good Aim',
+			'Grabbing It',
+			'Holding On',
+			'Leg Power',
+			'Maneuverability',
+			'Off The Block',
+			'Peripheral Vision',
+			'Push Off',
+			'Quick Hands',
+			'Quick Return',
+			'Quick Start',
+			'Quick Turn',
+			'Reaction Time',
+			'Release',
+			'Return',
+			'Rhythm',
+			'Speed',
+			'Spring',
+			'Stick Handling',
+			'Timing',
+			'Toughness',
+			'Versatility',
+		);
+		
+		// Select 3 random moves from default
+		$random_moves = array_rand( $default_moveset, 3 );
+		
+		// Set default moves
+		$default_moves = array(
+			$default_moveset[$random_moves[0]],
+			$default_moveset[$random_moves[1]],
+			$default_moveset[$random_moves[2]]
+		);
+		
+		return $default_moves;
+		
+	}			
 	
 	function validate_image( $usr_image ) {
 		
-		global $upload_log;
+		global $img_log;
 		
-		$upload_log = array();
+		$img_log = array();
+				
+		// Initialize validation and check if user file present
+		$submit_ok = true;
 		
-		$submit_ok = 1;
+		if( empty( $usr_image['tmp_name'] ) ) {					
+			$img_log[] = '<strong>ERROR:</strong> Champions always choose an image!';
+			return false;
+		} else {
+			$img_log[] = '<strong>OK:</strong> File was selected.';
+		}
 			
 		// Check if user file is image
 		$is_image = getimagesize( $usr_image['tmp_name'] );
 		
 		if( $is_image == false ) {
-			$upload_log[] = '<strong>ERROR:</strong> File is not an image.';
-			$submit_ok = 0;
+			$img_log[] = '<strong>ERROR:</strong> File is not an image.';
+			$submit_ok = false;
 		} else {
-			$upload_log[] = '<strong>OK:</strong> File is an image (<code>' . $is_image['mime'] . '</code>).';
+			$img_log[] = '<strong>OK:</strong> File is an image (<code>' . $is_image['mime'] . '</code>).';
 		}
 		
 		// Check if image extension is allowed
-		$img_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
+		$image_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
 				
-		if( $img_extension !== 'jpeg' && $img_extension !== 'jpg' && $img_extension !== 'png' && $img_extension !== 'gif' ) {
-			$upload_log[] = '<strong>ERROR:</strong> File must be a JPEG, JPG, PNG of GIF.';
-			$submit_ok = 0;
+		if( $image_extension !== 'jpeg' && $image_extension !== 'jpg' && $image_extension !== 'png' && $image_extension !== 'gif' ) {
+			$img_log[] = '<strong>ERROR:</strong> File must be a JPEG, JPG, PNG or GIF image.';
+			$submit_ok = false;
 		} else {
-			$upload_log[] = '<strong>OK:</strong> File is allowed format (<code>' . $img_extension . '</code>).';
+			$img_log[] = '<strong>OK:</strong> File is allowed format (<code>' . $image_extension . '</code>).';
 		}
 		
 		// Check if image size is within limit
 		$size_limit = 5242880;
 		
 		if( $usr_image['size'] > $size_limit ) {
-			$upload_log[] = '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).';
-			$submit_ok = 0;
+			$img_log[] = '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).';
+			$submit_ok = false;
 		} else {
-			$upload_log[] = '<strong>OK:</strong> File size within limit (<code>' . $usr_image['size'] . ' bytes</code>).';
+			$img_log[] = '<strong>OK:</strong> File size within limit (<code>' . $usr_image['size'] . ' bytes</code>).';
 		}
 		
-		// Check if any errors, else return file
-		if ( $submit_ok == 0 ) {
-			$upload_log[] = '<strong>ERROR:</strong> File was not submitted.';
+		// Check if any errors, else return true
+		if ( $submit_ok == false ) {
+			$img_log[] = '<strong>ERROR:</strong> File was not submitted.';
+			return false;
 		} else {
-			$upload_log[] = '<strong>OK:</strong> File submitted successfully.';
-			return $usr_image['tmp_name'];
+			$img_log[] = '<strong>OK:</strong> File submitted successfully.';
+			return true;
+		}
+		
+	}
+	
+	function validate_moves( $move_1, $move_2, $move_3 ) {
+		
+		global $mvs_log;
+		
+		$mvs_log = array();
+		
+		// Initialize validation and check for user moves
+		$submit_ok = true;
+		
+		if( empty( $move_1 ) ) {
+			$mvs_log[] = '<strong>ERROR:</strong> Missing move number 1.';
+			$submit_ok = false;
+		}
+		
+		if( empty( $move_2 ) ) {
+			$mvs_log[] = '<strong>ERROR:</strong> Missing move number 2.';
+			$submit_ok = false;
+		}
+		
+		if( empty( $move_3 ) ) {
+			$mvs_log[] = '<strong>ERROR:</strong> Missing move number 3.';
+			$submit_ok = false;
+		}
+		
+		// Check if any errors, else return true
+		if ( $submit_ok == false ) {
+			$mvs_log[] = '<strong>ERROR:</strong> Champions always enter 3 moves!';
+			return false;
+		} else {
+			$mvs_log[] = '<strong>OK:</strong> Moves submitted.';
+			return true;
 		}
 		
 	}
@@ -159,7 +261,7 @@
 		return $file;
 	}
 	
-	function get_image_url ( $filename ) {
+	function get_image_url( $filename ) {
 		
 		$http_protocol = ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) ? "https://" : "http://";
 					 
@@ -169,86 +271,35 @@
 		
 	}
 	
-	// Set default moves
-	$default_moves = array(
-		'Accuracy',
-		'Aggressiveness',
-		'Agility',
-		'Balance',
-		'Body Control',
-		'Control',
-		'Coordination',
-		'Cornering',
-		'Decision Making',
-		'Determination',
-		'Endurance',
-		'Fast Start',
-		'Fearlessness',
-		'Flat Out Speed',
-		'Focus',
-		'Getting There First',
-		'Good Aim',
-		'Grabbing It',
-		'Holding On',
-		'Leg Power',
-		'Maneuverability',
-		'Off The Block',
-		'Peripheral Vision',
-		'Push Off',
-		'Quick Hands',
-		'Quick Return',
-		'Quick Start',
-		'Quick Turn',
-		'Reaction Time',
-		'Release',
-		'Return',
-		'Rhythm',
-		'Speed',
-		'Spring',
-		'Stick Handling',
-		'Timing',
-		'Toughness',
-		'Versatility',
-	);
+	// Get default moves
+	$smart_moves = get_default_moves();
 	
-	// Select 3 random moves from default
-	$random_moves = array_rand( $default_moves, 3 );
-	
-	// Set default moves
-	$smart_moves = array(
-		$default_moves[$random_moves[0]],
-		$default_moves[$random_moves[1]],
-		$default_moves[$random_moves[2]]
-	);
-	
-	// Check for form submission
-	if( isset( $_POST['submit'] ) ) {
+	// Check for user inputs and (hopefully) submit
+	if( isset( $_POST['form-submit'] ) ) {
+		$submit_ok = true;
 		
-		$error_log = array();
-				
-		// Check for user image
-		if( empty( $_FILES['usr_img']['tmp_name'] ) ) {					
-			$error_log[] = '<strong>ERROR:</strong> Champions always choose an image!';
-		} else {
-			$usr_image = validate_image( $_FILES['usr_img'] );
-		}
-
-		// Check for user moves
-		if( empty( $_POST['move_1'] ) || empty( $_POST['move_2'] ) || empty( $_POST['move_3'] ) ) {
-			$error_log[] = '<strong>ERROR:</strong> Champions always enter 3 moves!';
-		} else {
+		// Set user moves
+		if( validate_moves( $_POST['move_1'], $_POST['move_2'], $_POST['move_3'] ) == true ) {
 			$smart_moves = array(
 				$_POST['move_1'],
 				$_POST['move_2'],
 				$_POST['move_3']
 			);
+		} else {
+			$submit_ok = false;
 		}
 		
-		if( empty( $error_log ) ) {
-			$filename = create_image( $usr_image, $smart_moves );
+		// Set for user image
+		if( validate_image( $_FILES['usr_img'] ) == true ) {
+			$usr_image = $_FILES['usr_img']['tmp_name'];
 		} else {
-			$error_log[] = '<strong>ERROR:</strong> Image could not be created.';
+			$submit_ok = false;
 		}
+		
+		// Check for errors, else create image
+		if( $submit_ok == true ) {
+			$filename = create_image( $usr_image, $smart_moves );
+		} 
 	}
 
 ?>
@@ -279,7 +330,7 @@
 		
 		<div class="container">
 			
-			<?php if( isset( $_POST['submit'] ) && empty( $error_log ) ) { ?>
+			<?php if( isset( $_POST['form-submit'] ) && $submit_ok == true ) { ?>
 			
 			<div class="row">
 				<div class="col-md-12">
@@ -289,14 +340,14 @@
 			</div>
 			<div id="smrt-mvs-results" class="row">
 				<div class="col-md-12">
-					<img src="img/mvs/testing.jpg?id=<?=rand( 0, 1292938 );?>" class="img-responsive" alt="..." />
+					<img src="<?php echo $filename; ?>?id=<?php echo rand( 0, 1292938 ); ?>" class="img-responsive" alt="..." />
 					<div class="input-group">
 						<input value="<?php echo get_image_url( $filename ); ?>" type="text" class="form-control input-lg" readonly>
 						<span class="input-group-btn">
 							<button class="btn btn-lg btn-default" type="button"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
 						</span>
 					</div>
-					<a class="btn btn-lg btn-default" href="./" role="button">Try Again!</a>
+					<a class="btn btn-lg btn-default" href="./" role="button">Back to you, Mike</a>
 				</div>
 			</div>
 			
@@ -310,27 +361,27 @@
 			</div>
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
-					<form enctype="multipart/form-data" method="post">
+					<form enctype="multipart/form-data" id="" method="post">
 						<img title="Do you have it?" src="img/sm_grey.png" class="img-responsive" alt="Do you have it?" />
-						<?php if( !empty( $upload_log ) ) {
+						<?php if( !empty( $img_log ) ) {
 							
-							echo '<ul class="well">';
+							echo '<div class="well"><ul>';
 							
-							foreach( $upload_log as $upload_message ) {
+							foreach( $img_log as $upload_message ) {
 								echo '<li>' . $upload_message . '</li>';
 							}
 							
-							echo '</ul>';
+							echo '</ul></div>';
 						} ?>
-						<?php if( !empty( $error_log ) ) {
+						<?php if( !empty( $mvs_log ) ) {
 							
-							echo '<ul class="well">';
+							echo '<div class="well"><ul>';
 							
-							foreach( $error_log as $error_message ) {
+							foreach( $mvs_log as $error_message ) {
 								echo '<li>' . $error_message . '</li>';
 							}
 							
-							echo '</ul>';
+							echo '</ul></div>';
 						} ?>
 						<input type="file" name="usr_img" id="usr-img" />
 						<label for="usr-img">
@@ -343,23 +394,23 @@
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">1.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control input-lg">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control input-lg" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">2.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control input-lg">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control input-lg" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon">3.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control input-lg">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control input-lg" autocomplete="off">
 								</div>
 							</div>
 						</div>
-						<input value="Take it to Mo!" type="submit" name="submit" class="btn btn-lg btn-default" />
+						<input value="Take it to Mo!" type="submit" name="form-submit" class="btn btn-lg btn-default" />
 					</form>
 				</div>
 			</div>
