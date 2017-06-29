@@ -2,7 +2,7 @@
 	
 	function get_default_moves() {
 		
-		// Set default moves
+		// Set default moveset
 		$default_moveset = array(
 			'Accuracy',
 			'Aggressiveness',
@@ -121,30 +121,12 @@
 		
 		$mvs_log = array();
 		
-		// Initialize validation and check for user moves
-		$submit_ok = true;
-		
-		if( empty( $move_1 ) ) {
-			$mvs_log[] = '<strong>ERROR:</strong> Missing move number 1.';
-			$submit_ok = false;
-		}
-		
-		if( empty( $move_2 ) ) {
-			$mvs_log[] = '<strong>ERROR:</strong> Missing move number 2.';
-			$submit_ok = false;
-		}
-		
-		if( empty( $move_3 ) ) {
-			$mvs_log[] = '<strong>ERROR:</strong> Missing move number 3.';
-			$submit_ok = false;
-		}
-		
-		// Check if any errors, else return true
-		if ( $submit_ok == false ) {
-			$mvs_log[] = '<strong>ERROR:</strong> Champions always enter 3 moves!';
+		// Check for user moves		
+		if( empty( $move_1 ) || empty( $move_2 ) || empty( $move_3 ) ) {
+			$mvs_log[] = '<strong>ERROR:</strong> Champions always enter three moves!';
 			return false;
 		} else {
-			$mvs_log[] = '<strong>OK:</strong> Moves submitted.';
+			$mvs_log[] = '<strong>OK:</strong> Moves submitted successfully.';
 			return true;
 		}
 		
@@ -261,6 +243,20 @@
 		return $file;
 	}
 	
+	function print_log_messages( $log ) {
+		
+		if( !empty( $log ) ) {
+			echo '<ul class="msg_log">';
+			
+			foreach( $log as $message ) {
+				echo '<li>' . $message . '</li>';
+			}
+			
+			echo '</ul>';
+		}
+		
+	}
+	
 	function get_image_url( $filename ) {
 		
 		$http_protocol = ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) ? "https://" : "http://";
@@ -309,7 +305,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, user-scalable=0, maximum-scale=1, initial-scale=1">
 		<title>SMRT MVS</title>
 
 		<!-- Bootstrap -->
@@ -363,26 +359,11 @@
 				<div class="col-md-12">
 					<form enctype="multipart/form-data" id="" method="post">
 						<img title="Do you have it?" src="img/sm_grey.png" class="img-responsive" alt="Do you have it?" />
-						<?php if( !empty( $img_log ) ) {
-							
-							echo '<div class="well"><ul>';
-							
-							foreach( $img_log as $upload_message ) {
-								echo '<li>' . $upload_message . '</li>';
-							}
-							
-							echo '</ul></div>';
-						} ?>
-						<?php if( !empty( $mvs_log ) ) {
-							
-							echo '<div class="well"><ul>';
-							
-							foreach( $mvs_log as $error_message ) {
-								echo '<li>' . $error_message . '</li>';
-							}
-							
-							echo '</ul></div>';
-						} ?>
+						
+						<?php echo print_log_messages( $img_log ) ?>
+						
+						<?php echo print_log_messages( $mvs_log ) ?>
+						
 						<input type="file" name="usr_img" id="usr-img" />
 						<label for="usr-img">
 							<div class="img-inner">
