@@ -58,9 +58,15 @@
 			margin-bottom: 9px;
 		}
 	}
+}
+
+#smrt-mvs-tab {
+	margin-bottom: 20px;
+	position: relative;
+	text-align: center;
 	
-	.well {
-		text-align: left;
+	button {
+		width: 80px;
 	}
 }
 
@@ -79,6 +85,11 @@
 	&:focus {
 		box-shadow: none;
 	}
+}
+
+.msg_log {
+	margin-bottom: 20px;
+	text-align: left;
 }
 
 

@@ -1,32 +1,68 @@
-.container { margin: 40px auto; max-width: 670px; }
+.container {
+  margin: 40px auto;
+  max-width: 670px; }
 
-#smrt-mvs-form { position: relative; text-align: center; }
+#smrt-mvs-form {
+  position: relative;
+  text-align: center; }
+  #smrt-mvs-form img {
+    margin-bottom: 20px; }
+  #smrt-mvs-form input[type=file] {
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    z-index: -1; }
+  #smrt-mvs-form label[for=usr-img] {
+    height: 223px;
+    font-weight: 400;
+    padding: 10px;
+    position: absolute;
+    top: 23px;
+    left: 339px;
+    width: 240px; }
+    #smrt-mvs-form label[for=usr-img]:hover {
+      background-color: #ccc;
+      cursor: pointer; }
+    #smrt-mvs-form label[for=usr-img] .img-inner {
+      overflow: hidden;
+      position: relative;
+      top: 50%;
+      text-align: center;
+      text-overflow: ellipsis;
+      transform: translateY(-50%); }
+      #smrt-mvs-form label[for=usr-img] .img-inner i {
+        display: block; }
+  #smrt-mvs-form .mvs-outer {
+    position: absolute;
+    top: 270px;
+    left: 25%;
+    right: 25%; }
+    #smrt-mvs-form .mvs-outer .form-group {
+      margin-bottom: 9px; }
 
-#smrt-mvs-form img { margin-bottom: 20px; }
+#smrt-mvs-tab {
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center; }
+  #smrt-mvs-tab button {
+    width: 80px; }
 
-#smrt-mvs-form input[type=file] { height: 1px; opacity: 0; overflow: hidden; position: absolute; width: 1px; z-index: -1; }
+#smrt-mvs-results {
+  position: relative;
+  text-align: center; }
+  #smrt-mvs-results img, #smrt-mvs-results .input-group {
+    margin-bottom: 20px; }
 
-#smrt-mvs-form label[for=usr-img] { height: 223px; font-weight: 400; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
+.btn, .form-control, .input-group-addon {
+  border-radius: 0; }
+  .btn:focus, .form-control:focus, .input-group-addon:focus {
+    box-shadow: none; }
 
-#smrt-mvs-form label[for=usr-img]:hover { background-color: #ccc; cursor: pointer; }
-
-#smrt-mvs-form label[for=usr-img] .img-inner { overflow: hidden; position: relative; top: 50%; text-align: center; text-overflow: ellipsis; transform: translateY(-50%); }
-
-#smrt-mvs-form label[for=usr-img] .img-inner i { display: block; }
-
-#smrt-mvs-form .mvs-outer { position: absolute; top: 270px; left: 25%; right: 25%; }
-
-#smrt-mvs-form .mvs-outer .form-group { margin-bottom: 9px; }
-
-#smrt-mvs-form .well { text-align: left; }
-
-#smrt-mvs-results { position: relative; text-align: center; }
-
-#smrt-mvs-results img, #smrt-mvs-results .input-group { margin-bottom: 20px; }
-
-.btn, .form-control, .input-group-addon { border-radius: 0; }
-
-.btn:focus, .form-control:focus, .input-group-addon:focus { box-shadow: none; }
+.msg_log {
+  margin-bottom: 20px;
+  text-align: left; }
 
 /*
 
