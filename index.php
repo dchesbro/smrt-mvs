@@ -270,7 +270,7 @@
 	// Get default moves
 	$smart_moves = get_default_moves();
 	
-	// Check for user inputs and (hopefully) submit
+	// Check for user inputs
 	if( isset( $_POST['form-submit'] ) ) {
 		$submit_ok = true;
 		
@@ -285,7 +285,7 @@
 			$submit_ok = false;
 		}
 		
-		// Set for user image
+		// Set user image
 		if( validate_image( $_FILES['usr_img'] ) == true ) {
 			$usr_image = $_FILES['usr_img']['tmp_name'];
 		} else {
