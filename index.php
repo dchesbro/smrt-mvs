@@ -264,7 +264,7 @@
 	function get_log_messages( $log ) {
 		
 		if( !empty( $log ) ) {
-			echo '<ul class="msg_log">';
+			echo '<ul class="msg-log">';
 			
 			foreach( $log as $message ) {
 				echo '<li>' . $message . '</li>';
@@ -335,7 +335,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
 		
 		<!-- Custom styles -->
-		<link rel="stylesheet" href="css/styles_ui.css">
+		<link rel="stylesheet" href="css/styles.css">
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -350,12 +350,6 @@
 			
 			<?php if( isset( $_POST['form-submit'] ) && $submit_ok == true ) { ?>
 			
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Form Submission</h1>
-					<hr />
-				</div>
-			</div>
 			<div id="smrt-mvs-results" class="row">
 				<div class="col-md-12">
 					<img src="<?php echo $filename; ?>" class="img-responsive" alt="..." />
@@ -371,12 +365,6 @@
 			
 			<?php } else { ?>
 			
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Landing Page</h1>
-					<hr />
-				</div>
-			</div>
 			<div id="smrt-mvs-tab" class="row">
 				<div class="col-md-12">
 					<form enctype="application/x-www-form-urlencoded" method="get">
@@ -392,7 +380,7 @@
 			
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
-					<form enctype="multipart/form-data" method="post" class="template template-<?php echo $template_option; ?>">
+					<form enctype="multipart/form-data" method="post">
 						<img title="Do you have it?" src="<?php echo $dst_image; ?>" class="img-responsive" alt="Do you have it?" />
 						
 						<?php echo get_log_messages( $img_log ); ?>
@@ -402,32 +390,31 @@
 						<?php if( $template_option == 'grey' ) { ?>
 						
 						<input type="file" name="usr_img" id="usr-img" />
-						<label for="usr-img">
+						<label for="usr-img" class="btn btn-lg btn-default">
 							<div class="img-inner">
-								<i class="fa fa-3x fa-picture-o" aria-hidden="true"></i>
 								<span>Choose an image...</span>
 							</div>
 						</label>
 						
 						<?php } ?>
 						
-						<div class="mvs-outer">
+						<div class="mvs-outer template-<?php echo $template_option; ?>">
 							<div class="form-group">
-								<div class="input-group">
+								<div class="input-group input-group-lg">
 									<div class="input-group-addon">1.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control input-lg" autocomplete="off">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="input-group">
+								<div class="input-group input-group-lg">
 									<div class="input-group-addon">2.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control input-lg" autocomplete="off">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="input-group">
+								<div class="input-group input-group-lg">
 									<div class="input-group-addon">3.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control input-lg" autocomplete="off">
+									<input type="text" placeholder="<?php if( empty( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 						</div>
