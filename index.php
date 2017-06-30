@@ -243,7 +243,7 @@
 		return $file;
 	}
 	
-	function print_log_messages( $log ) {
+	function get_log_messages( $log ) {
 		
 		if( !empty( $log ) ) {
 			echo '<ul class="msg_log">';
@@ -360,9 +360,9 @@
 					<form enctype="multipart/form-data" id="" method="post">
 						<img title="Do you have it?" src="img/sm_grey.png" class="img-responsive" alt="Do you have it?" />
 						
-						<?php echo print_log_messages( $img_log ) ?>
+						<?php echo get_log_messages( $img_log ) ?>
 						
-						<?php echo print_log_messages( $mvs_log ) ?>
+						<?php echo get_log_messages( $mvs_log ) ?>
 						
 						<input type="file" name="usr_img" id="usr-img" />
 						<label for="usr-img">
