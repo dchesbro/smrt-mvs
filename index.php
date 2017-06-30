@@ -379,7 +379,7 @@
 			</div>
 			<div id="smrt-mvs-tab" class="row">
 				<div class="col-md-12">
-					<form id="" method="get">
+					<form enctype="application/x-www-form-urlencoded" method="get">
 						<div class="btn-group btn-group-sm" role="group" aria-label="...">
 							<button value="grey" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'grey' ) { echo 'active'; } ?>">Grey</button>
 							<button value="green" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'green' ) { echo 'active'; } ?>">Green</button>
@@ -392,7 +392,7 @@
 			
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
-					<form enctype="multipart/form-data" id="" method="post">
+					<form enctype="multipart/form-data" method="post" class="template template-<?php echo $template_option; ?>">
 						<img title="Do you have it?" src="<?php echo $dst_image; ?>" class="img-responsive" alt="Do you have it?" />
 						
 						<?php echo get_log_messages( $img_log ); ?>
