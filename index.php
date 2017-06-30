@@ -132,7 +132,7 @@
 		
 	}
 	
-	function create_image( $usr_image, $smart_moves ) {
+	function create_image( $template, $usr_image, $smart_moves ) {
 		
 		// $file = 'img/mvs/' . md5( $usr_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
@@ -140,30 +140,33 @@
 		
 		// if ( !file_exists( $file ) ) {
 			
-			/*
-				// Set background image
-				$image = imagecreatefrompng( 'img/sm_green.png' );
-				
-				// Set font file and size
-				$font_file = 'font/LTe50244.ttf';
-				$size = '26';
-				
-				// Set text position
-				$x_pos = 60;
-				$y_pos = 245;
-
-			*/
-			
-			// Set background image			
-			$dst_image = 'img/sm_grey.png';
-			
-			// Set font file and size
-			$font_file = 'font/tt0144m_.ttf';
-			$size = '28';
-			
-			// Set text position
-			$x_txt = 150;
-			$y_txt = 310;
+			// Set template options
+			switch ( $template ) {
+			    case 'grey':
+			        // Set background image			
+					$dst_image = 'img/sm_grey.png';
+					
+					// Set font file and size
+					$font_file = 'font/tt0144m_.ttf';
+					$font_size = '28';
+					
+					// Set text position
+					$x_txt = 150;
+					$y_txt = 310;
+			        break;
+			    case 'green':
+			        // Set background image
+					$dst_image = 'img/sm_green.png';
+					
+					// Set font file and size
+					$font_file = 'font/LTe50244.ttf';
+					$font_size = '26';
+					
+					// Set text position
+					$x_txt = 60;
+					$y_txt = 245;
+			        break;
+			}
 			
 			// Get user image properties
 			list( $src_width, $src_height, $src_type ) = getimagesize( $usr_image );
@@ -226,11 +229,10 @@
 			foreach( $smart_moves as $move ) {
 				// Draw drop shadow
 				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
-					imagettftext( $tmp_image, $size, 0, $x_txt + $s_depth, $y_txt + $s_depth + $l, $black, $font_file, strtoupper( $n . '. ' . $move ) );
+					imagettftext( $tmp_image, $font_size, 0, $x_txt + $s_depth, $y_txt + $s_depth + $l, $black, $font_file, strtoupper( $n . '. ' . $move ) );
 				}
-				
 				// Draw text
-				imagettftext( $tmp_image, $size, 0, $x_txt, $y_txt + $l, $white, $font_file, strtoupper( $n . '. ' . $move ) );
+				imagettftext( $tmp_image, $font_size, 0, $x_txt, $y_txt + $l, $white, $font_file, strtoupper( $n . '. ' . $move ) );
 				
 				// Add 65px to line height for next line of text
 				$l = $l + $l_height;
@@ -294,7 +296,7 @@
 		
 		// Check for errors, else create image
 		if( $submit_ok == true ) {
-			$filename = create_image( $usr_image, $smart_moves );
+			$filename = create_image( 'grey', $usr_image, $smart_moves );
 		} 
 	}
 
