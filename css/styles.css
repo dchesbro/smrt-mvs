@@ -20,7 +20,9 @@
 
 #smrt-mvs-form .mvs-outer .form-group { margin-bottom: 10px; }
 
-#smrt-mvs-form .mvs-outer .input-group-addon { padding: 10px 12px; }
+#smrt-mvs-form .mvs-outer .form-group input[type=text] { appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
+
+#smrt-mvs-form .mvs-outer .form-group .input-group-addon { padding: 10px 12px; }
 
 #smrt-mvs-results { position: relative; text-align: center; }
 
