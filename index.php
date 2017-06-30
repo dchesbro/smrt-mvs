@@ -322,7 +322,6 @@
 	}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -396,9 +395,9 @@
 					<form enctype="multipart/form-data" id="" method="post">
 						<img title="Do you have it?" src="<?php echo $dst_image; ?>" class="img-responsive" alt="Do you have it?" />
 						
-						<?php echo get_log_messages( $img_log ) ?>
+						<?php echo get_log_messages( $img_log ); ?>
 						
-						<?php echo get_log_messages( $mvs_log ) ?>
+						<?php echo get_log_messages( $mvs_log ); ?>
 						
 						<?php if( $template_option == 'grey' ) { ?>
 						
