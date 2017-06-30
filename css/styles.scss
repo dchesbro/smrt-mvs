@@ -2,6 +2,13 @@ $mvs-width: 640px + 30px;
 
 .container {
 	margin: 20px auto;
+	
+	input[type=text] {
+		appearance: none;
+		-moz-appearance: none;
+		-o-appearance: none;
+		-webkit-appearance: none;
+	}
 }
 
 #smrt-mvs-form {
@@ -52,13 +59,6 @@ $mvs-width: 640px + 30px;
 		
 		.form-group {
 			margin-bottom: 10px;
-			
-			input[type=text] {
-				appearance: none;
-				-moz-appearance: none;
-				-o-appearance: none;
-				-webkit-appearance: none;
-			}
 			
 			.input-group-addon {
 				padding: 10px 12px;

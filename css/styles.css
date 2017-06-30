@@ -1,5 +1,7 @@
 .container { margin: 20px auto; }
 
+.container input[type=text] { appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
+
 #smrt-mvs-form { position: relative; text-align: center; }
 
 #smrt-mvs-form img { margin-bottom: 20px; }
@@ -19,8 +21,6 @@
 #smrt-mvs-form .mvs-outer { margin-bottom: 20px; }
 
 #smrt-mvs-form .mvs-outer .form-group { margin-bottom: 10px; }
-
-#smrt-mvs-form .mvs-outer .form-group input[type=text] { appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
 
 #smrt-mvs-form .mvs-outer .form-group .input-group-addon { padding: 10px 12px; }
 
