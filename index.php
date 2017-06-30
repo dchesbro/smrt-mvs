@@ -392,6 +392,7 @@
 						<input type="file" name="usr_img" id="usr-img" />
 						<label for="usr-img" class="btn btn-lg btn-default">
 							<div class="img-inner">
+								<i class="fa fa-picture-o" aria-hidden="true"></i>
 								<span>Choose an image...</span>
 							</div>
 						</label>

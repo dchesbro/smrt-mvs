@@ -35,6 +35,8 @@ $mvs-width: 640px + 30px;
 			text-overflow: ellipsis;
 			
 			i {
+				font-size: 20px;
+				margin-right: 10px;
 				vertical-align: middle;
 			}
 		}
@@ -102,6 +104,8 @@ $mvs-width: 640px + 30px;
 				
 				i {
 					display: block;
+					font-size: 42px;
+					margin-right: 0;
 				}
 			}
 		}

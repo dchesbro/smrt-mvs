@@ -12,7 +12,7 @@
 
 #smrt-mvs-form label[for=usr-img] .img-inner { overflow: hidden; text-align: center; text-overflow: ellipsis; }
 
-#smrt-mvs-form label[for=usr-img] .img-inner i { vertical-align: middle; }
+#smrt-mvs-form label[for=usr-img] .img-inner i { font-size: 20px; margin-right: 10px; vertical-align: middle; }
 
 #smrt-mvs-form .msg-log { margin-bottom: 20px; text-align: left; }
 
@@ -35,7 +35,7 @@
 @media only screen and (min-device-width: 670px) { .container { width: 670px; }
   #smrt-mvs-form label[for=usr-img] { border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
   #smrt-mvs-form label[for=usr-img] .img-inner { position: relative; top: 50%; transform: translateY(-50%); }
-  #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; }
+  #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; font-size: 42px; margin-right: 0; }
   #smrt-mvs-form .mvs-outer { position: absolute; }
   #smrt-mvs-form .mvs-outer.template-grey { top: 270px; left: 24%; right: 24%; }
   #smrt-mvs-form .mvs-outer.template-green { top: 210px; left: 12%; right: 12%; } }
