@@ -22,7 +22,7 @@
 
 #smrt-mvs-form .mvs-outer .form-group { margin-bottom: 10px; }
 
-#smrt-mvs-form .mvs-outer .form-group .input-group-addon { padding: 10px 12px; }
+#smrt-mvs-form .mvs-outer .form-group .input-group-addon { padding: 10px 10px 10px 14px; }
 
 #smrt-mvs-results { position: relative; text-align: center; }
 
