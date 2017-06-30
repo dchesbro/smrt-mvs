@@ -3,7 +3,10 @@ $mvs-width: 640px + 30px;
 .container {
 	margin: 20px auto;
 	
-	input[type=text] {
+	input[type=text], textarea {
+		box-shadow: none;
+		outline: none;
+		
 		appearance: none;
 		-moz-appearance: none;
 		-o-appearance: none;

@@ -1,6 +1,6 @@
 .container { margin: 20px auto; }
 
-.container input[type=text] { appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
+.container input[type=text], .container textarea { box-shadow: none; outline: none; appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
 
 #smrt-mvs-form { position: relative; text-align: center; }
 
