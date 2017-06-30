@@ -1,5 +1,22 @@
 <?php
 	
+	function get_default_template() {
+		
+		// Set templates
+		$templates = array( 'grey', 'green' );
+		
+		// Get template option
+		$template_option = $_GET['t'];
+		
+		// Check if option set or invalid option
+		if( empty( $template_option ) || !in_array( $template_option, $templates ) ) {
+			$template_option = $templates[0];
+		}
+		
+		return $template_option;
+		
+	}
+	
 	function get_default_moves() {
 		
 		// Set default moveset
@@ -132,7 +149,7 @@
 		
 	}
 	
-	function create_image( $template, $usr_image, $smart_moves ) {
+	function create_image( $template_option, $smart_moves, $usr_image ) {
 		
 		// $file = 'img/mvs/' . md5( $usr_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
@@ -141,10 +158,10 @@
 		// if ( !file_exists( $file ) ) {
 			
 			// Set template options
-			switch ( $template ) {
-			    case 'grey':
-			        // Set background image			
-					$dst_image = 'img/sm_grey.png';
+			switch ( $template_option ) {
+				case 'grey':
+			        // Set background image
+					$dst_image = imagecreatefrompng( 'img/sm_grey.png' );
 					
 					// Set font file and size
 					$font_file = 'font/tt0144m_.ttf';
@@ -154,9 +171,9 @@
 					$x_txt = 150;
 					$y_txt = 310;
 			        break;
-			    case 'green':
+				case 'green':
 			        // Set background image
-					$dst_image = 'img/sm_green.png';
+					$dst_image = imagecreatefrompng( 'img/sm_green.png' );
 					
 					// Set font file and size
 					$font_file = 'font/LTe50244.ttf';
@@ -168,56 +185,55 @@
 			        break;
 			}
 			
-			// Get user image properties
-			list( $src_width, $src_height, $src_type ) = getimagesize( $usr_image );
-			
-			switch ( $src_type ) {
-				case IMAGETYPE_GIF:
-					$src_image = imagecreatefromgif( $usr_image );
-					break;
-				case IMAGETYPE_JPEG:
-					$src_image = imagecreatefromjpeg( $usr_image );
-					break;
-				case IMAGETYPE_PNG:
-					$src_image = imagecreatefrompng( $usr_image );
-					break;
+			if( $template_option == 'grey' ) {
+				// Get user image properties
+				list( $src_width, $src_height, $src_type ) = getimagesize( $usr_image );
+				
+				switch ( $src_type ) {
+					case IMAGETYPE_GIF:
+						$src_image = imagecreatefromgif( $usr_image );
+						break;
+					case IMAGETYPE_JPEG:
+						$src_image = imagecreatefromjpeg( $usr_image );
+						break;
+					case IMAGETYPE_PNG:
+						$src_image = imagecreatefrompng( $usr_image );
+						break;
+				}
+				
+				// Set PIP dimensions
+				define( 'PIP_WIDTH', 240 );
+				define( 'PIP_HEIGHT', 223 );
+				
+				// Set aspect ratios
+				$dst_ar = PIP_WIDTH / PIP_HEIGHT;
+				$src_ar = $src_width / $src_height;
+				
+				if( $dst_ar < $src_ar ) {
+					// User image wider
+					$tmp_height = PIP_HEIGHT;
+					$tmp_width = ( int )( PIP_HEIGHT * $src_ar );
+				} else {
+					// User image taller or same size
+					$tmp_width = PIP_WIDTH;
+					$tmp_height = ( int )( PIP_WIDTH / $src_ar );
+				}
+				
+				// Create temp image
+				$pip_image = imagecreatetruecolor( $tmp_width, $tmp_height );
+				
+				imagecopyresampled( $pip_image, $src_image, 0, 0, 0, 0, $tmp_width, $tmp_height, $src_width, $src_height );
+				
+				// Set PIP cropping boundaries
+				$x_pip = ( $tmp_width - PIP_WIDTH ) / 2;
+				$y_pip = ( $tmp_height - PIP_HEIGHT ) / 2;
+				
+				imagecopy( $dst_image, $pip_image, 324, 23, $x_pip, $y_pip, PIP_WIDTH, PIP_HEIGHT );
 			}
-			
-			// Set PIP dimensions
-			define( 'PIP_WIDTH', 240 );
-			define( 'PIP_HEIGHT', 223 );
-			
-			// Set aspect ratios
-			$dst_ar = PIP_WIDTH / PIP_HEIGHT;
-			$src_ar = $src_width / $src_height;
-			
-			if( $dst_ar < $src_ar ) {
-				// User image wider
-				$tmp_height = PIP_HEIGHT;
-				$tmp_width = ( int )( PIP_HEIGHT * $src_ar );
-			} else {
-				// User image taller or same size
-				$tmp_width = PIP_WIDTH;
-				$tmp_height = ( int )( PIP_WIDTH / $src_ar );
-			}
-			
-			// Create temp image
-			$pip_image = imagecreatetruecolor( $tmp_width, $tmp_height );
-			
-			imagecopyresampled( $pip_image, $src_image, 0, 0, 0, 0, $tmp_width, $tmp_height, $src_width, $src_height );
-			
-			// Create background image
-			$tmp_image = imagecreatefrompng( $dst_image );
-			
-			// Set PIP cropping boundaries
-			$x_pip = ( $tmp_width - PIP_WIDTH ) / 2;
-			$y_pip = ( $tmp_height - PIP_HEIGHT ) / 2;
-			
-			imagecopy( $tmp_image, $pip_image, 324, 23, $x_pip, $y_pip, PIP_WIDTH, PIP_HEIGHT );
 			
 			// Set text colors
-			$black = imagecolorallocate( $tmp_image, 0, 0, 0 );
-			$white = imagecolorallocate( $tmp_image, 240, 240, 230 );
+			$black = imagecolorallocate( $dst_image, 0, 0, 0 );
+			$white = imagecolorallocate( $dst_image, 240, 240, 230 );
 			
 			// Initialize line height
 			$l = 0;
@@ -229,10 +245,10 @@
 			foreach( $smart_moves as $move ) {
 				// Draw drop shadow
 				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
-					imagettftext( $tmp_image, $font_size, 0, $x_txt + $s_depth, $y_txt + $s_depth + $l, $black, $font_file, strtoupper( $n . '. ' . $move ) );
+					imagettftext( $dst_image, $font_size, 0, $x_txt + $s_depth, $y_txt + $s_depth + $l, $black, $font_file, strtoupper( $n . '. ' . $move ) );
 				}
 				// Draw text
-				imagettftext( $tmp_image, $font_size, 0, $x_txt, $y_txt + $l, $white, $font_file, strtoupper( $n . '. ' . $move ) );
+				imagettftext( $dst_image, $font_size, 0, $x_txt, $y_txt + $l, $white, $font_file, strtoupper( $n . '. ' . $move ) );
 				
 				// Add 65px to line height for next line of text
 				$l = $l + $l_height;
@@ -240,7 +256,7 @@
 				// Add one to move number
 				$n = $n + 1;
 			}
-			imagejpeg( $tmp_image, $file, 35 );
+			imagejpeg( $dst_image, $file, 35 );
 		// }
 		return $file;
 	}
@@ -263,11 +279,14 @@
 		
 		$http_protocol = ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) || $_SERVER['SERVER_PORT'] == 443 ) ? "https://" : "http://";
 					 
-		$image_url = $http_protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $filename;
+		$image_url = $http_protocol . $_SERVER['HTTP_HOST'] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . $filename;
 						
 		return $image_url;
 		
 	}
+	
+	// Get default template
+	$template_option = get_default_template();
 	
 	// Get default moves
 	$smart_moves = get_default_moves();
@@ -287,16 +306,18 @@
 			$submit_ok = false;
 		}
 		
-		// Set user image
-		if( validate_image( $_FILES['usr_img'] ) == true ) {
-			$usr_image = $_FILES['usr_img']['tmp_name'];
-		} else {
-			$submit_ok = false;
+		if( $template_option == 'grey' ) {
+			// Set user image
+			if( validate_image( $_FILES['usr_img'] ) == true ) {
+				$usr_image = $_FILES['usr_img']['tmp_name'];
+			} else {
+				$submit_ok = false;
+			}
 		}
 		
 		// Check for errors, else create image
 		if( $submit_ok == true ) {
-			$filename = create_image( 'grey', $usr_image, $smart_moves );
+			$filename = create_image( $template_option, $smart_moves, $usr_image );
 		} 
 	}
 
@@ -340,9 +361,9 @@
 				<div class="col-md-12">
 					<img src="<?php echo $filename; ?>?id=<?php echo rand( 0, 1292938 ); ?>" class="img-responsive" alt="..." />
 					<div class="input-group">
-						<input value="<?php echo get_image_url( $filename ); ?>" type="text" class="form-control input-lg" readonly>
+						<input value="<?php echo get_image_url( $filename ); ?>" type="text" id="image-url" class="form-control input-lg" readonly>
 						<span class="input-group-btn">
-							<button class="btn btn-lg btn-default" type="button"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
+							<button type="button" data-clipboard-target="#image-url" class="btn btn-lg btn-default"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
 						</span>
 					</div>
 					<a class="btn btn-lg btn-default" href="./" role="button">Back to you, Mike</a>
@@ -357,14 +378,29 @@
 					<hr />
 				</div>
 			</div>
+			<div id="smrt-mvs-tab" class="row">
+				<div class="col-md-12">
+					<form id="" method="get">
+						<div class="btn-group btn-group-sm" role="group" aria-label="...">
+							<button value="grey" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'grey' ) { echo 'active'; } ?>">Grey</button>
+							<button value="green" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'green' ) { echo 'active'; } ?>">Green</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+			<?php switch ( $template_option ) { case 'grey': $dst_image = 'img/sm_grey.png'; break; case 'green': $dst_image = 'img/sm_green.png'; break; } ?>
+			
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
 					<form enctype="multipart/form-data" id="" method="post">
-						<img title="Do you have it?" src="img/sm_grey.png" class="img-responsive" alt="Do you have it?" />
+						<img title="Do you have it?" src="<?php echo $dst_image; ?>" class="img-responsive" alt="Do you have it?" />
 						
 						<?php echo get_log_messages( $img_log ) ?>
 						
 						<?php echo get_log_messages( $mvs_log ) ?>
+						
+						<?php if( $template_option == 'grey' ) { ?>
 						
 						<input type="file" name="usr_img" id="usr-img" />
 						<label for="usr-img">
@@ -373,6 +409,9 @@
 								<span>Choose an image...</span>
 							</div>
 						</label>
+						
+						<?php } ?>
+						
 						<div class="mvs-outer">
 							<div class="form-group">
 								<div class="input-group">
@@ -409,7 +448,12 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		
 		<!-- ... -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+		
+		<!-- ... -->
 		<script src="js/jquery.custom-file-input.js"></script>
+		
+		<script>new Clipboard('.btn');</script>
 	
 	</body>
 </html>
