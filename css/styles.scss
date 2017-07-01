@@ -63,7 +63,12 @@ $mvs-width: 640px + 30px;
 		.form-group {
 			margin-bottom: 10px;
 			
+			input[type=text] {
+				border-radius: 0;
+			}
+			
 			.input-group-addon {
+				border-radius: 0;
 				padding: 10px 10px 10px 14px;
 			}
 		}

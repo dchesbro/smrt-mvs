@@ -75,7 +75,7 @@
 		
 	}			
 	
-	function validate_image( $usr_image ) {
+	function validate_image( $user_image ) {
 		
 		global $img_log;
 		
@@ -84,7 +84,7 @@
 		// Initialize validation and check if user file present
 		$submit_ok = true;
 		
-		if( empty( $usr_image['tmp_name'] ) ) {					
+		if( empty( $user_image['tmp_name'] ) ) {					
 			$img_log[] = '<strong>ERROR:</strong> Champions always choose an image!';
 			return false;
 		} else {
@@ -92,7 +92,7 @@
 		}
 			
 		// Check if user file is image
-		$is_image = getimagesize( $usr_image['tmp_name'] );
+		$is_image = getimagesize( $user_image['tmp_name'] );
 		
 		if( $is_image == false ) {
 			$img_log[] = '<strong>ERROR:</strong> File is not an image.';
@@ -102,9 +102,11 @@
 		}
 		
 		// Check if image extension is allowed
-		$image_extension = pathinfo( sys_get_temp_dir () . basename( $usr_image['name'] ), PATHINFO_EXTENSION );
+		$allowed_extensions = array( 'JPEG', 'JPG', 'PNG', 'GIF', 'jpeg', 'jpg', 'png', 'gif' );
+		
+		$image_extension = pathinfo( sys_get_temp_dir () . basename( $user_image['name'] ), PATHINFO_EXTENSION );
 				
-		if( $image_extension !== 'jpeg' && $image_extension !== 'jpg' && $image_extension !== 'png' && $image_extension !== 'gif' ) {
+		if( !in_array( $image_extension, $allowed_extensions ) ) {
 			$img_log[] = '<strong>ERROR:</strong> File must be a JPEG, JPG, PNG or GIF image.';
 			$submit_ok = false;
 		} else {
@@ -114,11 +116,11 @@
 		// Check if image size is within limit
 		$size_limit = 5242880;
 		
-		if( $usr_image['size'] > $size_limit ) {
+		if( $user_image['size'] > $size_limit ) {
 			$img_log[] = '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).';
 			$submit_ok = false;
 		} else {
-			$img_log[] = '<strong>OK:</strong> File size within limit (<code>' . $usr_image['size'] . ' bytes</code>).';
+			$img_log[] = '<strong>OK:</strong> File size within limit (<code>' . $user_image['size'] . ' bytes</code>).';
 		}
 		
 		// Check if any errors, else return true
@@ -149,9 +151,9 @@
 		
 	}
 	
-	function create_image( $template_option, $smart_moves, $usr_image ) {
+	function create_image( $template_option, $smart_moves, $user_image ) {
 		
-		// $file = 'img/mvs/' . md5( $usr_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
+		// $file = 'img/mvs/' . md5( $user_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
 		
 		$file = 'img/mvs/testing.jpg';
 		
@@ -187,17 +189,17 @@
 			
 			if( $template_option == 'grey' ) {
 				// Get user image properties
-				list( $src_width, $src_height, $src_type ) = getimagesize( $usr_image );
+				list( $src_width, $src_height, $src_type ) = getimagesize( $user_image );
 				
 				switch ( $src_type ) {
 					case IMAGETYPE_GIF:
-						$src_image = imagecreatefromgif( $usr_image );
+						$src_image = imagecreatefromgif( $user_image );
 						break;
 					case IMAGETYPE_JPEG:
-						$src_image = imagecreatefromjpeg( $usr_image );
+						$src_image = imagecreatefromjpeg( $user_image );
 						break;
 					case IMAGETYPE_PNG:
-						$src_image = imagecreatefrompng( $usr_image );
+						$src_image = imagecreatefrompng( $user_image );
 						break;
 				}
 				
@@ -309,7 +311,7 @@
 		if( $template_option == 'grey' ) {
 			// Set user image
 			if( validate_image( $_FILES['usr_img'] ) == true ) {
-				$usr_image = $_FILES['usr_img']['tmp_name'];
+				$user_image = $_FILES['usr_img']['tmp_name'];
 			} else {
 				$submit_ok = false;
 			}
@@ -317,7 +319,7 @@
 		
 		// Check for errors, else create image
 		if( $submit_ok == true ) {
-			$filename = create_image( $template_option, $smart_moves, $usr_image );
+			$filename = create_image( $template_option, $smart_moves, $user_image );
 		} 
 	}
 
@@ -403,19 +405,19 @@
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">1.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_1'] ) ) { echo $smart_moves[0]; } ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
+									<input type="text" placeholder="<?php echo $smart_moves[0]; ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">2.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_2'] ) ) { echo $smart_moves[1]; } ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
+									<input type="text" placeholder="<?php echo $smart_moves[1]; ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">3.</div>
-									<input type="text" placeholder="<?php if( empty( $_POST['move_3'] ) ) { echo $smart_moves[2]; } ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
+									<input type="text" placeholder="<?php echo $smart_moves[2]; ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 						</div>
