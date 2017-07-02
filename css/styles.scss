@@ -12,6 +12,11 @@ $mvs-width: 640px + 30px;
 		-o-appearance: none;
 		-webkit-appearance: none;
 	}
+	
+	.msg-log {
+		margin-bottom: 20px;
+		text-align: left;
+	}
 }
 
 #smrt-mvs-form {
@@ -50,11 +55,6 @@ $mvs-width: 640px + 30px;
 				vertical-align: middle;
 			}
 		}
-	}
-	
-	.msg-log {
-		margin-bottom: 20px;
-		text-align: left;
 	}
 	
 	.mvs-outer {

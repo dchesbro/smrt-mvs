@@ -7,6 +7,9 @@
     -moz-appearance: none;
     -o-appearance: none;
     -webkit-appearance: none; }
+  .container .msg-log {
+    margin-bottom: 20px;
+    text-align: left; }
 
 #smrt-mvs-form {
   position: relative;
@@ -33,9 +36,6 @@
         font-size: 20px;
         margin-right: 10px;
         vertical-align: middle; }
-  #smrt-mvs-form .msg-log {
-    margin-bottom: 20px;
-    text-align: left; }
   #smrt-mvs-form .mvs-outer {
     margin-bottom: 20px; }
     #smrt-mvs-form .mvs-outer .form-group {

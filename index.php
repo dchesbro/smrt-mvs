@@ -8,7 +8,7 @@
 		// Get template option
 		$template_option = $_GET['t'];
 		
-		// Check if option set or invalid option
+		// Check if option set or invalid
 		if( empty( $template_option ) || !in_array( $template_option, $templates ) ) {
 			$template_option = $templates[0];
 		}
@@ -77,28 +77,28 @@
 	
 	function validate_image( $user_image ) {
 		
-		global $img_log;
+		global $image_log;
 		
-		$img_log = array();
+		$image_log = array();
 				
 		// Initialize validation and check if user file present
 		$submit_ok = true;
 		
 		if( empty( $user_image['tmp_name'] ) ) {					
-			$img_log[] = '<strong>ERROR:</strong> Champions always choose an image!';
+			$image_log[] = '<strong>ERROR:</strong> Champions always choose an image!';
 			return false;
 		} else {
-			$img_log[] = '<strong>OK:</strong> File was selected.';
+			$image_log[] = '<strong>OK:</strong> File was selected.';
 		}
 			
 		// Check if user file is image
 		$is_image = getimagesize( $user_image['tmp_name'] );
 		
 		if( $is_image == false ) {
-			$img_log[] = '<strong>ERROR:</strong> File is not an image.';
+			$image_log[] = '<strong>ERROR:</strong> File is not an image.';
 			$submit_ok = false;
 		} else {
-			$img_log[] = '<strong>OK:</strong> File is an image (<code>' . $is_image['mime'] . '</code>).';
+			$image_log[] = '<strong>OK:</strong> File is an image (' . $is_image['mime'] . ').';
 		}
 		
 		// Check if image extension is allowed
@@ -107,28 +107,28 @@
 		$image_extension = pathinfo( sys_get_temp_dir () . basename( $user_image['name'] ), PATHINFO_EXTENSION );
 				
 		if( !in_array( $image_extension, $allowed_extensions ) ) {
-			$img_log[] = '<strong>ERROR:</strong> File must be a JPEG, JPG, PNG or GIF image.';
+			$image_log[] = '<strong>ERROR:</strong> File must be a JPG, PNG or GIF image.';
 			$submit_ok = false;
 		} else {
-			$img_log[] = '<strong>OK:</strong> File is allowed format (<code>' . $image_extension . '</code>).';
+			$image_log[] = '<strong>OK:</strong> File is allowed format (' . $image_extension . ').';
 		}
 		
 		// Check if image size is within limit
 		$size_limit = 5242880;
 		
 		if( $user_image['size'] > $size_limit ) {
-			$img_log[] = '<strong>ERROR:</strong> File is too large (<code>Limit is ' . $size_limit . ' bytes</code>).';
+			$image_log[] = '<strong>ERROR:</strong> File is too large (Limit is ' . $size_limit . ' bytes).';
 			$submit_ok = false;
 		} else {
-			$img_log[] = '<strong>OK:</strong> File size within limit (<code>' . $user_image['size'] . ' bytes</code>).';
+			$image_log[] = '<strong>OK:</strong> File size within limit (' . $user_image['size'] . ' bytes).';
 		}
 		
 		// Check if any errors, else return true
 		if ( $submit_ok == false ) {
-			$img_log[] = '<strong>ERROR:</strong> File was not submitted.';
+			$image_log[] = '<strong>ERROR:</strong> File was not submitted.';
 			return false;
 		} else {
-			$img_log[] = '<strong>OK:</strong> File submitted successfully.';
+			$image_log[] = '<strong>OK:</strong> File submitted successfully.';
 			return true;
 		}
 		
@@ -136,16 +136,16 @@
 	
 	function validate_moves( $move_1, $move_2, $move_3 ) {
 		
-		global $mvs_log;
+		global $moves_log;
 		
-		$mvs_log = array();
+		$moves_log = array();
 		
 		// Check for user moves		
 		if( empty( $move_1 ) || empty( $move_2 ) || empty( $move_3 ) ) {
-			$mvs_log[] = '<strong>ERROR:</strong> Champions always enter three moves!';
+			$moves_log[] = '<strong>ERROR:</strong> Champions always enter three moves!';
 			return false;
 		} else {
-			$mvs_log[] = '<strong>OK:</strong> Moves submitted successfully.';
+			$moves_log[] = '<strong>OK:</strong> Moves submitted successfully.';
 			return true;
 		}
 		
@@ -200,6 +200,21 @@
 						break;
 					case IMAGETYPE_PNG:
 						$src_image = imagecreatefrompng( $user_image );
+						break;
+				}
+				
+				// Check image orientation				
+				$exif = exif_read_data( $user_image );
+				
+				switch ( $exif['Orientation'] ) {
+					case 3:
+						$src_image = imagerotate( $src_image, 180, 0 );
+						break;
+					case 6:
+						$src_image = imagerotate( $src_image, -90, 0 );
+						break;
+					case 8:
+						$src_image = imagerotate( $src_image, 90, 0 );
 						break;
 				}
 				
@@ -269,7 +284,7 @@
 			echo '<ul class="msg-log">';
 			
 			foreach( $log as $message ) {
-				echo '<li>' . $message . '</li>';
+				echo '<li><code>' . $message . '</code></li>';
 			}
 			
 			echo '</ul>';
@@ -355,6 +370,11 @@
 			<div id="smrt-mvs-results" class="row">
 				<div class="col-md-12">
 					<img src="<?php echo $filename; ?>" class="img-responsive" alt="..." />
+					
+					<?php echo get_log_messages( $image_log ); ?>
+												
+					<?php echo get_log_messages( $moves_log ); ?>
+					
 					<div class="input-group">
 						<input value="<?php echo get_image_url( $filename ); ?>" type="text" id="image-url" class="form-control input-lg" readonly>
 						<span class="input-group-btn">
@@ -385,9 +405,9 @@
 					<form enctype="multipart/form-data" method="post">
 						<img title="Do you have it?" src="<?php echo $dst_image; ?>" class="img-responsive" alt="Do you have it?" />
 						
-						<?php echo get_log_messages( $img_log ); ?>
-						
-						<?php echo get_log_messages( $mvs_log ); ?>
+						<?php echo get_log_messages( $image_log ); ?>
+												
+						<?php echo get_log_messages( $moves_log ); ?>
 						
 						<?php if( $template_option == 'grey' ) { ?>
 						
