@@ -110,7 +110,7 @@
 			$image_log[] = '<strong>ERROR:</strong> File must be a JPG, PNG or GIF image.';
 			$submit_ok = false;
 		} else {
-			$image_log[] = '<strong>OK:</strong> File is allowed format (' . $image_extension . ').';
+			$image_log[] = '<strong>OK:</strong> File is an allowed format (' . $image_extension . ').';
 		}
 		
 		// Check if image size is within limit
@@ -284,7 +284,7 @@
 			echo '<ul class="msg-log">';
 			
 			foreach( $log as $message ) {
-				echo '<li><code>' . $message . '</code></li>';
+				echo '<li>' . $message . '</li>';
 			}
 			
 			echo '</ul>';
