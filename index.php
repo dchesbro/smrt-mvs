@@ -362,7 +362,6 @@
 		<![endif]-->
 	</head>
 	<body>
-		
 		<div class="container">
 			
 			<?php if( isset( $_POST['form-submit'] ) && $submit_ok == true ) { ?>
@@ -425,19 +424,19 @@
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">1.</div>
-									<input type="text" placeholder="<?php echo $smart_moves[0]; ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
+									<input <?php if( isset( $_POST['move_1'] ) ) { echo 'value="' . $_POST['move_1'] . '"'; } ?> type="text" placeholder="<?php echo $smart_moves[0]; ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">2.</div>
-									<input type="text" placeholder="<?php echo $smart_moves[1]; ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
+									<input <?php if( isset( $_POST['move_2'] ) ) { echo 'value="' . $_POST['move_2'] . '"'; } ?> type="text" placeholder="<?php echo $smart_moves[1]; ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">3.</div>
-									<input type="text" placeholder="<?php echo $smart_moves[2]; ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
+									<input <?php if( isset( $_POST['move_3'] ) ) { echo 'value="' . $_POST['move_3'] . '"'; } ?> type="text" placeholder="<?php echo $smart_moves[2]; ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 						</div>
@@ -463,6 +462,5 @@
 		<script src="js/jquery.custom-file-input.js"></script>
 		
 		<script>new Clipboard('.btn');</script>
-	
 	</body>
 </html>
