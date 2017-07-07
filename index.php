@@ -151,9 +151,9 @@
 		
 	}
 	
-	function create_image( $template_option, $smart_moves, $user_image ) {
+	function create_image( $template_option, $user_moves, $user_image ) {
 		
-		// $file = 'img/mvs/' . md5( $user_image . $smart_moves[0] . $smart_moves[1] . $smart_moves[2] ) . '.jpg';
+		// $file = 'img/mvs/' . md5( $user_image . $user_moves[0] . $user_moves[1] . $user_moves[2] ) . '.jpg';
 		
 		$file = 'img/mvs/testing.jpg';
 		
@@ -259,7 +259,7 @@
 			// Initialize move number
 			$n = 1;
 			
-			foreach( $smart_moves as $move ) {
+			foreach( $user_moves as $move ) {
 				// Draw drop shadow
 				for( $s_depth = 0; $s_depth < 5; $s_depth = $s_depth + 1 ) {
 					imagettftext( $dst_image, $font_size, 0, $x_txt + $s_depth, $y_txt + $s_depth + $l, $black, $font_file, strtoupper( $n . '. ' . $move ) );
@@ -306,7 +306,7 @@
 	$template_option = get_default_template();
 	
 	// Get default moves
-	$smart_moves = get_default_moves();
+	$default_moves = get_default_moves();
 	
 	// Check for user inputs
 	if( isset( $_POST['form-submit'] ) ) {
@@ -314,7 +314,7 @@
 		
 		// Set user moves
 		if( validate_moves( $_POST['move_1'], $_POST['move_2'], $_POST['move_3'] ) == true ) {
-			$smart_moves = array(
+			$user_moves = array(
 				$_POST['move_1'],
 				$_POST['move_2'],
 				$_POST['move_3']
@@ -334,7 +334,7 @@
 		
 		// Check for errors, else create image
 		if( $submit_ok == true ) {
-			$filename = create_image( $template_option, $smart_moves, $user_image );
+			$filename = create_image( $template_option, $user_moves, $user_image );
 		} 
 	}
 
@@ -424,19 +424,19 @@
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">1.</div>
-									<input <?php if( isset( $_POST['move_1'] ) ) { echo 'value="' . $_POST['move_1'] . '"'; } ?> type="text" placeholder="<?php echo $smart_moves[0]; ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
+									<input <?php if( isset( $_POST['move_1'] ) ) { echo 'value="' . $_POST['move_1'] . '"'; } ?> type="text" placeholder="<?php echo $default_moves[0]; ?>" name="move_1" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">2.</div>
-									<input <?php if( isset( $_POST['move_2'] ) ) { echo 'value="' . $_POST['move_2'] . '"'; } ?> type="text" placeholder="<?php echo $smart_moves[1]; ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
+									<input <?php if( isset( $_POST['move_2'] ) ) { echo 'value="' . $_POST['move_2'] . '"'; } ?> type="text" placeholder="<?php echo $default_moves[1]; ?>" name="move_2" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon">3.</div>
-									<input <?php if( isset( $_POST['move_3'] ) ) { echo 'value="' . $_POST['move_3'] . '"'; } ?> type="text" placeholder="<?php echo $smart_moves[2]; ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
+									<input <?php if( isset( $_POST['move_3'] ) ) { echo 'value="' . $_POST['move_3'] . '"'; } ?> type="text" placeholder="<?php echo $default_moves[2]; ?>" name="move_3" maxlength="20" class="form-control" autocomplete="off">
 								</div>
 							</div>
 						</div>
