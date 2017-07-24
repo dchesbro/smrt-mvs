@@ -381,7 +381,7 @@
 							<button type="button" data-clipboard-target="#image-url" class="btn btn-lg btn-yellow">Copy URL</button>
 						</span>
 					</div>
-					<a title="Back to SMRT MVS homepage" role="button" class="btn btn-lg btn-yellow" href="/smrt_mvs/">Back to you, Mike</a>
+					<a title="Back to SMRT MVS" role="button" class="btn btn-lg btn-yellow" href="/smrt_mvs/">Back to you, Mike</a>
 				</div>
 			</div>
 			

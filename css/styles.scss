@@ -2,7 +2,7 @@
 $mvs-orange: #e39900;
 $mvs-purple: #605cd1;
 $mvs-yellow: #ffc800;
-$mvs-width: 640px;
+$mvs-width:  670px;
 
 @mixin button-variant( $color, $background ) {
 	color: $color;
@@ -14,7 +14,7 @@ $mvs-width: 640px;
 	&.focus,
 	&:hover {
 		color: $color;
-		background-color: lighten($color, 45%);
+		background-color: lighten( $color, 45% );
 		border-color: $color;
 	}
 	
@@ -93,11 +93,18 @@ body {
 	}
 	
 	.msg-log {
+		list-style: none;
 		margin-bottom: 20px;
-		text-align: left;
+		padding-left: 0;
+		text-align: center;
 		
 		li {
-			color: #c7254e;
+			background-color: $mvs-purple;
+			border-radius: 3px;
+			color: #fff;
+			display: inline-block;
+			font-size: 12px;
+			padding: 5px 10px;
 		}
 	}
 }
@@ -189,13 +196,13 @@ body {
 	body {
 		background: url( '../img/mvs-splat.svg' ) center 48px no-repeat;
 		
-		@media only screen and ( max-width: 670px ) {
-			background-position: -198px 48px;
+		@media only screen and ( max-width: $mvs-width ) {
+			background-position-x: -198px;
 		}
 	}
 	
 	.container {
-		width: $mvs-width + 30px;
+		width: $mvs-width;
 	}
 	
 	#smrt-mvs-form {
@@ -241,5 +248,9 @@ body {
 		&::before {
 			
 		}
+	}
+	
+	#smrt-mvs-results {
+		margin-top: 50px;
 	}
 }
