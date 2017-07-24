@@ -188,6 +188,10 @@ body {
 @media only screen and ( min-device-width: $mvs-width ) {
 	body {
 		background: url( '../img/mvs-splat.svg' ) center 48px no-repeat;
+		
+		@media only screen and ( max-width: 670px ) {
+			background-position: -198px 48px;
+		}
 	}
 	
 	.container {
@@ -232,6 +236,10 @@ body {
 				left: 12%;
 				right: 12%;
 			}
+		}
+		
+		&::before {
+			
 		}
 	}
 }
