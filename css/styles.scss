@@ -194,7 +194,7 @@ body {
 
 @media only screen and ( min-device-width: $mvs-width ) {
 	body {
-		background: url( '../img/mvs-splat.svg' ) center 48px no-repeat;
+		background: url( '../img/sm_splat.svg' ) center 48px no-repeat;
 		
 		@media only screen and ( max-width: $mvs-width ) {
 			background-position-x: -198px;
