@@ -151,11 +151,11 @@
 	
 	function create_image( $template_option, $user_moves, $user_image ) {
 		
-		// $file = 'img/mvs/' . md5( $user_image . $user_moves[0] . $user_moves[1] . $user_moves[2] ) . '.jpg';
+		$file = 'img/mvs/' . md5( $user_image . $user_moves[0] . $user_moves[1] . $user_moves[2] ) . '.jpg';
 		
-		$file = 'img/mvs/debug.jpg';
+		// $file = 'img/mvs/debug.jpg';
 		
-		// if ( !file_exists( $file ) ) {
+		if ( !file_exists( $file ) ) {
 			
 			// Set template options
 			switch ( $template_option ) {
@@ -272,7 +272,7 @@
 				$n = $n + 1;
 			}
 			imagejpeg( $dst_image, $file, 35 );
-		// }
+		}
 		return $file;
 	}
 	
@@ -346,8 +346,11 @@
 		<title>SMRT MVS</title>
 
 		<!-- Bootstrap -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+		
+		<!-- Web fonts -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+		<script src="//use.edgefonts.net/geo.js"></script>
 		
 		<!-- Custom styles -->
 		<link rel="stylesheet" href="css/styles.css">
@@ -359,14 +362,14 @@
 			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body>
+	<body>		
 		<div class="container">
 			
 			<?php if( isset( $_POST['form-submit'] ) && $submit_ok == true ) { ?>
 			
 			<div id="smrt-mvs-results" class="row">
 				<div class="col-md-12">
-					<img src="<?php echo $filename; ?>" class="img-responsive" alt="..." />
+					<img src="<?php echo $filename; ?>" class="img-responsive" alt="..."/>
 					
 					<?php echo get_log_messages( $image_log ); ?>
 												
@@ -388,8 +391,8 @@
 				<div class="col-md-12">
 					<form enctype="application/x-www-form-urlencoded" method="get">
 						<div class="btn-group btn-group-sm" role="group">
-							<button value="green" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'green' ) { echo 'active'; } ?>">Green</button>
-							<button value="grey" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'grey' ) { echo 'active'; } ?>">Grey</button>
+							<button value="green" type="submit" title="Text only" name="t" class="btn btn-default<?php if( $template_option == 'green' ) { echo ' active'; } ?>">Green</button>
+							<button value="grey" type="submit" title="Text with image" name="t" class="btn btn-default<?php if( $template_option == 'grey' ) { echo ' active'; } ?>">Grey</button>
 						</div>
 					</form>
 				</div>
@@ -400,7 +403,8 @@
 			<div id="smrt-mvs-form" class="row">
 				<div class="col-md-12">
 					<form enctype="multipart/form-data" method="post">
-						<img title="Do you have it?" src="<?php echo $dst_image; ?>" class="img-responsive" alt="Do you have it?" />
+						<img src="<?php echo $dst_image; ?>" class="img-responsive" alt="Moves template image"/>
+						<!-- <img src="img/mvs-splat.svg" class="img-splat" alt="Splat image"/> -->
 						
 						<?php echo get_log_messages( $image_log ); ?>
 												
@@ -408,7 +412,7 @@
 						
 						<?php if( $template_option == 'grey' ) { ?>
 						
-						<input type="file" name="usr_img" id="usr-img" />
+						<input type="file" name="usr_img" id="usr-img"/>
 						<label for="usr-img" class="btn btn-lg btn-default">
 							<div class="img-inner">
 								<i class="fa fa-picture-o" aria-hidden="true"></i>
@@ -438,7 +442,7 @@
 								</div>
 							</div>
 						</div>
-						<input value="Take it to Mo!" type="submit" name="form-submit" class="btn btn-lg btn-default" />
+						<input value="Take it to Mo!" type="submit" title="Create image" name="form-submit" class="btn btn-lg btn-default"/>
 					</form>
 				</div>
 			</div>
@@ -447,18 +451,20 @@
 				
 		</div>
 
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- Bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 		
-		<!-- ... -->
+		<!-- Clipboard -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 		
-		<!-- ... -->
+		<!-- Custom file input -->
 		<script src="js/jquery.custom-file-input.js"></script>
 		
-		<script>new Clipboard('.btn');</script>
+		<script>
+			new Clipboard('.btn');
+		</script>
 	</body>
 </html>

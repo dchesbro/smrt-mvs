@@ -1,10 +1,5 @@
-html {
-  background: url("../img/bg-teal.png") center top no-repeat;
-  background-size: cover;
-  height: 100%; }
-
 body {
-  background: transparent; }
+  background-color: transparent; }
 
 .container {
   margin: 20px auto; }
@@ -27,6 +22,7 @@ body {
   position: relative;
   text-align: center; }
   #smrt-mvs-form img {
+    background-color: #000;
     margin-bottom: 20px; }
   #smrt-mvs-form input[type=file] {
     height: 1px;
@@ -35,6 +31,23 @@ body {
     position: absolute;
     width: 1px;
     z-index: -1; }
+  #smrt-mvs-form input[type=submit] {
+    color: #ffc800;
+    background-color: #fff;
+    border-color: #ffc800;
+    box-shadow: none;
+    font-family: geo, sans-serif;
+    font-size: 24px; }
+    #smrt-mvs-form input[type=submit].active {
+      color: #fff;
+      background-color: #ffc800;
+      border-color: #ffc800; }
+    #smrt-mvs-form input[type=submit].disabled:hover, #smrt-mvs-form input[type=submit].disabled:focus, #smrt-mvs-form input[type=submit].disabled.focus, #smrt-mvs-form input[type=submit][disabled]:hover, #smrt-mvs-form input[type=submit][disabled]:focus, #smrt-mvs-form input[type=submit][disabled].focus {
+      background-color: #fff;
+      border-color: #ffc800; }
+    #smrt-mvs-form input[type=submit] .badge {
+      color: #fff;
+      background-color: #ffc800; }
   #smrt-mvs-form label[for=usr-img] {
     display: block;
     margin-bottom: 10px; }
@@ -72,28 +85,31 @@ body {
   #smrt-mvs-tab .btn-group {
     margin-bottom: 20px; }
     #smrt-mvs-tab .btn-group .btn {
-      box-shadow: 5px 5px 0px #111;
       width: 80px; }
       #smrt-mvs-tab .btn-group .btn.btn-default {
         color: #ffc800;
-        background-color: white;
+        background-color: #fff;
         border-color: #ffc800;
-        z-index: 0 !important; }
-        #smrt-mvs-tab .btn-group .btn.btn-default:active, #smrt-mvs-tab .btn-group .btn.btn-default.active {
-          color: white;
+        box-shadow: none;
+        z-index: 0; }
+        #smrt-mvs-tab .btn-group .btn.btn-default.active {
+          color: #fff;
           background-color: #ffc800;
           border-color: #ffc800; }
-        #smrt-mvs-tab .btn-group .btn.btn-default:active, #smrt-mvs-tab .btn-group .btn.btn-default.active {
-          background-image: none; }
         #smrt-mvs-tab .btn-group .btn.btn-default.disabled:hover, #smrt-mvs-tab .btn-group .btn.btn-default.disabled:focus, #smrt-mvs-tab .btn-group .btn.btn-default.disabled.focus, #smrt-mvs-tab .btn-group .btn.btn-default[disabled]:hover, #smrt-mvs-tab .btn-group .btn.btn-default[disabled]:focus, #smrt-mvs-tab .btn-group .btn.btn-default[disabled].focus {
-          background-color: white;
+          background-color: #fff;
           border-color: #ffc800; }
         #smrt-mvs-tab .btn-group .btn.btn-default .badge {
-          color: white;
+          color: #fff;
           background-color: #ffc800; }
+      #smrt-mvs-tab .btn-group .btn + .btn {
+        margin-left: 0; }
 
-@media only screen and (min-device-width: 670px) {
+@media only screen and (min-device-width: 640px) {
+  body {
+    background: url("../img/mvs-splat.svg") center 48px no-repeat; }
   .container {
+    overflow: visible;
     width: 670px; }
   #smrt-mvs-form label[for=usr-img] {
     border-radius: 0;

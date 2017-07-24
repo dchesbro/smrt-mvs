@@ -1,22 +1,22 @@
+// Colors
 $mvs-orange: #e39900;
 $mvs-purple: #605cd1;
 $mvs-yellow: #ffc800;
 
-$mvs-width: 640px + 30px;
+// Variables
+$mvs-width:  640px;
 
+// Mixins
 @mixin button-variant($color, $background) {
 	color: $color;
 	background-color: $background;
 	border-color: $color;
-	
-	&:active, &.active {
+	box-shadow: none;
+		
+	&.active {
 		color: $background;
 		background-color: $color;
 		border-color: $color;
-	}
-	
-	&:active, &.active {
-		background-image: none;
 	}
 	
 	&.disabled, &[disabled] {
@@ -32,14 +32,9 @@ $mvs-width: 640px + 30px;
 	}
 }
 
-html {
-	background: url('../img/bg-teal.png') center top no-repeat;
-	background-size: cover;
-	height: 100%;
-}
-
+// Styles
 body {
-	background: transparent;
+	background-color: transparent;
 }
 
 .container {
@@ -72,6 +67,7 @@ body {
 	text-align: center;
 	
 	img {
+		background-color: #000;
 		margin-bottom: 20px;
 	}
 	
@@ -82,6 +78,12 @@ body {
 		position: absolute;
 		width: 1px;
 		z-index: -1;
+	}
+	
+	input[type=submit] {
+		@include button-variant($mvs-yellow, #fff);
+		font-family: geo, sans-serif;
+		font-size: 24px;
 	}
 	
 	label[for=usr-img] {
@@ -144,20 +146,28 @@ body {
 		margin-bottom: 20px;
 		
 		.btn {
-			box-shadow: 5px 5px 0px #111;
 			width: 80px;
 			
 			&.btn-default {
-				@include button-variant($mvs-yellow, white);
-				z-index: 0 !important;
+				@include button-variant($mvs-yellow, #fff);
+				z-index: 0;
+			}
+			
+			+.btn {
+				margin-left: 0;
 			}
 		}
 	}
 }
 
 @media only screen and ( min-device-width: $mvs-width ) {
+	body {
+		background: url('../img/mvs-splat.svg') center 48px no-repeat;
+	}
+	
 	.container {
-		width: $mvs-width;
+		overflow: visible;
+		width: $mvs-width + 30px;
 	}
 	
 	#smrt-mvs-form {
