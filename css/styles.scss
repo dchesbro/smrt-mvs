@@ -181,14 +181,6 @@ body {
 		
 		.btn {
 			width: 88.5px;
-			
-			&.btn-yellow {
-				z-index: 0;
-			}
-			
-			+.btn {
-				margin-left: 0;
-			}
 		}
 	}
 }
