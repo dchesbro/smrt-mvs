@@ -1,139 +1,74 @@
-body {
-  background-color: transparent; }
+body { background-color: transparent; }
 
-.container {
-  margin: 20px auto; }
-  .container input[type=text], .container textarea {
-    box-shadow: none;
-    outline: none;
-    appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    -webkit-appearance: none; }
-  .container .msg-log {
-    margin-bottom: 20px;
-    text-align: left; }
-    .container .msg-log li {
-      color: #c7254e;
-      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-      font-size: 90%; }
+.container { margin: 20px auto; }
 
-#smrt-mvs-form {
-  position: relative;
-  text-align: center; }
-  #smrt-mvs-form img {
-    background-color: #000;
-    margin-bottom: 20px; }
-  #smrt-mvs-form input[type=file] {
-    height: 1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    width: 1px;
-    z-index: -1; }
-  #smrt-mvs-form input[type=submit] {
-    color: #ffc800;
-    background-color: #fff;
-    border-color: #ffc800;
-    box-shadow: none;
-    font-family: geo, sans-serif;
-    font-size: 24px; }
-    #smrt-mvs-form input[type=submit].active {
-      color: #fff;
-      background-color: #ffc800;
-      border-color: #ffc800; }
-    #smrt-mvs-form input[type=submit].disabled:hover, #smrt-mvs-form input[type=submit].disabled:focus, #smrt-mvs-form input[type=submit].disabled.focus, #smrt-mvs-form input[type=submit][disabled]:hover, #smrt-mvs-form input[type=submit][disabled]:focus, #smrt-mvs-form input[type=submit][disabled].focus {
-      background-color: #fff;
-      border-color: #ffc800; }
-    #smrt-mvs-form input[type=submit] .badge {
-      color: #fff;
-      background-color: #ffc800; }
-  #smrt-mvs-form label[for=usr-img] {
-    display: block;
-    margin-bottom: 10px; }
-    #smrt-mvs-form label[for=usr-img]:hover {
-      cursor: pointer; }
-    #smrt-mvs-form label[for=usr-img] .img-inner {
-      overflow: hidden;
-      text-align: center;
-      text-overflow: ellipsis; }
-      #smrt-mvs-form label[for=usr-img] .img-inner i {
-        font-size: 20px;
-        margin-right: 10px;
-        vertical-align: middle; }
-  #smrt-mvs-form .mvs-outer {
-    margin-bottom: 20px; }
-    #smrt-mvs-form .mvs-outer .form-group {
-      margin-bottom: 10px; }
-      #smrt-mvs-form .mvs-outer .form-group input[type=text] {
-        border-radius: 0; }
-      #smrt-mvs-form .mvs-outer .form-group .input-group-addon {
-        border-radius: 0;
-        padding: 10px 10px 10px 14px; }
+.container input[type=text], .container textarea { box-shadow: none; outline: none; appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
 
-#smrt-mvs-results {
-  position: relative;
-  text-align: center; }
-  #smrt-mvs-results img {
-    margin-bottom: 20px; }
-  #smrt-mvs-results .input-group {
-    margin-bottom: 20px; }
+.container .btn-yellow { color: #ffc800; background-color: #fff; border-color: #ffc800; box-shadow: none !important; }
 
-#smrt-mvs-tab {
-  position: relative;
-  text-align: center; }
-  #smrt-mvs-tab .btn-group {
-    margin-bottom: 20px; }
-    #smrt-mvs-tab .btn-group .btn {
-      width: 80px; }
-      #smrt-mvs-tab .btn-group .btn.btn-default {
-        color: #ffc800;
-        background-color: #fff;
-        border-color: #ffc800;
-        box-shadow: none;
-        z-index: 0; }
-        #smrt-mvs-tab .btn-group .btn.btn-default.active {
-          color: #fff;
-          background-color: #ffc800;
-          border-color: #ffc800; }
-        #smrt-mvs-tab .btn-group .btn.btn-default.disabled:hover, #smrt-mvs-tab .btn-group .btn.btn-default.disabled:focus, #smrt-mvs-tab .btn-group .btn.btn-default.disabled.focus, #smrt-mvs-tab .btn-group .btn.btn-default[disabled]:hover, #smrt-mvs-tab .btn-group .btn.btn-default[disabled]:focus, #smrt-mvs-tab .btn-group .btn.btn-default[disabled].focus {
-          background-color: #fff;
-          border-color: #ffc800; }
-        #smrt-mvs-tab .btn-group .btn.btn-default .badge {
-          color: #fff;
-          background-color: #ffc800; }
-      #smrt-mvs-tab .btn-group .btn + .btn {
-        margin-left: 0; }
+.container .btn-yellow:focus, .container .btn-yellow.focus, .container .btn-yellow:hover { color: #ffc800; background-color: #fffae5; border-color: #ffc800; }
 
-@media only screen and (min-device-width: 640px) {
-  body {
-    background: url("../img/mvs-splat.svg") center 48px no-repeat; }
-  .container {
-    overflow: visible;
-    width: 670px; }
-  #smrt-mvs-form label[for=usr-img] {
-    border-radius: 0;
-    height: 223px;
-    padding: 10px;
-    position: absolute;
-    top: 23px;
-    left: 339px;
-    width: 240px; }
-    #smrt-mvs-form label[for=usr-img] .img-inner {
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%); }
-      #smrt-mvs-form label[for=usr-img] .img-inner i {
-        display: block;
-        font-size: 42px;
-        margin-right: 0; }
-  #smrt-mvs-form .mvs-outer {
-    position: absolute; }
-    #smrt-mvs-form .mvs-outer.template-grey {
-      top: 270px;
-      left: 24%;
-      right: 24%; }
-    #smrt-mvs-form .mvs-outer.template-green {
-      top: 210px;
-      left: 12%;
-      right: 12%; } }
+.container .btn-yellow:active, .container .btn-yellow.active, .open > .container .btn-yellow.dropdown-toggle { color: #fff; background-color: #ffc800; border-color: #ffc800; }
+
+.container .btn-yellow:active:hover, .container .btn-yellow:active:focus, .container .btn-yellow:active.focus, .container .btn-yellow.active:hover, .container .btn-yellow.active:focus, .container .btn-yellow.active.focus, .open > .container .btn-yellow.dropdown-toggle:hover, .open > .container .btn-yellow.dropdown-toggle:focus, .open > .container .btn-yellow.dropdown-toggle.focus { color: #fff; background-color: #ffc800; border-color: #ffc800; }
+
+.container .btn-yellow:active, .container .btn-yellow.active, .open > .container .btn-yellow.dropdown-toggle { background-image: none; }
+
+.container .btn-yellow.disabled:hover, .container .btn-yellow.disabled:focus, .container .btn-yellow.disabled.focus, .container .btn-yellow[disabled]:hover, .container .btn-yellow[disabled]:focus, .container .btn-yellow[disabled].focus, fieldset[disabled] .container .btn-yellow:hover, fieldset[disabled] .container .btn-yellow:focus, fieldset[disabled] .container .btn-yellow.focus { background-color: #fff; border-color: #ffc800; }
+
+.container .btn-yellow .badge { color: #fff; background-color: #ffc800; }
+
+.container .btn-yellow.btn-lg { font-family: geo, sans-serif; font-size: 26px; padding: 5px 16px; }
+
+.container .form-control:focus, .container .form-control.focus { border-color: #ffc800; }
+
+.container .msg-log { margin-bottom: 20px; text-align: left; }
+
+.container .msg-log li { color: #c7254e; }
+
+#smrt-mvs-form { position: relative; text-align: center; }
+
+#smrt-mvs-form img { background-color: #000; margin-bottom: 20px; }
+
+#smrt-mvs-form input[type=file] { height: 1px; opacity: 0; overflow: hidden; position: absolute; width: 1px; z-index: -1; }
+
+#smrt-mvs-form label[for=usr-img] { display: block; margin-bottom: 10px; }
+
+#smrt-mvs-form label[for=usr-img]:hover { cursor: pointer; }
+
+#smrt-mvs-form label[for=usr-img] .img-inner { overflow: hidden; text-align: center; text-overflow: ellipsis; }
+
+#smrt-mvs-form label[for=usr-img] .img-inner i { font-size: 20px; margin-right: 10px; vertical-align: middle; }
+
+#smrt-mvs-form .mvs-outer { margin-bottom: 20px; }
+
+#smrt-mvs-form .mvs-outer .form-group { margin-bottom: 10px; }
+
+#smrt-mvs-form .mvs-outer .form-group input[type=text] { border-radius: 0; }
+
+#smrt-mvs-form .mvs-outer .form-group .input-group-addon { border-radius: 0; padding: 10px 10px 10px 14px; }
+
+#smrt-mvs-results { position: relative; text-align: center; }
+
+#smrt-mvs-results img { margin-bottom: 20px; }
+
+#smrt-mvs-results .input-group { margin-bottom: 20px; }
+
+#smrt-mvs-tab { position: relative; text-align: center; }
+
+#smrt-mvs-tab .btn-group { margin-bottom: 20px; }
+
+#smrt-mvs-tab .btn-group .btn { width: 88.5px; }
+
+#smrt-mvs-tab .btn-group .btn.btn-yellow { z-index: 0; }
+
+#smrt-mvs-tab .btn-group .btn + .btn { margin-left: 0; }
+
+@media only screen and (min-device-width: 640px) { body { background: url("../img/mvs-splat.svg") center 48px no-repeat; }
+  .container { width: 670px; }
+  #smrt-mvs-form label[for=usr-img] { border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
+  #smrt-mvs-form label[for=usr-img] .img-inner { position: relative; top: 50%; transform: translateY(-50%); }
+  #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; font-size: 42px; margin-right: 0; }
+  #smrt-mvs-form .mvs-outer { position: absolute; }
+  #smrt-mvs-form .mvs-outer.template-grey { top: 270px; left: 24%; right: 24%; }
+  #smrt-mvs-form .mvs-outer.template-green { top: 210px; left: 12%; right: 12%; } }

@@ -349,7 +349,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
 		
 		<!-- Web fonts -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
 		<script src="//use.edgefonts.net/geo.js"></script>
 		
 		<!-- Custom styles -->
@@ -378,10 +377,10 @@
 					<div class="input-group">
 						<input value="<?php echo get_image_url( $filename ); ?>" type="text" id="image-url" class="form-control input-lg" readonly>
 						<span class="input-group-btn">
-							<button type="button" data-clipboard-target="#image-url" class="btn btn-lg btn-default"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy URL</button>
+							<button type="button" data-clipboard-target="#image-url" class="btn btn-lg btn-yellow">Copy URL</button>
 						</span>
 					</div>
-					<a class="btn btn-lg btn-default" href="./" role="button">Back to you, Mike</a>
+					<a title="Back to SMRT MVS homepage" role="button" class="btn btn-lg btn-yellow" href="/smrt_mvs/">Back to you, Mike</a>
 				</div>
 			</div>
 			
@@ -391,8 +390,8 @@
 				<div class="col-md-12">
 					<form enctype="application/x-www-form-urlencoded" method="get">
 						<div class="btn-group btn-group-sm" role="group">
-							<button value="green" type="submit" title="Text only" name="t" class="btn btn-default<?php if( $template_option == 'green' ) { echo ' active'; } ?>">Green</button>
-							<button value="grey" type="submit" title="Text with image" name="t" class="btn btn-default<?php if( $template_option == 'grey' ) { echo ' active'; } ?>">Grey</button>
+							<button value="green" type="submit" title="Text only" name="t" class="btn btn-yellow<?php if( $template_option == 'green' ) { echo ' active'; } ?>">Green</button>
+							<button value="grey" type="submit" title="Text with image" name="t" class="btn btn-yellow<?php if( $template_option == 'grey' ) { echo ' active'; } ?>">Grey</button>
 						</div>
 					</form>
 				</div>
@@ -442,7 +441,7 @@
 								</div>
 							</div>
 						</div>
-						<input value="Take it to Mo!" type="submit" title="Create image" name="form-submit" class="btn btn-lg btn-default"/>
+						<input value="Take it to Mo!" type="submit" title="Create your image" name="form-submit" class="btn btn-lg btn-yellow"/>
 					</form>
 				</div>
 			</div>

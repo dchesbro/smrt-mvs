@@ -1,26 +1,51 @@
-// Colors
+// Variables
 $mvs-orange: #e39900;
 $mvs-purple: #605cd1;
 $mvs-yellow: #ffc800;
+$mvs-width: 640px;
 
-// Variables
-$mvs-width:  640px;
-
-// Mixins
-@mixin button-variant($color, $background) {
+@mixin button-variant( $color, $background ) {
 	color: $color;
 	background-color: $background;
 	border-color: $color;
-	box-shadow: none;
-		
-	&.active {
-		color: $background;
-		background-color: $color;
+	box-shadow: none !important;
+	
+	&:focus,
+	&.focus,
+	&:hover {
+		color: $color;
+		background-color: lighten($color, 45%);
 		border-color: $color;
 	}
 	
-	&.disabled, &[disabled] {
-		&:hover, &:focus, &.focus {
+	&:active,
+	&.active,
+	.open > &.dropdown-toggle {
+		color: $background;
+		background-color: $color;
+		border-color: $color;
+	
+		&:hover,
+		&:focus,
+		&.focus {
+			color: $background;
+			background-color: $color;
+			border-color: $color;
+		}
+	}
+	
+	&:active,
+	&.active,
+	.open > &.dropdown-toggle {
+		background-image: none;
+	}
+	
+	&.disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		&:hover,
+		&:focus,
+		&.focus {
 			background-color: $background;
 			border-color: $color;
 		}
@@ -50,14 +75,29 @@ body {
 		-webkit-appearance: none;
 	}
 	
+	.btn-yellow {
+		@include button-variant( $mvs-yellow, #fff );
+		
+		&.btn-lg {
+			font-family: geo, sans-serif;
+			font-size: 26px;
+			padding: 5px 16px;
+		}
+	}
+		
+	.form-control {
+		&:focus,
+		&.focus {
+			border-color: $mvs-yellow;
+		}
+	}
+	
 	.msg-log {
 		margin-bottom: 20px;
 		text-align: left;
 		
 		li {
 			color: #c7254e;
-			font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-			font-size: 90%;
 		}
 	}
 }
@@ -78,12 +118,6 @@ body {
 		position: absolute;
 		width: 1px;
 		z-index: -1;
-	}
-	
-	input[type=submit] {
-		@include button-variant($mvs-yellow, #fff);
-		font-family: geo, sans-serif;
-		font-size: 24px;
 	}
 	
 	label[for=usr-img] {
@@ -146,10 +180,9 @@ body {
 		margin-bottom: 20px;
 		
 		.btn {
-			width: 80px;
+			width: 88.5px;
 			
-			&.btn-default {
-				@include button-variant($mvs-yellow, #fff);
+			&.btn-yellow {
 				z-index: 0;
 			}
 			
@@ -162,11 +195,10 @@ body {
 
 @media only screen and ( min-device-width: $mvs-width ) {
 	body {
-		background: url('../img/mvs-splat.svg') center 48px no-repeat;
+		background: url( '../img/mvs-splat.svg' ) center 48px no-repeat;
 	}
 	
 	.container {
-		overflow: visible;
 		width: $mvs-width + 30px;
 	}
 	
