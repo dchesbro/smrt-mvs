@@ -66,7 +66,7 @@ body { background-color: transparent; }
 
 @media only screen and (min-device-width: 640px) { body { background: url("../img/mvs-splat.svg") center 48px no-repeat; }
   .container { width: 670px; }
-  #smrt-mvs-form label[for=usr-img] { border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
+  #smrt-mvs-form label[for=usr-img] { border: none; border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
   #smrt-mvs-form label[for=usr-img] .img-inner { position: relative; top: 50%; transform: translateY(-50%); }
   #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; font-size: 42px; margin-right: 0; }
   #smrt-mvs-form .mvs-outer { position: absolute; }
