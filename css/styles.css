@@ -1,3 +1,11 @@
+html {
+  background: url("../img/bg-teal.png") center top no-repeat;
+  background-size: cover;
+  height: 100%; }
+
+body {
+  background: transparent; }
+
 .container {
   margin: 20px auto; }
   .container input[type=text], .container textarea {
@@ -63,8 +71,26 @@
   text-align: center; }
   #smrt-mvs-tab .btn-group {
     margin-bottom: 20px; }
-    #smrt-mvs-tab .btn-group button {
+    #smrt-mvs-tab .btn-group .btn {
+      box-shadow: 5px 5px 0px #111;
       width: 80px; }
+      #smrt-mvs-tab .btn-group .btn.btn-default {
+        color: #ffc800;
+        background-color: white;
+        border-color: #ffc800;
+        z-index: 0 !important; }
+        #smrt-mvs-tab .btn-group .btn.btn-default:active, #smrt-mvs-tab .btn-group .btn.btn-default.active {
+          color: white;
+          background-color: #ffc800;
+          border-color: #ffc800; }
+        #smrt-mvs-tab .btn-group .btn.btn-default:active, #smrt-mvs-tab .btn-group .btn.btn-default.active {
+          background-image: none; }
+        #smrt-mvs-tab .btn-group .btn.btn-default.disabled:hover, #smrt-mvs-tab .btn-group .btn.btn-default.disabled:focus, #smrt-mvs-tab .btn-group .btn.btn-default.disabled.focus, #smrt-mvs-tab .btn-group .btn.btn-default[disabled]:hover, #smrt-mvs-tab .btn-group .btn.btn-default[disabled]:focus, #smrt-mvs-tab .btn-group .btn.btn-default[disabled].focus {
+          background-color: white;
+          border-color: #ffc800; }
+        #smrt-mvs-tab .btn-group .btn.btn-default .badge {
+          color: white;
+          background-color: #ffc800; }
 
 @media only screen and (min-device-width: 670px) {
   .container {

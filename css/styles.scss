@@ -1,4 +1,46 @@
+$mvs-orange: #e39900;
+$mvs-purple: #605cd1;
+$mvs-yellow: #ffc800;
+
 $mvs-width: 640px + 30px;
+
+@mixin button-variant($color, $background) {
+	color: $color;
+	background-color: $background;
+	border-color: $color;
+	
+	&:active, &.active {
+		color: $background;
+		background-color: $color;
+		border-color: $color;
+	}
+	
+	&:active, &.active {
+		background-image: none;
+	}
+	
+	&.disabled, &[disabled] {
+		&:hover, &:focus, &.focus {
+			background-color: $background;
+			border-color: $color;
+		}
+	}
+	
+	.badge {
+		color: $background;
+		background-color: $color;
+	}
+}
+
+html {
+	background: url('../img/bg-teal.png') center top no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+
+body {
+	background: transparent;
+}
 
 .container {
 	margin: 20px auto;
@@ -101,8 +143,14 @@ $mvs-width: 640px + 30px;
 	.btn-group {
 		margin-bottom: 20px;
 		
-		button {
+		.btn {
+			box-shadow: 5px 5px 0px #111;
 			width: 80px;
+			
+			&.btn-default {
+				@include button-variant($mvs-yellow, white);
+				z-index: 0 !important;
+			}
 		}
 	}
 }

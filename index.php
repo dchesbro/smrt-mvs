@@ -10,9 +10,8 @@
 		
 		// Check if option set or invalid
 		if( empty( $template_option ) || !in_array( $template_option, $templates ) ) {
-			$template_option = $templates[0];
+			$template_option = $templates[1];
 		}
-		
 		return $template_option;
 		
 	}
@@ -70,7 +69,6 @@
 			$default_moveset[$random_moves[1]],
 			$default_moveset[$random_moves[2]]
 		);
-		
 		return $default_moves;
 		
 	}			
@@ -155,7 +153,7 @@
 		
 		// $file = 'img/mvs/' . md5( $user_image . $user_moves[0] . $user_moves[1] . $user_moves[2] ) . '.jpg';
 		
-		$file = 'img/mvs/testing.jpg';
+		$file = 'img/mvs/debug.jpg';
 		
 		// if ( !file_exists( $file ) ) {
 			
@@ -389,9 +387,9 @@
 			<div id="smrt-mvs-tab" class="row">
 				<div class="col-md-12">
 					<form enctype="application/x-www-form-urlencoded" method="get">
-						<div class="btn-group btn-group-sm" role="group" aria-label="...">
-							<button value="grey" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'grey' ) { echo 'active'; } ?>">Grey</button>
+						<div class="btn-group btn-group-sm" role="group">
 							<button value="green" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'green' ) { echo 'active'; } ?>">Green</button>
+							<button value="grey" type="submit" name="t" class="btn btn-default <?php if( $template_option == 'grey' ) { echo 'active'; } ?>">Grey</button>
 						</div>
 					</form>
 				</div>
