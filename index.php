@@ -151,9 +151,9 @@
 	
 	function create_image( $template_option, $user_moves, $user_image ) {
 		
-		$file = 'img/mvs/' . md5( $user_image . $user_moves[0] . $user_moves[1] . $user_moves[2] ) . '.jpg';
+		// $file = 'img/mvs/' . md5( $user_image . $user_moves[0] . $user_moves[1] . $user_moves[2] ) . '.jpg';
 		
-		// $file = 'img/mvs/debug.jpg';
+		$file = 'img/mvs/debug.jpg';
 		
 		if ( !file_exists( $file ) ) {
 			
@@ -272,7 +272,7 @@
 				$n = $n + 1;
 			}
 			imagejpeg( $dst_image, $file, 35 );
-		}
+		// }
 		return $file;
 	}
 	
