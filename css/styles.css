@@ -22,7 +22,7 @@
 
 .container .msg-log { list-style: none; margin-bottom: 30px; padding-left: 0; }
 
-.container .msg-log li { background-color: #605cd1; border-radius: 3px; color: #fff; display: table; font-size: 12px; margin: auto auto 5px auto; padding: 5px 10px; }
+.container .msg-log li { background-color: #605cd1; border-radius: 3px; color: #fff; display: table; font-size: 12px; margin: auto auto 5px auto; padding: 6px 10px; }
 
 #smrt-mvs-form { position: relative; text-align: center; }
 
