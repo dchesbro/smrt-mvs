@@ -456,11 +456,11 @@
 		<!-- Bootstrap -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 		
-		<!-- Clipboard -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
-		
 		<!-- Custom file input -->
 		<script src="js/jquery.custom-file-input.js"></script>
+		
+		<!-- Clipboard -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 		
 		<script>
 			new Clipboard('.btn');
