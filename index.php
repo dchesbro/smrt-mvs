@@ -404,10 +404,9 @@
 				<div class="col-md-12">
 					<form enctype="multipart/form-data" method="post">
 						<img src="<?php echo $dst_image; ?>" class="img-responsive" alt="Moves template image"/>
-						<!-- <img src="img/mvs-splat.svg" class="img-splat" alt="Splat image"/> -->
-						
-						<?php echo get_log_messages( $image_log ); ?>
 												
+						<?php echo get_log_messages( $image_log ); ?>
+						
 						<?php echo get_log_messages( $moves_log ); ?>
 						
 						<?php if( $template_option == 'grey' ) { ?>
