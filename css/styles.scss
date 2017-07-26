@@ -58,14 +58,10 @@ $mvs-width:  670px;
 }
 
 // Styles
-body {
-	background-color: transparent;
-}
-
 .container {
-	margin: 20px auto;
+	margin: 30px auto;
 	
-	input[type=text], textarea {
+	input[type=text], .form-control {
 		box-shadow: none;
 		outline: none;
 		
@@ -73,38 +69,31 @@ body {
 		-moz-appearance: none;
 		-o-appearance: none;
 		-webkit-appearance: none;
-	}
-	
-	.btn-yellow {
-		@include button-variant( $mvs-yellow, #fff );
 		
-		&.btn-lg {
-			font-family: geo, sans-serif;
-			font-size: 26px;
-			padding: 5px 16px;
-		}
-	}
-		
-	.form-control {
 		&:focus,
 		&.focus {
 			border-color: $mvs-yellow;
 		}
 	}
 	
+	.btn-yellow {
+		@include button-variant( $mvs-yellow, #fff );
+		
+		&.btn-lg {
+			font-family: Geo, sans-serif;
+			font-size: 26px;
+			padding: 5px 16px;
+		}
+	}
+	
 	.msg-log {
 		list-style: none;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		padding-left: 0;
-		text-align: center;
 		
 		li {
-			background-color: $mvs-purple;
-			border-radius: 3px;
-			color: #fff;
-			display: inline-block;
+			color: $mvs-purple;
 			font-size: 12px;
-			padding: 5px 10px;
 		}
 	}
 }
@@ -115,7 +104,7 @@ body {
 	
 	img {
 		background-color: #000;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 	}
 	
 	input[type=file] {
@@ -149,7 +138,7 @@ body {
 	}
 	
 	.mvs-outer {
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		
 		.form-group {
 			margin-bottom: 10px;
@@ -171,11 +160,11 @@ body {
 	text-align: center;
 	
 	img {
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 	}
 	
 	.input-group {
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 	}
 }
 
@@ -184,7 +173,7 @@ body {
 	text-align: center;
 	
 	.btn-group {
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		
 		.btn {
 			width: 88.5px;
@@ -194,10 +183,10 @@ body {
 
 @media only screen and ( min-device-width: $mvs-width ) {
 	body {
-		background: url( '../img/sm_splat.svg' ) center 40px no-repeat;
+		background: url( '../img/sm_splat.svg' ) center 62px no-repeat;
 		
 		@media only screen and ( max-width: $mvs-width ) {
-			background-position-x: -198px;
+			background-position-x: -165px;
 		}
 	}
 	
@@ -244,13 +233,9 @@ body {
 				right: 12%;
 			}
 		}
-		
-		&::before {
-			
-		}
 	}
 	
 	#smrt-mvs-results {
-		margin-top: 50px;
+		margin-top: 60px;
 	}
 }
