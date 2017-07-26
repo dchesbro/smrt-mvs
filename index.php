@@ -463,7 +463,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 		
 		<script>
-			new Clipboard('.btn');
+			new Clipboard( '.btn' );
 		</script>
 	</body>
 </html>
