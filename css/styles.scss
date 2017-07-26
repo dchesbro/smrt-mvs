@@ -92,8 +92,13 @@ $mvs-width:  670px;
 		padding-left: 0;
 		
 		li {
-			color: $mvs-purple;
+			background-color: $mvs-purple;
+			border-radius: 3px;
+			color: #fff;
+			display: table;
 			font-size: 12px;
+			margin: auto auto 5px auto;
+			padding: 5px 10px;
 		}
 	}
 }
