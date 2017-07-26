@@ -169,7 +169,7 @@ $mvs-width:  670px;
 	}
 	
 	.input-group {
-		margin-bottom: 30px;
+		display: none;
 	}
 }
 
@@ -242,5 +242,10 @@ $mvs-width:  670px;
 	
 	#smrt-mvs-results {
 		margin-top: 60px;
+		
+		.input-group {			
+			display: table;
+			margin-bottom: 30px;
+		}
 	}
 }

@@ -378,7 +378,7 @@
 					<div class="input-group">
 						<input value="<?php echo get_image_url( $filename ); ?>" type="text" id="image-url" class="form-control input-lg" readonly>
 						<span class="input-group-btn">
-							<button type="button" data-clipboard-target="#image-url" class="btn btn-lg btn-yellow">Copy URL</button>
+							<button type="button" title="Copy img URL to clipboard" data-clipboard-target="#image-url" class="btn btn-lg btn-yellow">Copy URL</button>
 						</span>
 					</div>
 					<a title="Back to SMRT MVS" role="button" class="btn btn-lg btn-yellow" href="/smrt_mvs/">Back to you, Mike</a>
