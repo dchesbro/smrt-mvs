@@ -155,7 +155,7 @@
 		
 		$file = 'img/mvs/debug.jpg';
 		
-		if ( !file_exists( $file ) ) {
+		// if ( !file_exists( $file ) ) {
 			
 			// Set template options
 			switch ( $template_option ) {
