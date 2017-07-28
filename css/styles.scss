@@ -110,7 +110,6 @@ input[type=text], .form-control {
 }
 
 #smrt-mvs-form {
-	position: relative;
 	text-align: center;
 	
 	img {
@@ -136,7 +135,6 @@ input[type=text], .form-control {
 		}
 		
 		.img-inner {
-			color: #555;
 			overflow: hidden;
 			text-align: center;
 			text-overflow: ellipsis;
@@ -168,7 +166,6 @@ input[type=text], .form-control {
 }
 
 #smrt-mvs-results {
-	position: relative;
 	text-align: center;
 	
 	img {
@@ -181,7 +178,6 @@ input[type=text], .form-control {
 }
 
 #smrt-mvs-tab {
-	position: relative;
 	text-align: center;
 	
 	.btn-group {
@@ -193,9 +189,7 @@ input[type=text], .form-control {
 	}
 }
 
-/* @media only screen and ( min-device-width: $mvs-width ) { */
-	
-@media only screen and ( min-width: $mvs-width ) {
+@media only screen and ( min-device-width: $mvs-width ) {
 	body {
 		background: url( '../img/sm_splat.svg' ) center 62px no-repeat;
 		
@@ -222,6 +216,8 @@ input[type=text], .form-control {
 	}
 	
 	#smrt-mvs-form {
+		position: relative;
+		
 		img {
 			margin-bottom: ( $mvs-margin * 2 );
 		}
@@ -250,6 +246,7 @@ input[type=text], .form-control {
 		}
 		
 		.mvs-outer {
+			margin-bottom: ( $mvs-margin * 2 );
 			position: absolute;
 			
 			&.template-grey {
@@ -279,7 +276,7 @@ input[type=text], .form-control {
 		}
 	}
 	
-	#smrt-mvs-tab {		
+	#smrt-mvs-tab {
 		.btn-group {
 			margin-bottom: ( $mvs-margin * 2 );
 		}

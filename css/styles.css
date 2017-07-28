@@ -26,7 +26,7 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 
 .msg-log:last-of-type { margin-bottom: 15px; }
 
-#smrt-mvs-form { position: relative; text-align: center; }
+#smrt-mvs-form { text-align: center; }
 
 #smrt-mvs-form img { background-color: #000; margin-bottom: 15px; }
 
@@ -36,7 +36,7 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 
 #smrt-mvs-form label[for=usr-img]:hover { cursor: pointer; }
 
-#smrt-mvs-form label[for=usr-img] .img-inner { color: #555; overflow: hidden; text-align: center; text-overflow: ellipsis; }
+#smrt-mvs-form label[for=usr-img] .img-inner { overflow: hidden; text-align: center; text-overflow: ellipsis; }
 
 #smrt-mvs-form label[for=usr-img] .img-inner i { font-size: 20px; margin-right: 10px; vertical-align: middle; }
 
@@ -48,32 +48,32 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 
 #smrt-mvs-form .mvs-outer .form-group .input-group-addon { border-radius: 0; padding: 10px 10px 10px 14px; }
 
-#smrt-mvs-results { position: relative; text-align: center; }
+#smrt-mvs-results { text-align: center; }
 
 #smrt-mvs-results img { margin-bottom: 15px; }
 
 #smrt-mvs-results .input-group { display: none; }
 
-#smrt-mvs-tab { position: relative; text-align: center; }
+#smrt-mvs-tab { text-align: center; }
 
 #smrt-mvs-tab .btn-group { margin-bottom: 15px; }
 
 #smrt-mvs-tab .btn-group .btn { width: 88.5px; }
 
-/* @media only screen and ( min-device-width: $mvs-width ) { */
-@media only screen and (min-width: 670px) { body { background: url("../img/sm_splat.svg") center 62px no-repeat; } }
+@media only screen and (min-device-width: 670px) { body { background: url("../img/sm_splat.svg") center 62px no-repeat; } }
 
-@media only screen and (min-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
+@media only screen and (min-device-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
 
-@media only screen and (min-width: 670px) { .container { margin: 30px auto; width: 670px; }
+@media only screen and (min-device-width: 670px) { .container { margin: 30px auto; width: 670px; }
   .msg-log { margin-bottom: 15px; }
   .msg-log li { margin-bottom: 15px; }
   .msg-log:last-of-type { margin-bottom: 30px; }
+  #smrt-mvs-form { position: relative; }
   #smrt-mvs-form img { margin-bottom: 30px; }
   #smrt-mvs-form label[for=usr-img] { border: none; border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
   #smrt-mvs-form label[for=usr-img] .img-inner { position: relative; top: 50%; transform: translateY(-50%); }
   #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; font-size: 42px; margin-right: 0; }
-  #smrt-mvs-form .mvs-outer { position: absolute; }
+  #smrt-mvs-form .mvs-outer { margin-bottom: 30px; position: absolute; }
   #smrt-mvs-form .mvs-outer.template-grey { top: 270px; left: 24%; right: 24%; }
   #smrt-mvs-form .mvs-outer.template-green { top: 210px; left: 12%; right: 12%; }
   #smrt-mvs-results { margin-top: 60px; }
