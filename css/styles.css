@@ -1,6 +1,6 @@
-input[type=text], .form-control { box-shadow: none; outline: none; appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
+input[type=text], .btn, .form-control { outline: none; appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
 
-input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-control.focus { border-color: #ffbf00; }
+input[type=text]:focus, input[type=text].focus, .btn:focus, .btn.focus, .form-control:focus, .form-control.focus { border-color: #ffbf00; box-shadow: none; -moz-box-shadow: none; -o-box-shadow: none; -webkit-box-shadow: none; }
 
 .btn-yellow { color: #ffbf00; background-color: #fff; border-color: #ffbf00; box-shadow: none !important; }
 
@@ -18,17 +18,17 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 
 .btn-yellow.btn-lg { font-family: Geo, sans-serif; font-size: 26px; padding: 5px 16px; }
 
-.container { margin: 30px auto; }
+.container { margin: 20px auto; }
 
 .msg-log { list-style: none; margin-bottom: 10px; padding-left: 0; }
 
 .msg-log li { background-color: #605cd1; border-radius: 3px; color: #fff; display: table; font-size: 12px; margin: auto auto 10px auto; padding: 6px 10px; }
 
-.msg-log:last-of-type { margin-bottom: 15px; }
+.msg-log:last-of-type { margin-bottom: 20px; }
 
 #smrt-mvs-form { text-align: center; }
 
-#smrt-mvs-form img { background-color: #000; margin-bottom: 15px; }
+#smrt-mvs-form img { background-color: #000; margin-bottom: 20px; }
 
 #smrt-mvs-form input[type=file] { height: 1px; opacity: 0; overflow: hidden; position: absolute; width: 1px; z-index: -1; }
 
@@ -40,7 +40,7 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 
 #smrt-mvs-form label[for=usr-img] .img-inner i { font-size: 20px; margin-right: 10px; vertical-align: middle; }
 
-#smrt-mvs-form .mvs-outer { margin-bottom: 15px; }
+#smrt-mvs-form .mvs-outer { margin-bottom: 20px; }
 
 #smrt-mvs-form .mvs-outer .form-group { margin-bottom: 10px; }
 
@@ -50,13 +50,13 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 
 #smrt-mvs-results { text-align: center; }
 
-#smrt-mvs-results img { margin-bottom: 15px; }
+#smrt-mvs-results img { margin-bottom: 20px; }
 
 #smrt-mvs-results .input-group { display: none; }
 
 #smrt-mvs-tab { text-align: center; }
 
-#smrt-mvs-tab .btn-group { margin-bottom: 15px; }
+#smrt-mvs-tab .btn-group { margin-bottom: 20px; }
 
 #smrt-mvs-tab .btn-group .btn { width: 88.5px; }
 
@@ -65,18 +65,16 @@ input[type=text]:focus, input[type=text].focus, .form-control:focus, .form-contr
 @media only screen and (min-device-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
 
 @media only screen and (min-device-width: 670px) { .container { width: 670px; }
-  .msg-log { margin-bottom: 15px; }
-  .msg-log li { margin-bottom: 15px; }
-  .msg-log:last-of-type { margin-bottom: 30px; }
+  .msg-log:last-of-type { margin-bottom: 40px; }
   #smrt-mvs-form { position: relative; }
-  #smrt-mvs-form img { margin-bottom: 30px; }
+  #smrt-mvs-form img { margin-bottom: 40px; }
   #smrt-mvs-form label[for=usr-img] { border: none; border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
   #smrt-mvs-form label[for=usr-img] .img-inner { position: relative; top: 50%; transform: translateY(-50%); }
   #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; font-size: 42px; margin-right: 0; }
-  #smrt-mvs-form .mvs-outer { margin-bottom: 30px; position: absolute; }
+  #smrt-mvs-form .mvs-outer { margin-bottom: 40px; position: absolute; }
   #smrt-mvs-form .mvs-outer.template-grey { top: 270px; left: 24%; right: 24%; }
   #smrt-mvs-form .mvs-outer.template-green { top: 210px; left: 12%; right: 12%; }
-  #smrt-mvs-results { margin-top: 60px; }
-  #smrt-mvs-results img { margin-bottom: 30px; }
-  #smrt-mvs-results .input-group { display: table; margin-bottom: 30px; }
-  #smrt-mvs-tab .btn-group { margin-bottom: 30px; } }
+  #smrt-mvs-results { margin-top: 70px; }
+  #smrt-mvs-results img { margin-bottom: 40px; }
+  #smrt-mvs-results .input-group { display: table; margin-bottom: 40px; }
+  #smrt-mvs-tab .btn-group { margin-bottom: 40px; } }

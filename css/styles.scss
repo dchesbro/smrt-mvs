@@ -3,7 +3,7 @@ $mvs-orange: #e39900;
 $mvs-purple: #605cd1;
 $mvs-yellow: #ffbf00;
 
-$mvs-margin: 15px;
+$mvs-margin: 20px;
 $mvs-width:  670px;
 
 @mixin button-variant( $color, $background ) {
@@ -60,8 +60,7 @@ $mvs-width:  670px;
 }
 
 // Styles
-input[type=text], .form-control {
-	box-shadow: none;
+input[type=text], .btn, .form-control {
 	outline: none;
 	
 	appearance: none;
@@ -72,6 +71,11 @@ input[type=text], .form-control {
 	&:focus,
 	&.focus {
 		border-color: $mvs-yellow;
+		
+		box-shadow: none;
+		-moz-box-shadow: none;
+		-o-box-shadow: none;
+		-webkit-box-shadow: none;
 	}
 }
 
@@ -86,12 +90,12 @@ input[type=text], .form-control {
 }
 
 .container {
-	margin: ( $mvs-margin * 2 ) auto;
+	margin: $mvs-margin auto;
 }
 
 .msg-log {
 	list-style: none;
-	margin-bottom: 10px;
+	margin-bottom: ( $mvs-margin / 2 );
 	padding-left: 0;
 	
 	li {
@@ -100,7 +104,7 @@ input[type=text], .form-control {
 		color: #fff;
 		display: table;
 		font-size: 12px;
-		margin: auto auto 10px auto;
+		margin: auto auto ( $mvs-margin / 2 ) auto;
 		padding: 6px 10px;
 	}
 	
@@ -203,12 +207,6 @@ input[type=text], .form-control {
 	}
 	
 	.msg-log {
-		margin-bottom: $mvs-margin;
-		
-		li {
-			margin-bottom: $mvs-margin;
-		}
-		
 		&:last-of-type {
 			margin-bottom: ( $mvs-margin * 2 );
 		}
@@ -263,7 +261,7 @@ input[type=text], .form-control {
 	}
 	
 	#smrt-mvs-results {
-		margin-top: 60px;
+		margin-top: 70px;
 		
 		img {
 			margin-bottom: ( $mvs-margin * 2 );
@@ -271,7 +269,7 @@ input[type=text], .form-control {
 		
 		.input-group {			
 			display: table;
-			margin-bottom: 30px;
+			margin-bottom: ( $mvs-margin * 2 );
 		}
 	}
 	
