@@ -203,6 +203,7 @@ input[type=text], .btn, .form-control {
 	}
 	
 	.container {
+		margin: ( $mvs-margin * 2 ) auto;
 		width: $mvs-width;
 	}
 	

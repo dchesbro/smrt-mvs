@@ -64,7 +64,7 @@ input[type=text]:focus, input[type=text].focus, .btn:focus, .btn.focus, .form-co
 
 @media only screen and (min-device-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
 
-@media only screen and (min-device-width: 670px) { .container { width: 670px; }
+@media only screen and (min-device-width: 670px) { .container { margin: 40px auto; width: 670px; }
   .msg-log:last-of-type { margin-bottom: 40px; }
   #smrt-mvs-form { position: relative; }
   #smrt-mvs-form img { margin-bottom: 40px; }
