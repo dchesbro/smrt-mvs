@@ -86,7 +86,7 @@ input[type=text], .form-control {
 }
 
 .container {
-	margin: $mvs-margin auto;
+	margin: ( $mvs-margin * 2 ) auto;
 }
 
 .msg-log {
@@ -199,7 +199,6 @@ input[type=text], .form-control {
 	}
 	
 	.container {
-		margin: ( $mvs-margin * 2 ) auto;
 		width: $mvs-width;
 	}
 	
