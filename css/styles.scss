@@ -60,48 +60,52 @@ $mvs-width:  670px;
 }
 
 // Styles
+input[type=text], .form-control {
+	box-shadow: none;
+	outline: none;
+	
+	appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	-webkit-appearance: none;
+	
+	&:focus,
+	&.focus {
+		border-color: $mvs-yellow;
+	}
+}
+
+.btn-yellow {
+	@include button-variant( $mvs-yellow, #fff );
+	
+	&.btn-lg {
+		font-family: Geo, sans-serif;
+		font-size: 26px;
+		padding: 5px 16px;
+	}
+}
+
 .container {
 	margin: $mvs-margin auto;
+}
+
+.msg-log {
+	list-style: none;
+	margin-bottom: 10px;
+	padding-left: 0;
 	
-	input[type=text], .form-control {
-		box-shadow: none;
-		outline: none;
-		
-		appearance: none;
-		-moz-appearance: none;
-		-o-appearance: none;
-		-webkit-appearance: none;
-		
-		&:focus,
-		&.focus {
-			border-color: $mvs-yellow;
-		}
+	li {
+		background-color: $mvs-purple;
+		border-radius: 3px;
+		color: #fff;
+		display: table;
+		font-size: 12px;
+		margin: auto auto 10px auto;
+		padding: 6px 10px;
 	}
 	
-	.btn-yellow {
-		@include button-variant( $mvs-yellow, #fff );
-		
-		&.btn-lg {
-			font-family: Geo, sans-serif;
-			font-size: 26px;
-			padding: 5px 16px;
-		}
-	}
-	
-	.msg-log {
-		list-style: none;
+	&:last-of-type {
 		margin-bottom: $mvs-margin;
-		padding-left: 0;
-		
-		li {
-			background-color: $mvs-purple;
-			border-radius: 3px;
-			color: #fff;
-			display: table;
-			font-size: 12px;
-			margin: auto auto 5px auto;
-			padding: 6px 10px;
-		}
 	}
 }
 
@@ -203,8 +207,16 @@ $mvs-width:  670px;
 	.container {
 		margin: ( $mvs-margin * 2 ) auto;
 		width: $mvs-width;
+	}
+	
+	.msg-log {
+		margin-bottom: $mvs-margin;
 		
-		.msg-log {
+		li {
+			margin-bottom: $mvs-margin;
+		}
+		
+		&:last-of-type {
 			margin-bottom: ( $mvs-margin * 2 );
 		}
 	}
