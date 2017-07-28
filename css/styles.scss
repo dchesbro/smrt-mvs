@@ -2,6 +2,8 @@
 $mvs-orange: #e39900;
 $mvs-purple: #605cd1;
 $mvs-yellow: #ffbf00;
+
+$mvs-margin: 15px;
 $mvs-width:  670px;
 
 @mixin button-variant( $color, $background ) {
@@ -59,7 +61,7 @@ $mvs-width:  670px;
 
 // Styles
 .container {
-	margin: 30px auto;
+	margin: $mvs-margin auto;
 	
 	input[type=text], .form-control {
 		box-shadow: none;
@@ -88,7 +90,7 @@ $mvs-width:  670px;
 	
 	.msg-log {
 		list-style: none;
-		margin-bottom: 30px;
+		margin-bottom: $mvs-margin;
 		padding-left: 0;
 		
 		li {
@@ -109,7 +111,7 @@ $mvs-width:  670px;
 	
 	img {
 		background-color: #000;
-		margin-bottom: 30px;
+		margin-bottom: $mvs-margin;
 	}
 	
 	input[type=file] {
@@ -143,7 +145,7 @@ $mvs-width:  670px;
 	}
 	
 	.mvs-outer {
-		margin-bottom: 30px;
+		margin-bottom: $mvs-margin;
 		
 		.form-group {
 			margin-bottom: 10px;
@@ -165,7 +167,7 @@ $mvs-width:  670px;
 	text-align: center;
 	
 	img {
-		margin-bottom: 30px;
+		margin-bottom: $mvs-margin;
 	}
 	
 	.input-group {
@@ -178,7 +180,7 @@ $mvs-width:  670px;
 	text-align: center;
 	
 	.btn-group {
-		margin-bottom: 30px;
+		margin-bottom: $mvs-margin;
 		
 		.btn {
 			width: 88.5px;
@@ -186,7 +188,9 @@ $mvs-width:  670px;
 	}
 }
 
-@media only screen and ( min-device-width: $mvs-width ) {
+/* @media only screen and ( min-device-width: $mvs-width ) { */
+	
+@media only screen and ( min-width: $mvs-width ) {
 	body {
 		background: url( '../img/sm_splat.svg' ) center 62px no-repeat;
 		
@@ -196,10 +200,19 @@ $mvs-width:  670px;
 	}
 	
 	.container {
+		margin: ( $mvs-margin * 2 ) auto;
 		width: $mvs-width;
+		
+		.msg-log {
+			margin-bottom: ( $mvs-margin * 2 );
+		}
 	}
 	
 	#smrt-mvs-form {
+		img {
+			margin-bottom: ( $mvs-margin * 2 );
+		}
+		
 		label[for=usr-img] {
 			border: none;
 			border-radius: 0;
@@ -243,9 +256,19 @@ $mvs-width:  670px;
 	#smrt-mvs-results {
 		margin-top: 60px;
 		
+		img {
+			margin-bottom: ( $mvs-margin * 2 );
+		}
+		
 		.input-group {			
 			display: table;
 			margin-bottom: 30px;
+		}
+	}
+	
+	#smrt-mvs-tab {		
+		.btn-group {
+			margin-bottom: $mvs-margin * 2;
 		}
 	}
 }

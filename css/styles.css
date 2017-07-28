@@ -1,4 +1,4 @@
-.container { margin: 30px auto; }
+.container { margin: 15px auto; }
 
 .container input[type=text], .container .form-control { box-shadow: none; outline: none; appearance: none; -moz-appearance: none; -o-appearance: none; -webkit-appearance: none; }
 
@@ -20,13 +20,13 @@
 
 .container .btn-yellow.btn-lg { font-family: Geo, sans-serif; font-size: 26px; padding: 5px 16px; }
 
-.container .msg-log { list-style: none; margin-bottom: 30px; padding-left: 0; }
+.container .msg-log { list-style: none; margin-bottom: 15px; padding-left: 0; }
 
 .container .msg-log li { background-color: #605cd1; border-radius: 3px; color: #fff; display: table; font-size: 12px; margin: auto auto 5px auto; padding: 6px 10px; }
 
 #smrt-mvs-form { position: relative; text-align: center; }
 
-#smrt-mvs-form img { background-color: #000; margin-bottom: 30px; }
+#smrt-mvs-form img { background-color: #000; margin-bottom: 15px; }
 
 #smrt-mvs-form input[type=file] { height: 1px; opacity: 0; overflow: hidden; position: absolute; width: 1px; z-index: -1; }
 
@@ -38,7 +38,7 @@
 
 #smrt-mvs-form label[for=usr-img] .img-inner i { font-size: 20px; margin-right: 10px; vertical-align: middle; }
 
-#smrt-mvs-form .mvs-outer { margin-bottom: 30px; }
+#smrt-mvs-form .mvs-outer { margin-bottom: 15px; }
 
 #smrt-mvs-form .mvs-outer .form-group { margin-bottom: 10px; }
 
@@ -48,21 +48,24 @@
 
 #smrt-mvs-results { position: relative; text-align: center; }
 
-#smrt-mvs-results img { margin-bottom: 30px; }
+#smrt-mvs-results img { margin-bottom: 15px; }
 
 #smrt-mvs-results .input-group { display: none; }
 
 #smrt-mvs-tab { position: relative; text-align: center; }
 
-#smrt-mvs-tab .btn-group { margin-bottom: 30px; }
+#smrt-mvs-tab .btn-group { margin-bottom: 15px; }
 
 #smrt-mvs-tab .btn-group .btn { width: 88.5px; }
 
-@media only screen and (min-device-width: 670px) { body { background: url("../img/sm_splat.svg") center 62px no-repeat; } }
+/* @media only screen and ( min-device-width: $mvs-width ) { */
+@media only screen and (min-width: 670px) { body { background: url("../img/sm_splat.svg") center 62px no-repeat; } }
 
-@media only screen and (min-device-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
+@media only screen and (min-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
 
-@media only screen and (min-device-width: 670px) { .container { width: 670px; }
+@media only screen and (min-width: 670px) { .container { margin: 30px auto; width: 670px; }
+  .container .msg-log { margin-bottom: 30px; }
+  #smrt-mvs-form img { margin-bottom: 30px; }
   #smrt-mvs-form label[for=usr-img] { border: none; border-radius: 0; height: 223px; padding: 10px; position: absolute; top: 23px; left: 339px; width: 240px; }
   #smrt-mvs-form label[for=usr-img] .img-inner { position: relative; top: 50%; transform: translateY(-50%); }
   #smrt-mvs-form label[for=usr-img] .img-inner i { display: block; font-size: 42px; margin-right: 0; }
@@ -70,4 +73,6 @@
   #smrt-mvs-form .mvs-outer.template-grey { top: 270px; left: 24%; right: 24%; }
   #smrt-mvs-form .mvs-outer.template-green { top: 210px; left: 12%; right: 12%; }
   #smrt-mvs-results { margin-top: 60px; }
-  #smrt-mvs-results .input-group { display: table; margin-bottom: 30px; } }
+  #smrt-mvs-results img { margin-bottom: 30px; }
+  #smrt-mvs-results .input-group { display: table; margin-bottom: 30px; }
+  #smrt-mvs-tab .btn-group { margin-bottom: 30px; } }
