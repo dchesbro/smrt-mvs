@@ -60,7 +60,7 @@ input[type=text]:focus, input[type=text].focus, .btn:focus, .btn.focus, .form-co
 
 #smrt-mvs-tab .btn-group .btn { width: 88.5px; }
 
-@media only screen and (min-device-width: 670px) { body { background: url("../img/sm_splat.svg") center 72px no-repeat; } }
+@media only screen and (min-device-width: 670px) { body { background: url("../img/sm_splat.svg") center 82px no-repeat; } }
 
 @media only screen and (min-device-width: 670px) and (max-width: 670px) { body { background-position-x: -165px; } }
 

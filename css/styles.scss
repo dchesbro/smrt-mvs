@@ -195,7 +195,7 @@ input[type=text], .btn, .form-control {
 
 @media only screen and ( min-device-width: $mvs-width ) {
 	body {
-		background: url( '../img/sm_splat.svg' ) center 72px no-repeat;
+		background: url( '../img/sm_splat.svg' ) center 82px no-repeat;
 		
 		@media only screen and ( max-width: $mvs-width ) {
 			background-position-x: -165px;
