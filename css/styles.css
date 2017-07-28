@@ -34,7 +34,7 @@
 
 #smrt-mvs-form label[for=usr-img]:hover { cursor: pointer; }
 
-#smrt-mvs-form label[for=usr-img] .img-inner { overflow: hidden; text-align: center; text-overflow: ellipsis; }
+#smrt-mvs-form label[for=usr-img] .img-inner { color: #555; overflow: hidden; text-align: center; text-overflow: ellipsis; }
 
 #smrt-mvs-form label[for=usr-img] .img-inner i { font-size: 20px; margin-right: 10px; vertical-align: middle; }
 
