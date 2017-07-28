@@ -226,7 +226,7 @@ $mvs-width:  670px;
 			.img-inner {
 				position: relative;
 					top: 50%;
-				transform: translateY(-50%);
+				transform: translateY( -50% );
 				
 				i {
 					display: block;
@@ -268,7 +268,7 @@ $mvs-width:  670px;
 	
 	#smrt-mvs-tab {		
 		.btn-group {
-			margin-bottom: $mvs-margin * 2;
+			margin-bottom: ( $mvs-margin * 2 );
 		}
 	}
 }
