@@ -274,6 +274,7 @@
 			imagejpeg( $dst_image, $file, 35 );
 		// }
 		return $file;
+		
 	}
 	
 	function get_log_messages( $log ) {
