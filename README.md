@@ -1,1 +1,1 @@
-# smrt_mvs
+# smrt-mvs
